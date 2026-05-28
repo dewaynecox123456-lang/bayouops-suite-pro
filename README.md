@@ -46,6 +46,25 @@ The report includes hostname, OS release, kernel version, uptime, disk usage, to
 
 See [docs/linux-operational-health-export.md](docs/linux-operational-health-export.md) for full usage and safety notes.
 
+## Operational Aggregation Engine
+
+Combine local Windows and Linux exports into centralized operational summaries:
+
+```bash
+python3 tools/aggregate_operational_reports.py
+```
+
+Default outputs:
+
+```text
+exports/executive-operational-summary.csv
+exports/operational-risk-summary.txt
+```
+
+The aggregated CSV normalizes hostname, platform, owner, reboot state, disk risk, patch readiness, failed services, operational status, and risk score. The TXT summary is written for executive review and highlights host counts, status counts, highest-risk systems, and scoring notes.
+
+See [docs/operational-aggregation-engine.md](docs/operational-aggregation-engine.md) for full usage and safety notes.
+
 ## Developer Preview Package
 
 The v0.2 release package is intended for early access review and includes the

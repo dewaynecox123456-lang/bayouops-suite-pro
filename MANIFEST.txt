@@ -11,11 +11,15 @@ RELEASE_NOTES_v0.2.md
 MANIFEST.txt
 windows/Export-PatchReadiness.ps1
 linux/Linux_Health_Check.sh
+tools/aggregate_operational_reports.py
 exports/patch-readiness-report.csv
 exports/linux-health-report.txt
 exports/linux-health-summary.csv
+exports/executive-operational-summary.csv
+exports/operational-risk-summary.txt
 docs/windows-operational-readiness-export.md
 docs/linux-operational-health-export.md
+docs/operational-aggregation-engine.md
 
 Excluded from package:
 

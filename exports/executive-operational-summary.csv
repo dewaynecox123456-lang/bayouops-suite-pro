@@ -1,0 +1,3 @@
+Hostname,Platform,Owner,RebootPending,DiskRisk,PatchReadiness,FailedServices,OperationalStatus,RiskScore
+BAYOUOPS-WIN01,Windows,Unknown,Yes,Low,Action required - reboot pending,Not collected,At Risk,40
+dcox.spectrum.com,Linux,dewaynecox,Unknown,Low,Review recommended,systemd unavailable or not accessible,Monitor,30
