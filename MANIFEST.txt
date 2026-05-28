@@ -1,0 +1,31 @@
+BayouOps Suite Pro Developer Preview v0.2 Manifest
+
+Package contents:
+
+README.md
+CHANGELOG.md
+LICENSE.txt
+EARLY_ACCESS_NOTICE.md
+SUPPORT.md
+RELEASE_NOTES_v0.2.md
+MANIFEST.txt
+windows/Export-PatchReadiness.ps1
+linux/Linux_Health_Check.sh
+exports/patch-readiness-report.csv
+exports/linux-health-report.txt
+exports/linux-health-summary.csv
+docs/windows-operational-readiness-export.md
+docs/linux-operational-health-export.md
+
+Excluded from package:
+
+.git/
+node_modules/
+private/internal files
+local editor metadata
+temporary build files
+
+Release posture:
+
+Developer Preview only. No enterprise support claims, managed service claims,
+or production service-level commitments are included.

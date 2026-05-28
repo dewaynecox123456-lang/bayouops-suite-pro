@@ -1,5 +1,8 @@
 # BayouOps Suite Pro
 
+Developer Preview v0.2 provides local, read-only Windows and Linux operational
+export collectors for early access evaluation.
+
 ## Windows Operational Readiness Export
 
 Generate a local Windows patch readiness CSV:
@@ -42,3 +45,12 @@ exports/linux-health-summary.csv
 The report includes hostname, OS release, kernel version, uptime, disk usage, top disk usage directories, failed systemd services when available, reboot required indicator, current user, and timestamp.
 
 See [docs/linux-operational-health-export.md](docs/linux-operational-health-export.md) for full usage and safety notes.
+
+## Developer Preview Package
+
+The v0.2 release package is intended for early access review and includes the
+collectors, generated sample/current exports, documentation, license, support
+scope, release notes, and manifest.
+
+This Developer Preview does not include enterprise support, managed service
+claims, or production service-level commitments.
