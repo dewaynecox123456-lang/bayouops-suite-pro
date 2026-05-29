@@ -38,12 +38,21 @@ pwsh -NoProfile -File .\windows\Export-PatchReadiness.ps1
 
 ---
 
-# Screenshots
+# Platform Preview
 
-## Terminal Workflow
+## BayouOps Brand Banner
 
-![Terminal Workflow](screenshots/demo/02-terminal-workflow.png)
+![BayouOps Brand Banner](screenshots/brand-clean/01-brand-banner.png)
 
-## Operational Visibility
+## Launcher Icon Concept
 
-![Operational Visibility](screenshots/demo/03-operational-visibility.png)
+![Launcher Icon Concept](screenshots/brand-clean/02-launcher.png)
+
+## BayouOps Lockup
+
+![BayouOps Lockup](screenshots/brand-clean/03-operational-summary.png)
+
+## Square Icon
+
+![Square Icon](screenshots/brand-clean/04-dashboard.png)
+
