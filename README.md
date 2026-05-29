@@ -1,75 +1,52 @@
 # BayouOps Suite Pro
 
-Developer Preview v0.2 provides local, read-only Windows and Linux operational
-export collectors for early access evaluation.
+Lightweight local-first operational readiness and export tooling for Windows and Linux environments.
+
+BayouOps Suite Pro focuses on practical operational visibility without requiring enterprise-scale infrastructure, cloud dependency, or subscription-heavy monitoring platforms.
+
+---
+
+# Why BayouOps Exists
+
+Modern operational tooling is often:
+
+- overloaded
+- cloud-dependent
+- difficult to hand off
+- expensive for small teams
+- difficult to evaluate quickly
+
+BayouOps Suite Pro was designed to provide:
+
+- local-first workflows
+- exportable operational evidence
+- lightweight readiness visibility
+- operator-readable outputs
+- practical operational summaries
+
+---
+
+# Current Developer Preview Features
 
 ## Windows Operational Readiness Export
 
-Generate a local Windows patch readiness CSV:
+Generate a local Windows operational readiness export:
 
 ```powershell
 pwsh -NoProfile -File .\windows\Export-PatchReadiness.ps1
-```
 
-Default output:
+---
 
-```text
-exports/patch-readiness-report.csv
-```
+# Screenshots
 
-The report includes hostname, last boot time, reboot pending status, installed hotfix count, disk free space, and OS caption/version.
+## Cleanup Overview
 
-For validation on non-Windows systems:
+![Cleanup Overview](screenshots/demo/01-cleanup-overview.png)
 
-```powershell
-pwsh -NoProfile -File .\windows\Export-PatchReadiness.ps1 -UseSampleData
-```
+## Terminal Workflow
 
-See [docs/windows-operational-readiness-export.md](docs/windows-operational-readiness-export.md) for full usage and safety notes.
+![Terminal Workflow](screenshots/demo/02-terminal-workflow.png)
 
-## Linux Operational Health Export
+## Operational Visibility
 
-Generate a local Linux operational health report:
-
-```bash
-bash linux/Linux_Health_Check.sh
-```
-
-Default outputs:
-
-```text
-exports/linux-health-report.txt
-exports/linux-health-summary.csv
-```
-
-The report includes hostname, OS release, kernel version, uptime, disk usage, top disk usage directories, failed systemd services when available, reboot required indicator, current user, and timestamp.
-
-See [docs/linux-operational-health-export.md](docs/linux-operational-health-export.md) for full usage and safety notes.
-
-## Operational Aggregation Engine
-
-Combine local Windows and Linux exports into centralized operational summaries:
-
-```bash
-python3 tools/aggregate_operational_reports.py
-```
-
-Default outputs:
-
-```text
-exports/executive-operational-summary.csv
-exports/operational-risk-summary.txt
-```
-
-The aggregated CSV normalizes hostname, platform, owner, reboot state, disk risk, patch readiness, failed services, operational status, and risk score. The TXT summary is written for executive review and highlights host counts, status counts, highest-risk systems, and scoring notes.
-
-See [docs/operational-aggregation-engine.md](docs/operational-aggregation-engine.md) for full usage and safety notes.
-
-## Developer Preview Package
-
-The v0.2 release package is intended for early access review and includes the
-collectors, generated sample/current exports, documentation, license, support
-scope, release notes, and manifest.
-
-This Developer Preview does not include enterprise support, managed service
-claims, or production service-level commitments.
+![Operational Visibility](screenshots/demo/03-operational-visibility.png)
