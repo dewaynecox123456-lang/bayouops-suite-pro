@@ -1,0 +1,25 @@
+BayouOps Suite Pro Developer Preview License
+
+Copyright (c) 2026 BayouFinds. All rights reserved.
+
+Permission is granted to the purchaser or authorized recipient of this Developer
+Preview package to download, install, run, and evaluate BayouOps Suite Pro
+collectors for internal operational review.
+
+You may:
+- Run the included scripts on systems you own or are authorized to administer.
+- Review and adapt the scripts for internal evaluation.
+- Keep backup copies for your own use.
+
+You may not:
+- Resell, redistribute, sublicense, or publish this package or modified versions.
+- Represent this Developer Preview as a generally available production product.
+- Remove copyright, license, or notice files from redistributed internal copies.
+
+This Developer Preview is provided "as is" without warranty of any kind,
+including implied warranties of merchantability, fitness for a particular
+purpose, or non-infringement. BayouFinds is not liable for damages arising from
+use of this package.
+
+No enterprise support, uptime guarantee, managed service commitment, or service
+level agreement is included with this Developer Preview.
