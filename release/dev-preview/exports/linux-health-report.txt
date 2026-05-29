@@ -1,0 +1,34 @@
+BayouOps Suite Pro Linux Operational Health Report
+==================================================
+
+Timestamp: 2026-05-28T13:28:06-05:00
+Hostname: dcox.spectrum.com
+Current user: dewaynecox
+OS release: Fedora Linux 42.20260524.0 (Silverblue)
+Kernel version: 6.19.14-108.fc42.x86_64
+Uptime: up 1 day, 12 hours, 11 minutes
+Reboot required: Unknown - no reboot detector available
+
+Disk Usage Summary
+------------------
+Filesystem     Type      Size  Used Avail Use% Mounted on
+composefs      overlay    26M   26M     0 100% /
+/dev/sda3      btrfs     237G  130G  105G  56% /etc
+efivarfs       efivarfs  150K   87K   59K  60% /sys/firmware/efi/efivars
+/dev/sda2      ext4      974M  251M  656M  28% /boot
+/dev/sda1      vfat      599M   13M  587M   3% /boot/efi
+/dev/sda3      btrfs     237G  130G  105G  56% /var
+/dev/sda3      btrfs     237G  130G  105G  56% /var/home
+
+Top Disk Usage Directories
+--------------------------
+9.9G	/usr
+9.9G	/
+
+Failed systemd Services
+-----------------------
+systemd unavailable or not accessible
+
+Safety
+------
+Read-only local collection. No service changes, package changes, reboots, deletions, or privileged destructive actions were performed.

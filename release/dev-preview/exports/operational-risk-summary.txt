@@ -1,0 +1,18 @@
+BayouOps Executive Operational Risk Summary
+===========================================
+
+Total hosts reviewed: 2
+Critical: 0
+At Risk: 1
+Monitor: 1
+Healthy: 0
+
+Highest risk hosts:
+
+- BAYOUOPS-WIN01 (Windows) | Status: At Risk | RiskScore: 40 | RebootPending: Yes | DiskRisk: Low | FailedServices: Not collected
+- dcox.spectrum.com (Linux) | Status: Monitor | RiskScore: 30 | RebootPending: Unknown | DiskRisk: Low | FailedServices: systemd unavailable or not accessible
+
+Scoring notes:
+- Reboot pending, disk pressure, failed services, unknown collection state, and weak patch readiness add risk.
+- RiskScore is a simple 0-100 operational triage value, not a compliance score.
+- All aggregation is local-only and read-only.

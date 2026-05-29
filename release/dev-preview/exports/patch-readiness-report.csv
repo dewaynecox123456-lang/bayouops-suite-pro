@@ -1,0 +1,2 @@
+"Hostname","LastBootTime","RebootPending","RebootPendingReason","InstalledHotfixCount","DiskFreeSpace","OSCaption","OSVersion","CollectedAt","Notes"
+"BAYOUOPS-WIN01","2026-05-19T13:22:55","True","RebootRequired","186","C: 84.32 GB free of 237.41 GB (35.5% free); D: 412.8 GB free of 931.5 GB (44.3% free)","Microsoft Windows 11 Pro","10.0.22631","2026-05-28T13:22:55","Sample validation record"
