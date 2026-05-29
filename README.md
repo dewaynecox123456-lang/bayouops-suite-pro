@@ -34,6 +34,7 @@ Generate a local Windows operational readiness export:
 
 ```powershell
 pwsh -NoProfile -File .\windows\Export-PatchReadiness.ps1
+```
 
 ---
 
