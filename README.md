@@ -40,10 +40,6 @@ pwsh -NoProfile -File .\windows\Export-PatchReadiness.ps1
 
 # Screenshots
 
-## Cleanup Overview
-
-![Cleanup Overview](screenshots/demo/01-cleanup-overview.png)
-
 ## Terminal Workflow
 
 ![Terminal Workflow](screenshots/demo/02-terminal-workflow.png)
