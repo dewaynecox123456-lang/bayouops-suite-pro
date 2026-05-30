@@ -56,3 +56,8 @@ pwsh -NoProfile -File .\windows\Export-PatchReadiness.ps1
 
 ![Square Icon](screenshots/brand-clean/04-dashboard.png)
 
+---
+
+# Demo Materials
+
+Polished demo scripts, walkthrough notes, buyer-story framing, video planning assets, and launch copy are available in [`videos/2026-05-29/`](videos/2026-05-29/). These materials position BayouOps Suite Pro as an operational readiness and visibility layer for patch, compliance, CAB, and executive reporting workflows.
