@@ -1,0 +1,50 @@
+[
+  {
+    "ComputerName": "BAYOUOPS-WIN11-01",
+    "CollectedAt": "2026-05-30T15:42:18.0000000Z",
+    "DisplayName": "Contoso Endpoint Agent",
+    "DisplayVersion": "5.12.4081",
+    "Publisher": "Contoso Security",
+    "InstallDate": "20260418",
+    "InstallLocation": "C:\\Program Files\\Contoso\\Endpoint Agent",
+    "InstallSource": "C:\\Installers\\Contoso",
+    "UninstallString": "\"C:\\Program Files\\Contoso\\Endpoint Agent\\uninstall.exe\"",
+    "QuietUninstallString": "\"C:\\Program Files\\Contoso\\Endpoint Agent\\uninstall.exe\" /quiet",
+    "ModifyPath": "\"C:\\Program Files\\Contoso\\Endpoint Agent\\setup.exe\" /modify",
+    "EstimatedSize": 245760,
+    "RegistryHive": "HKLM",
+    "RegistryPath": "HKLM:\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\{A1111111-B222-C333-D444-E55555555555}"
+  },
+  {
+    "ComputerName": "BAYOUOPS-WIN11-01",
+    "CollectedAt": "2026-05-30T15:42:18.0000000Z",
+    "DisplayName": "Northwind VPN Client",
+    "DisplayVersion": "3.8.2",
+    "Publisher": "Northwind Networks",
+    "InstallDate": "20260302",
+    "InstallLocation": "C:\\Program Files (x86)\\Northwind\\VPN Client",
+    "InstallSource": "",
+    "UninstallString": "MsiExec.exe /I{B2222222-C333-D444-E555-F66666666666}",
+    "QuietUninstallString": "MsiExec.exe /X{B2222222-C333-D444-E555-F66666666666} /qn",
+    "ModifyPath": "MsiExec.exe /I{B2222222-C333-D444-E555-F66666666666}",
+    "EstimatedSize": 98304,
+    "RegistryHive": "HKLM",
+    "RegistryPath": "HKLM:\\Software\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\{B2222222-C333-D444-E555-F66666666666}"
+  },
+  {
+    "ComputerName": "BAYOUOPS-WIN11-01",
+    "CollectedAt": "2026-05-30T15:42:18.0000000Z",
+    "DisplayName": "User Scope Reporting Helper",
+    "DisplayVersion": "1.4.0",
+    "Publisher": "BayouOps Sample Data",
+    "InstallDate": "20260512",
+    "InstallLocation": "C:\\Users\\operator\\AppData\\Local\\ReportingHelper",
+    "InstallSource": "",
+    "UninstallString": "\"C:\\Users\\operator\\AppData\\Local\\ReportingHelper\\uninstall.exe\"",
+    "QuietUninstallString": "",
+    "ModifyPath": "",
+    "EstimatedSize": 18432,
+    "RegistryHive": "HKCU",
+    "RegistryPath": "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\ReportingHelper"
+  }
+]

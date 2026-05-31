@@ -382,6 +382,312 @@
         font-size: 0.95rem;
       }
 
+      .visibility-shell {
+        border: 1px solid rgba(51, 65, 85, 0.8);
+        border-radius: 8px;
+        background: rgba(5, 10, 18, 0.9);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+
+      .visibility-toolbar {
+        display: grid;
+        grid-template-columns: minmax(220px, 1fr) auto auto;
+        align-items: center;
+        gap: 12px;
+        border-bottom: 1px solid rgba(51, 65, 85, 0.72);
+        padding: 16px;
+        background: rgba(17, 28, 45, 0.88);
+      }
+
+      .search-field {
+        width: 100%;
+        min-height: 44px;
+        border: 1px solid rgba(159, 176, 195, 0.24);
+        border-radius: 8px;
+        padding: 0 14px;
+        background: rgba(8, 16, 29, 0.92);
+        color: var(--white);
+        font: inherit;
+      }
+
+      .search-field::placeholder {
+        color: #718399;
+      }
+
+      .select-field {
+        min-height: 44px;
+        border: 1px solid rgba(159, 176, 195, 0.24);
+        border-radius: 8px;
+        padding: 0 12px;
+        background: rgba(8, 16, 29, 0.92);
+        color: var(--mist);
+        font: inherit;
+      }
+
+      .visibility-summary {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 1px;
+        background: rgba(51, 65, 85, 0.55);
+      }
+
+      .summary-card {
+        min-height: 122px;
+        padding: 20px;
+        background: rgba(11, 18, 32, 0.96);
+      }
+
+      .summary-card strong {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--white);
+        font-size: clamp(1.65rem, 3vw, 2.45rem);
+        line-height: 1;
+      }
+
+      .summary-card span {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .summary-card.warning strong {
+        color: var(--copper);
+      }
+
+      .summary-card.good strong {
+        color: var(--teal);
+      }
+
+      .visibility-grid {
+        display: grid;
+        grid-template-columns: minmax(280px, 0.95fr) minmax(0, 1.55fr);
+        gap: 1px;
+        background: rgba(51, 65, 85, 0.55);
+      }
+
+      .product-list,
+      .product-detail {
+        min-height: 560px;
+        background: rgba(11, 18, 32, 0.96);
+      }
+
+      .product-list {
+        display: grid;
+        align-content: start;
+        gap: 10px;
+        padding: 14px;
+      }
+
+      .product-row {
+        width: 100%;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 12px;
+        border: 1px solid rgba(51, 65, 85, 0.74);
+        border-radius: 8px;
+        padding: 14px;
+        background: rgba(17, 28, 45, 0.84);
+        color: inherit;
+        cursor: pointer;
+        font: inherit;
+        text-align: left;
+      }
+
+      .product-row:hover,
+      .product-row.active {
+        border-color: rgba(31, 182, 166, 0.72);
+        background: rgba(20, 32, 51, 0.98);
+      }
+
+      .product-row strong {
+        display: block;
+        color: var(--white);
+        font-size: 0.98rem;
+        line-height: 1.25;
+      }
+
+      .product-row small {
+        color: var(--muted);
+        font-size: 0.8rem;
+      }
+
+      .risk-stack {
+        display: grid;
+        min-width: 84px;
+        gap: 6px;
+        color: var(--muted);
+        font-size: 0.76rem;
+      }
+
+      .bar {
+        height: 7px;
+        border-radius: 999px;
+        background: rgba(51, 65, 85, 0.9);
+        overflow: hidden;
+      }
+
+      .bar span {
+        display: block;
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, var(--teal), var(--cyan));
+      }
+
+      .product-detail {
+        min-width: 0;
+        padding: 20px;
+      }
+
+      .detail-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 18px;
+        margin-bottom: 18px;
+      }
+
+      .detail-header h3 {
+        margin-bottom: 8px;
+        color: var(--white);
+        font-size: 1.52rem;
+        line-height: 1.18;
+      }
+
+      .detail-header p {
+        max-width: 620px;
+        margin-bottom: 0;
+        color: var(--muted);
+      }
+
+      .status-pill {
+        display: inline-flex;
+        min-height: 28px;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(159, 176, 195, 0.24);
+        border-radius: 999px;
+        padding: 0 10px;
+        color: var(--mist);
+        font-size: 0.76rem;
+        font-weight: 800;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+
+      .status-pill.current {
+        border-color: rgba(31, 182, 166, 0.52);
+        color: var(--teal);
+      }
+
+      .status-pill.old,
+      .status-pill.missing {
+        border-color: rgba(196, 122, 58, 0.62);
+        color: #f5b26d;
+      }
+
+      .status-pill.review {
+        border-color: rgba(56, 189, 248, 0.48);
+        color: var(--cyan);
+      }
+
+      .detail-metrics {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 10px;
+        margin-bottom: 16px;
+      }
+
+      .detail-metric {
+        border: 1px solid rgba(51, 65, 85, 0.68);
+        border-radius: 8px;
+        padding: 12px;
+        background: rgba(17, 28, 45, 0.76);
+      }
+
+      .detail-metric strong {
+        display: block;
+        color: var(--white);
+        font-size: 1.25rem;
+        line-height: 1.1;
+      }
+
+      .detail-metric span {
+        color: var(--muted);
+        font-size: 0.78rem;
+      }
+
+      .install-notes {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-bottom: 16px;
+      }
+
+      .note-box {
+        min-width: 0;
+        border: 1px solid rgba(51, 65, 85, 0.68);
+        border-radius: 8px;
+        padding: 12px;
+        background: rgba(8, 16, 29, 0.74);
+      }
+
+      .note-box span {
+        display: block;
+        margin-bottom: 6px;
+        color: var(--muted);
+        font-size: 0.76rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .note-box code {
+        display: block;
+        overflow-wrap: anywhere;
+        color: #c8d3df;
+        font-size: 0.8rem;
+        line-height: 1.45;
+      }
+
+      .table-wrap {
+        overflow-x: auto;
+        border: 1px solid rgba(51, 65, 85, 0.72);
+        border-radius: 8px;
+      }
+
+      table {
+        width: 100%;
+        min-width: 760px;
+        border-collapse: collapse;
+        font-size: 0.86rem;
+      }
+
+      th,
+      td {
+        border-bottom: 1px solid rgba(51, 65, 85, 0.5);
+        padding: 11px 12px;
+        text-align: left;
+        vertical-align: top;
+      }
+
+      th {
+        color: var(--muted);
+        font-size: 0.74rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      td {
+        color: #d8e1eb;
+      }
+
+      tr:last-child td {
+        border-bottom: 0;
+      }
+
       .split {
         display: grid;
         grid-template-columns: minmax(0, 0.84fr) minmax(320px, 1.16fr);
@@ -521,6 +827,22 @@
         .feature-grid {
           grid-template-columns: repeat(2, minmax(0, 1fr));
         }
+
+        .visibility-toolbar,
+        .visibility-grid,
+        .detail-metrics,
+        .install-notes {
+          grid-template-columns: 1fr;
+        }
+
+        .visibility-summary {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .product-list,
+        .product-detail {
+          min-height: auto;
+        }
       }
 
       @media (max-width: 620px) {
@@ -549,7 +871,8 @@
         }
 
         .ops-metrics,
-        .feature-grid {
+        .feature-grid,
+        .visibility-summary {
           grid-template-columns: 1fr;
         }
 
@@ -585,6 +908,7 @@
         </div>
         <div class="nav-links">
           <a href="#demo">Demo</a>
+          <a href="#software-visibility">Software</a>
           <a href="#features">Features</a>
           <a href="#mission">Mission</a>
           <a href="#team">Team</a>
@@ -663,6 +987,51 @@
               preload="metadata"
               playsinline
             ></video>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="software-visibility">
+        <div class="wrap">
+          <div class="section-heading">
+            <p class="eyebrow">Software / Agent Visibility</p>
+            <h2>Operational awareness for endpoint software drift.</h2>
+            <p>
+              Review agent coverage, stale check-ins, missing installs, version drift, and
+              export-ready evidence for leadership, CAB, audit, and handoff discussions. Future
+              real inventory data can come from the read-only Windows Software Inventory Collector
+              for BayouOps reporting.
+            </p>
+          </div>
+
+          <div class="visibility-shell" aria-label="Software and agent visibility dashboard">
+            <div class="visibility-toolbar">
+              <input
+                class="search-field"
+                id="softwareSearch"
+                type="search"
+                placeholder="Search software, agent, vendor, or endpoint"
+                aria-label="Search software visibility data"
+              >
+              <select class="select-field" id="statusFilter" aria-label="Filter by operational status">
+                <option value="All">All statuses</option>
+                <option value="Current">Current</option>
+                <option value="Old">Old</option>
+                <option value="Missing">Missing</option>
+                <option value="Review">Review</option>
+              </select>
+              <div class="actions" aria-label="Export software visibility reports">
+                <button class="button secondary" id="exportCsv" type="button">Export CSV</button>
+                <button class="button secondary" id="exportJson" type="button">Export JSON</button>
+              </div>
+            </div>
+
+            <div class="visibility-summary" id="visibilitySummary" aria-label="Operational summary cards"></div>
+
+            <div class="visibility-grid">
+              <div class="product-list" id="productList" aria-label="Software product list"></div>
+              <article class="product-detail" id="productDetail" aria-label="Selected product details"></article>
+            </div>
           </div>
         </div>
       </section>
@@ -765,5 +1134,461 @@
         <span>&copy; BayouFinds.com</span>
       </div>
     </footer>
+    <script>
+      const softwareInventory = [
+        {
+          name: "Dynatrace OneAgent",
+          currentVersion: "1.303.112",
+          endpointCount: 148,
+          staleEndpointCount: 19,
+          missingEndpointCount: 7,
+          notes: "Prioritize older finance and warehouse hosts before the next monitoring review.",
+          installString: "Dynatrace-OneAgent-Windows.exe --set-monitoring-mode=fullstack --quiet",
+          uninstallString: "Program Files\\dynatrace\\oneagent\\agent\\tools\\oneagentctl.exe --uninstall",
+          endpoints: [
+            ["ATL-FIN-021", "Windows Server 2019", "1.299.87", "2026-05-29 07:42", "Old"],
+            ["HOU-WMS-014", "Windows Server 2016", "1.287.44", "2026-05-21 18:04", "Old"],
+            ["DAL-API-006", "RHEL 8.9", "1.303.112", "2026-05-30 05:16", "Current"],
+            ["MOB-APP-032", "Windows Server 2022", "Not installed", "No agent record", "Missing"],
+            ["LFT-DB-018", "RHEL 9.3", "1.303.112", "2026-05-30 04:51", "Current"]
+          ]
+        },
+        {
+          name: "BigFix Agent",
+          currentVersion: "11.0.3.94",
+          endpointCount: 214,
+          staleEndpointCount: 11,
+          missingEndpointCount: 16,
+          notes: "Missing agent count is concentrated in recently imaged laptop pools.",
+          installString: "setup.exe /s /v/qn BESCLIENT_ACTIONSITE_MASTHEAD=actionsiten.afxm",
+          uninstallString: "msiexec /x {BFCLIENT-GUID} /qn",
+          endpoints: [
+            ["BTR-LAP-104", "Windows 11", "11.0.3.94", "2026-05-30 06:27", "Current"],
+            ["BTR-LAP-117", "Windows 11", "Not installed", "No agent record", "Missing"],
+            ["NOLA-FS-002", "Windows Server 2019", "10.0.9.21", "2026-05-24 20:11", "Old"],
+            ["HOU-KIOSK-044", "Windows 10", "11.0.2.75", "2026-05-18 13:12", "Review"],
+            ["DAL-VDI-221", "Windows 11", "11.0.3.94", "2026-05-30 05:55", "Current"]
+          ]
+        },
+        {
+          name: "Cisco Secure Endpoint / AMP",
+          currentVersion: "8.4.3.30419",
+          endpointCount: 187,
+          staleEndpointCount: 28,
+          missingEndpointCount: 9,
+          notes: "Legacy AMP connector versions remain on multiple server and point-of-sale systems.",
+          installString: "cisco-secure-endpoint.exe /R /S /desktopicon 0",
+          uninstallString: "C:\\Program Files\\Cisco\\AMP\\uninstall.exe /S",
+          endpoints: [
+            ["POS-BR-031", "Windows 10 LTSC", "7.5.9.21456", "2026-05-17 09:05", "Old"],
+            ["MOB-HR-009", "macOS 14.5", "8.4.3.30419", "2026-05-30 07:08", "Current"],
+            ["DAL-SQL-004", "Windows Server 2016", "7.4.1.20591", "2026-05-22 01:34", "Old"],
+            ["ATL-WKS-210", "Windows 11", "Not installed", "No agent record", "Missing"],
+            ["HOU-CAD-018", "Windows 10", "8.4.3.30419", "2026-05-29 19:44", "Current"]
+          ]
+        },
+        {
+          name: "FireEye Agent",
+          currentVersion: "35.31.0",
+          endpointCount: 96,
+          staleEndpointCount: 14,
+          missingEndpointCount: 5,
+          notes: "Review smaller server population before renewing reporting evidence.",
+          installString: "xagtSetup.exe /quiet /norestart",
+          uninstallString: "xagtSetup.exe /uninstall /quiet",
+          endpoints: [
+            ["NOLA-LEGAL-018", "Windows 11", "35.31.0", "2026-05-29 22:11", "Current"],
+            ["BTR-ENG-033", "Windows 10", "34.28.2", "2026-05-19 11:26", "Old"],
+            ["HOU-FS-009", "Windows Server 2019", "35.31.0", "2026-05-30 06:09", "Current"],
+            ["DAL-APP-017", "Windows Server 2016", "Not installed", "No agent record", "Missing"]
+          ]
+        },
+        {
+          name: "Entrust",
+          currentVersion: "10.4.1",
+          endpointCount: 72,
+          staleEndpointCount: 8,
+          missingEndpointCount: 4,
+          notes: "Certificate and identity client coverage should be reviewed for privileged users.",
+          installString: "EntrustClient.msi /qn REBOOT=ReallySuppress",
+          uninstallString: "msiexec /x EntrustClient.msi /qn",
+          endpoints: [
+            ["ATL-SEC-012", "Windows 11", "10.4.1", "2026-05-30 05:49", "Current"],
+            ["BTR-FIN-077", "Windows 10", "10.1.8", "2026-05-20 15:03", "Old"],
+            ["NOLA-EXEC-004", "macOS 14.4", "10.4.1", "2026-05-29 16:19", "Current"],
+            ["DAL-ADMIN-030", "Windows 11", "Not installed", "No agent record", "Missing"]
+          ]
+        },
+        {
+          name: "Cisco VPN",
+          currentVersion: "5.1.7.80",
+          endpointCount: 241,
+          staleEndpointCount: 22,
+          missingEndpointCount: 13,
+          notes: "Version drift affects remote access support and help desk repeat tickets.",
+          installString: "anyconnect-win.msi /qn PRE_DEPLOY_DISABLE_VPN=1",
+          uninstallString: "msiexec /x anyconnect-win.msi /qn",
+          endpoints: [
+            ["REMOTE-153", "Windows 11", "5.1.7.80", "2026-05-30 06:50", "Current"],
+            ["REMOTE-088", "Windows 10", "4.10.07061", "2026-05-16 12:48", "Old"],
+            ["FIELD-042", "macOS 13.6", "5.1.6.103", "2026-05-25 10:22", "Review"],
+            ["FIELD-059", "Windows 11", "Not installed", "No agent record", "Missing"]
+          ]
+        },
+        {
+          name: "CrowdStrike Falcon",
+          currentVersion: "7.20.17905",
+          endpointCount: 226,
+          staleEndpointCount: 6,
+          missingEndpointCount: 3,
+          notes: "Coverage is strong; remaining review items are mostly stale check-in records.",
+          installString: "WindowsSensor.exe /install /quiet CID=<customer-id>",
+          uninstallString: "CsUninstallTool.exe /quiet",
+          endpoints: [
+            ["HOU-EXEC-011", "Windows 11", "7.20.17905", "2026-05-30 07:10", "Current"],
+            ["ATL-FS-003", "Windows Server 2022", "7.20.17905", "2026-05-30 03:17", "Current"],
+            ["DAL-KIOSK-012", "Windows 10", "7.14.16807", "2026-05-18 09:41", "Old"],
+            ["NOLA-LAB-024", "RHEL 8.8", "7.20.17905", "2026-05-29 20:37", "Current"]
+          ]
+        },
+        {
+          name: "SentinelOne",
+          currentVersion: "23.4.4.223",
+          endpointCount: 132,
+          staleEndpointCount: 17,
+          missingEndpointCount: 6,
+          notes: "Check stale VDI and field laptops before operational readiness reporting.",
+          installString: "SentinelInstaller_windows_64bit.exe /SITE_TOKEN=<token> /quiet",
+          uninstallString: "SentinelCtl.exe unprotect -k <key> && SentinelInstaller.exe /uninstall /quiet",
+          endpoints: [
+            ["VDI-POOL-018", "Windows 11", "23.3.2.12", "2026-05-17 17:55", "Old"],
+            ["FIELD-071", "Windows 10", "23.4.4.223", "2026-05-29 13:38", "Current"],
+            ["BTR-OPS-029", "Windows 11", "Not installed", "No agent record", "Missing"],
+            ["NOLA-FS-006", "Windows Server 2019", "23.4.4.223", "2026-05-30 04:23", "Current"]
+          ]
+        },
+        {
+          name: "Splunk Universal Forwarder",
+          currentVersion: "9.3.1",
+          endpointCount: 109,
+          staleEndpointCount: 31,
+          missingEndpointCount: 14,
+          notes: "Old forwarders create log coverage gaps for operations and incident review.",
+          installString: "splunkforwarder.msi AGREETOLICENSE=Yes /quiet",
+          uninstallString: "msiexec /x splunkforwarder.msi /qn",
+          endpoints: [
+            ["ATL-IIS-005", "Windows Server 2019", "8.2.12", "2026-05-15 23:08", "Old"],
+            ["DAL-LNX-022", "Ubuntu 22.04", "9.3.1", "2026-05-30 02:58", "Current"],
+            ["HOU-APP-040", "RHEL 8.9", "8.1.11", "2026-05-13 21:31", "Old"],
+            ["BTR-FS-010", "Windows Server 2016", "Not installed", "No agent record", "Missing"]
+          ]
+        },
+        {
+          name: "Zscaler Client Connector",
+          currentVersion: "4.4.0.321",
+          endpointCount: 203,
+          staleEndpointCount: 18,
+          missingEndpointCount: 12,
+          notes: "Remote workforce connector drift should be included in weekly service review.",
+          installString: "Zscaler-windows.msi /qn CLOUDNAME=<cloud> USERDOMAIN=<domain>",
+          uninstallString: "msiexec /x Zscaler-windows.msi /qn",
+          endpoints: [
+            ["REMOTE-201", "Windows 11", "4.4.0.321", "2026-05-30 07:02", "Current"],
+            ["REMOTE-099", "macOS 13.6", "4.1.0.89", "2026-05-20 08:46", "Old"],
+            ["FIELD-016", "Windows 10", "4.4.0.321", "2026-05-29 18:13", "Current"],
+            ["REMOTE-243", "Windows 11", "Not installed", "No agent record", "Missing"]
+          ]
+        },
+        {
+          name: "Qualys Cloud Agent",
+          currentVersion: "5.6.1.29",
+          endpointCount: 171,
+          staleEndpointCount: 24,
+          missingEndpointCount: 10,
+          notes: "Scanning visibility gaps should be exported before the next vulnerability review.",
+          installString: "QualysCloudAgent.exe CustomerId=<id> ActivationId=<id> WebServiceUri=<url>",
+          uninstallString: "C:\\Program Files\\Qualys\\QualysAgent\\uninstall.exe",
+          endpoints: [
+            ["BTR-SQL-003", "Windows Server 2019", "5.6.1.29", "2026-05-30 02:43", "Current"],
+            ["ATL-LNX-044", "RHEL 8.7", "4.9.0.44", "2026-05-14 06:25", "Old"],
+            ["DAL-WKS-180", "Windows 11", "5.6.1.29", "2026-05-29 17:34", "Current"],
+            ["HOU-DB-011", "Windows Server 2016", "Not installed", "No agent record", "Missing"]
+          ]
+        },
+        {
+          name: "Rapid7 Insight Agent",
+          currentVersion: "4.0.14.32",
+          endpointCount: 118,
+          staleEndpointCount: 21,
+          missingEndpointCount: 8,
+          notes: "Endpoint analytics coverage needs cleanup for server and lab segments.",
+          installString: "agentInstaller-x86_64.msi /quiet CUSTOMTOKEN=<token>",
+          uninstallString: "msiexec /x agentInstaller-x86_64.msi /qn",
+          endpoints: [
+            ["NOLA-LAB-009", "Windows 10", "3.3.12.18", "2026-05-16 09:17", "Old"],
+            ["HOU-LNX-032", "Ubuntu 22.04", "4.0.14.32", "2026-05-30 01:58", "Current"],
+            ["DAL-WEB-017", "RHEL 9.2", "4.0.14.32", "2026-05-29 22:07", "Current"],
+            ["BTR-TEST-021", "Windows 11", "Not installed", "No agent record", "Missing"]
+          ]
+        },
+        {
+          name: "Defender for Endpoint",
+          currentVersion: "4.18.24040",
+          endpointCount: 219,
+          staleEndpointCount: 9,
+          missingEndpointCount: 5,
+          notes: "Strong baseline; review onboarding state for non-domain joined systems.",
+          installString: "WindowsDefenderATPOnboardingScript.cmd",
+          uninstallString: "WindowsDefenderATPOffboardingScript.cmd",
+          endpoints: [
+            ["ATL-WKS-088", "Windows 11", "4.18.24040", "2026-05-30 07:18", "Current"],
+            ["HOU-SRV-028", "Windows Server 2019", "4.18.24020", "2026-05-24 04:03", "Review"],
+            ["REMOTE-033", "Windows 10", "4.18.23110", "2026-05-19 14:45", "Old"],
+            ["NOLA-LAP-070", "Windows 11", "Not installed", "No agent record", "Missing"]
+          ]
+        }
+      ];
+
+      const state = {
+        query: "",
+        status: "All",
+        selectedName: softwareInventory[0].name
+      };
+
+      const normalize = (value) => String(value).toLowerCase();
+      const escapeHtml = (value) => String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+      const riskPercent = (product) =>
+        Math.min(100, Math.round(((product.staleEndpointCount + product.missingEndpointCount) / product.endpointCount) * 100));
+
+      function productStatus(product) {
+        if (product.missingEndpointCount > 10) return "Missing";
+        if (product.staleEndpointCount > 18) return "Old";
+        if (product.staleEndpointCount > 8 || product.missingEndpointCount > 3) return "Review";
+        return "Current";
+      }
+
+      function visibleProducts() {
+        return softwareInventory.filter((product) => {
+          const haystack = normalize([
+            product.name,
+            product.currentVersion,
+            product.notes,
+            ...product.endpoints.flat()
+          ].join(" "));
+          const matchesQuery = !state.query || haystack.includes(normalize(state.query));
+          const matchesStatus = state.status === "All" || productStatus(product) === state.status ||
+            product.endpoints.some((endpoint) => endpoint[4] === state.status);
+          return matchesQuery && matchesStatus;
+        });
+      }
+
+      function renderSummary(products) {
+        const totals = products.reduce((acc, product) => {
+          acc.products += 1;
+          acc.endpoints += product.endpointCount;
+          acc.stale += product.staleEndpointCount;
+          acc.missing += product.missingEndpointCount;
+          return acc;
+        }, { products: 0, endpoints: 0, stale: 0, missing: 0 });
+
+        document.getElementById("visibilitySummary").innerHTML = `
+          <div class="summary-card good"><strong>${totals.products}</strong><span>Tracked software and agents</span></div>
+          <div class="summary-card"><strong>${totals.endpoints}</strong><span>Observed endpoint installs</span></div>
+          <div class="summary-card warning"><strong>${totals.stale}</strong><span>Stale or old endpoint records</span></div>
+          <div class="summary-card warning"><strong>${totals.missing}</strong><span>Missing endpoint installs</span></div>
+        `;
+      }
+
+      function renderProductList(products) {
+        const list = document.getElementById("productList");
+        if (!products.length) {
+          list.innerHTML = "<p>No software records match the current filters.</p>";
+          return;
+        }
+
+        if (!products.some((product) => product.name === state.selectedName)) {
+          state.selectedName = products[0].name;
+        }
+
+        list.innerHTML = products.map((product) => {
+          const status = productStatus(product);
+          const percent = riskPercent(product);
+          return `
+            <button class="product-row ${product.name === state.selectedName ? "active" : ""}" type="button" data-product="${product.name}">
+              <span>
+                <strong>${escapeHtml(product.name)}</strong>
+                <small>${product.endpointCount} endpoints | Current ${escapeHtml(product.currentVersion)}</small>
+              </span>
+              <span class="risk-stack">
+                <span class="status-pill ${status.toLowerCase()}">${status}</span>
+                <span class="bar" aria-hidden="true"><span style="width: ${percent}%"></span></span>
+              </span>
+            </button>
+          `;
+        }).join("");
+
+        list.querySelectorAll(".product-row").forEach((button) => {
+          button.addEventListener("click", () => {
+            state.selectedName = button.dataset.product;
+            render();
+          });
+        });
+      }
+
+      function endpointRows(product) {
+        const rows = product.endpoints.filter((endpoint) =>
+          state.status === "All" || endpoint[4] === state.status || productStatus(product) === state.status
+        );
+
+        return rows.map((endpoint) => `
+          <tr>
+            <td>${escapeHtml(endpoint[0])}</td>
+            <td>${escapeHtml(endpoint[1])}</td>
+            <td>${escapeHtml(endpoint[2])}</td>
+            <td>${escapeHtml(product.currentVersion)}</td>
+            <td>${escapeHtml(endpoint[3])}</td>
+            <td><span class="status-pill ${endpoint[4].toLowerCase()}">${endpoint[4]}</span></td>
+          </tr>
+        `).join("");
+      }
+
+      function renderDetail(products) {
+        const product = products.find((item) => item.name === state.selectedName) || products[0];
+        const detail = document.getElementById("productDetail");
+        if (!product) {
+          detail.innerHTML = "<p>Select a software product to review endpoint detail.</p>";
+          return;
+        }
+
+        const status = productStatus(product);
+        detail.innerHTML = `
+          <div class="detail-header">
+            <div>
+              <h3>${escapeHtml(product.name)}</h3>
+              <p>${escapeHtml(product.notes)}</p>
+            </div>
+            <span class="status-pill ${status.toLowerCase()}">${status}</span>
+          </div>
+
+          <div class="detail-metrics">
+            <div class="detail-metric"><strong>${escapeHtml(product.currentVersion)}</strong><span>Current / recommended version</span></div>
+            <div class="detail-metric"><strong>${product.endpointCount}</strong><span>Endpoint count</span></div>
+            <div class="detail-metric"><strong>${product.staleEndpointCount}</strong><span>Stale endpoint count</span></div>
+            <div class="detail-metric"><strong>${product.missingEndpointCount}</strong><span>Missing endpoint count</span></div>
+          </div>
+
+          <div class="install-notes">
+            <div class="note-box">
+              <span>Install String</span>
+              <code>${escapeHtml(product.installString)}</code>
+            </div>
+            <div class="note-box">
+              <span>Uninstall String</span>
+              <code>${escapeHtml(product.uninstallString)}</code>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Endpoint Hostname</th>
+                  <th>OS</th>
+                  <th>Installed Version</th>
+                  <th>Recommended Version</th>
+                  <th>Last Check-In</th>
+                  <th>Operational Status</th>
+                </tr>
+              </thead>
+              <tbody>${endpointRows(product)}</tbody>
+            </table>
+          </div>
+        `;
+      }
+
+      function downloadFile(filename, content, type) {
+        const blob = new Blob([content], { type });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = filename;
+        link.click();
+        URL.revokeObjectURL(url);
+      }
+
+      function reportRows(products) {
+        return products.flatMap((product) =>
+          product.endpoints.map((endpoint) => ({
+            softwareName: product.name,
+            installedVersion: endpoint[2],
+            recommendedVersion: product.currentVersion,
+            endpointCount: product.endpointCount,
+            staleEndpointCount: product.staleEndpointCount,
+            missingEndpointCount: product.missingEndpointCount,
+            endpointHostname: endpoint[0],
+            os: endpoint[1],
+            lastCheckIn: endpoint[3],
+            deploymentNotes: product.notes,
+            installString: product.installString,
+            uninstallString: product.uninstallString,
+            operationalStatus: endpoint[4]
+          }))
+        );
+      }
+
+      function csvEscape(value) {
+        return `"${String(value).replaceAll('"', '""')}"`;
+      }
+
+      function exportCsv() {
+        const rows = reportRows(visibleProducts());
+        const headers = Object.keys(rows[0] || {
+          softwareName: "", installedVersion: "", recommendedVersion: "", endpointCount: "",
+          staleEndpointCount: "", missingEndpointCount: "", endpointHostname: "", os: "",
+          lastCheckIn: "", deploymentNotes: "", installString: "", uninstallString: "",
+          operationalStatus: ""
+        });
+        const csv = [
+          headers.join(","),
+          ...rows.map((row) => headers.map((header) => csvEscape(row[header])).join(","))
+        ].join("\n");
+        downloadFile("bayouops-software-agent-visibility.csv", csv, "text/csv");
+      }
+
+      function exportJson() {
+        const payload = {
+          reportName: "BayouOps Software / Agent Visibility",
+          generatedAt: new Date().toISOString(),
+          positioning: "Visibility and reporting only. No deployment, uninstall, remote execution, remediation, patch orchestration, or agent control.",
+          filters: { search: state.query, status: state.status },
+          products: visibleProducts()
+        };
+        downloadFile("bayouops-software-agent-visibility.json", JSON.stringify(payload, null, 2), "application/json");
+      }
+
+      function render() {
+        const products = visibleProducts();
+        renderSummary(products);
+        renderProductList(products);
+        renderDetail(products);
+      }
+
+      document.getElementById("softwareSearch").addEventListener("input", (event) => {
+        state.query = event.target.value.trim();
+        render();
+      });
+      document.getElementById("statusFilter").addEventListener("change", (event) => {
+        state.status = event.target.value;
+        render();
+      });
+      document.getElementById("exportCsv").addEventListener("click", exportCsv);
+      document.getElementById("exportJson").addEventListener("click", exportJson);
+      render();
+    </script>
   </body>
 </html>

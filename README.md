@@ -1,8 +1,10 @@
 # BayouOps Suite Pro
 
-Lightweight local-first operational readiness and export tooling for Windows and Linux environments.
+Lightweight local-first operational visibility, readiness, and export tooling for Windows and Linux environments.
 
 BayouOps Suite Pro focuses on practical operational visibility without requiring enterprise-scale infrastructure, cloud dependency, or subscription-heavy monitoring platforms.
+
+BayouOps is visibility and reporting focused. It is not positioned as an RMM, agent-control platform, deployment orchestrator, remediation system, or remote execution tool.
 
 ---
 
@@ -21,12 +23,48 @@ BayouOps Suite Pro was designed to provide:
 - local-first workflows
 - exportable operational evidence
 - lightweight readiness visibility
+- software and agent deployment visibility
 - operator-readable outputs
 - practical operational summaries
 
 ---
 
 # Current Developer Preview Features
+
+## Software / Agent Visibility
+
+The product site includes a first-pass Software / Agent Visibility module in the `#software-visibility` section of [`index.html`](index.html).
+
+The module provides read-only operational awareness for questions such as:
+
+- How many systems still have old Dynatrace?
+- Which endpoints are stale?
+- Which systems have old Cisco Secure Endpoint / AMP?
+- Which systems are missing BigFix?
+- What version drift exists across endpoint agents?
+- Can this data be exported for leadership, CAB, audit, or handoff review?
+
+Supported visibility fields include software name, installed version, current or recommended version, endpoint count, stale endpoint count, missing endpoint count, endpoint hostname, OS, last check-in, deployment notes, install string, uninstall string, and operational status.
+
+Current operational statuses are:
+
+- Current
+- Old
+- Missing
+- Review
+
+The module includes realistic sample data for common enterprise agents such as Dynatrace OneAgent, BigFix Agent, Cisco Secure Endpoint / AMP, FireEye Agent, Entrust, Cisco VPN, CrowdStrike Falcon, SentinelOne, Splunk Universal Forwarder, Zscaler Client Connector, Qualys Cloud Agent, Rapid7 Insight Agent, and Defender for Endpoint.
+
+Export-ready JSON and CSV downloads are available directly from the dashboard for reporting workflows.
+
+Future real endpoint data can come from the read-only Windows Software Inventory
+Collector at [`collectors/windows/Get-BayouOpsSoftwareInventory.ps1`](collectors/windows/Get-BayouOpsSoftwareInventory.ps1).
+The collector reads Windows uninstall registry metadata and exports JSON or CSV
+for BayouOps visibility/reporting workflows. It is not a deployment, uninstall,
+remediation, or agent control tool.
+
+Collector documentation is available at
+[`docs/WINDOWS_SOFTWARE_INVENTORY_COLLECTOR.md`](docs/WINDOWS_SOFTWARE_INVENTORY_COLLECTOR.md).
 
 ## Windows Operational Readiness Export
 
