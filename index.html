@@ -341,6 +341,69 @@
         aspect-ratio: 16 / 9;
       }
 
+      .latest-demo-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
+        gap: 18px;
+        align-items: start;
+      }
+
+      .latest-demo-copy {
+        border: 1px solid rgba(51, 65, 85, 0.72);
+        border-radius: 8px;
+        padding: 22px;
+        background: rgba(17, 28, 45, 0.86);
+      }
+
+      .latest-demo-copy p {
+        color: var(--muted);
+      }
+
+      .workflow-list {
+        display: grid;
+        gap: 10px;
+        margin: 18px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .workflow-list li {
+        border: 1px solid rgba(51, 65, 85, 0.68);
+        border-radius: 8px;
+        padding: 12px 14px;
+        background: rgba(8, 16, 29, 0.74);
+        color: #d8e1eb;
+        font-weight: 700;
+      }
+
+      .screenshot-gallery {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 18px;
+      }
+
+      .screenshot-card {
+        border: 1px solid rgba(51, 65, 85, 0.72);
+        border-radius: 8px;
+        background: rgba(17, 28, 45, 0.86);
+        overflow: hidden;
+      }
+
+      .screenshot-card img {
+        width: 100%;
+        aspect-ratio: 16 / 10;
+        object-fit: cover;
+        background: #02050a;
+      }
+
+      .screenshot-card figcaption {
+        padding: 10px 12px;
+        color: var(--muted);
+        font-size: 0.82rem;
+        font-weight: 700;
+      }
+
       .feature-grid {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -473,6 +536,10 @@
         background: rgba(51, 65, 85, 0.55);
       }
 
+      .visibility-summary.wide {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+      }
+
       .summary-card {
         min-height: 122px;
         padding: 20px;
@@ -498,6 +565,89 @@
 
       .summary-card.good strong {
         color: var(--teal);
+      }
+
+      .summary-card.danger strong {
+        color: #fb7185;
+      }
+
+      .import-summary-panel {
+        display: none;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 1px;
+        border-bottom: 1px solid rgba(51, 65, 85, 0.72);
+        background: rgba(51, 65, 85, 0.55);
+      }
+
+      .import-summary-panel.active {
+        display: grid;
+      }
+
+      .import-summary-panel .summary-card {
+        min-height: 96px;
+        padding: 16px;
+      }
+
+      .import-notes {
+        grid-column: 1 / -1;
+        padding: 12px 16px;
+        background: rgba(8, 16, 29, 0.9);
+        color: var(--muted);
+        font-size: 0.84rem;
+      }
+
+      .correlation-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(280px, 0.42fr);
+        gap: 1px;
+        background: rgba(51, 65, 85, 0.55);
+      }
+
+      .correlation-main,
+      .correlation-side {
+        min-width: 0;
+        padding: 18px;
+        background: rgba(11, 18, 32, 0.96);
+      }
+
+      .correlation-side {
+        display: grid;
+        align-content: start;
+        gap: 12px;
+      }
+
+      .concern-list,
+      .top-endpoint-list {
+        display: grid;
+        gap: 10px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .concern-list li,
+      .top-endpoint-list li {
+        border: 1px solid rgba(51, 65, 85, 0.68);
+        border-radius: 8px;
+        padding: 12px;
+        background: rgba(17, 28, 45, 0.76);
+      }
+
+      .concern-list strong,
+      .top-endpoint-list strong {
+        display: block;
+        color: var(--white);
+      }
+
+      .concern-list span,
+      .top-endpoint-list span {
+        color: var(--muted);
+        font-size: 0.82rem;
+      }
+
+      .correlation-text {
+        margin: 0;
+        color: #c8d3df;
       }
 
       .visibility-grid {
@@ -622,13 +772,24 @@
         color: var(--teal);
       }
 
+      .status-pill.healthy {
+        border-color: rgba(31, 182, 166, 0.52);
+        color: var(--teal);
+      }
+
       .status-pill.old,
       .status-pill.missing,
       .status-pill.pending-reboot,
       .status-pill.stale,
-      .status-pill.unsupported-os {
+      .status-pill.unsupported-os,
+      .status-pill.risk {
         border-color: rgba(196, 122, 58, 0.62);
         color: #f5b26d;
+      }
+
+      .status-pill.critical {
+        border-color: rgba(251, 113, 133, 0.68);
+        color: #fb7185;
       }
 
       .status-pill.installed {
@@ -863,6 +1024,7 @@
         }
 
         .hero-grid,
+        .latest-demo-layout,
         .split,
         .team-grid,
         .follow-box {
@@ -877,8 +1039,13 @@
           grid-template-columns: repeat(2, minmax(0, 1fr));
         }
 
+        .screenshot-gallery {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
         .visibility-toolbar,
         .visibility-grid,
+        .correlation-layout,
         .detail-metrics,
         .install-notes,
         .data-state {
@@ -894,7 +1061,9 @@
           text-align: left;
         }
 
-        .visibility-summary {
+        .visibility-summary,
+        .visibility-summary.wide,
+        .import-summary-panel {
           grid-template-columns: repeat(2, minmax(0, 1fr));
         }
 
@@ -931,7 +1100,10 @@
 
         .ops-metrics,
         .feature-grid,
-        .visibility-summary {
+        .screenshot-gallery,
+        .visibility-summary,
+        .visibility-summary.wide,
+        .import-summary-panel {
           grid-template-columns: 1fr;
         }
 
@@ -969,6 +1141,7 @@
           <a href="#demo">Demo</a>
           <a href="#software-visibility">Software</a>
           <a href="#patch-visibility">Patches</a>
+          <a href="#endpoint-risk">Endpoint Risk</a>
           <a href="#features">Features</a>
           <a href="#mission">Mission</a>
           <a href="#team">Team</a>
@@ -1029,24 +1202,63 @@
       <section class="section" id="demo">
         <div class="wrap">
           <div class="section-heading">
-            <p class="eyebrow">Operational Demo Preview</p>
-            <h2>Developer Preview Demonstration</h2>
+            <p class="eyebrow">Latest Operational Readiness Demo</p>
+            <h2>Software, patch, endpoint risk, and executive export in one local workflow.</h2>
             <p>
-              A practical walkthrough of readiness scoring, stale-system visibility,
-              certificate findings, and export workflows.
+              The latest demo shows BayouOps Suite Pro as a lightweight operational readiness
+              layer: import local evidence, review software and patch gaps, correlate endpoint
+              risk, and export an executive-ready summary without remediation or remote control.
             </p>
           </div>
-          <div class="demo-frame">
-            <div class="demo-label">
-              <span>Developer Preview Demonstration</span>
-              <span>BayouOps Operational Readiness Demo</span>
+
+          <div class="latest-demo-layout">
+            <div class="demo-frame">
+              <div class="demo-label">
+                <span>Local Demo Video</span>
+                <span>Operational Readiness Workflow</span>
+              </div>
+              <video
+                src="videos/2026-05-29/final/BayouOps_Operational_Readiness_Demo_FINAL_v1.mp4"
+                poster="screenshots/2026-05-30/16-operational-readiness-summary.png"
+                controls
+                preload="metadata"
+                playsinline
+              ></video>
             </div>
-            <video
-              src="videos/2026-05-29/final/BayouOps_Operational_Readiness_Demo_FINAL_v1.mp4"
-              controls
-              preload="metadata"
-              playsinline
-            ></video>
+
+            <article class="latest-demo-copy">
+              <h3>Operational Summary</h3>
+              <p>
+                This workflow is designed for small IT teams that need trustworthy status quickly:
+                read-only visibility, fast local imports, correlated readiness scoring, and
+                exportable evidence for leadership, CAB, audit, and handoff reviews.
+              </p>
+              <ul class="workflow-list" aria-label="Latest demo workflow coverage">
+                <li>Software Visibility</li>
+                <li>Patch Readiness</li>
+                <li>Endpoint Risk Correlation</li>
+                <li>Executive Export Workflow</li>
+              </ul>
+            </article>
+          </div>
+
+          <div class="screenshot-gallery" aria-label="Operational readiness screenshots">
+            <figure class="screenshot-card">
+              <img src="screenshots/2026-05-30/16-operational-readiness-summary.png" alt="Operational readiness summary dashboard">
+              <figcaption>Operational Readiness Summary</figcaption>
+            </figure>
+            <figure class="screenshot-card">
+              <img src="screenshots/2026-05-30/17-top-operational-risks.png" alt="Top operational risks panel">
+              <figcaption>Top Operational Risks</figcaption>
+            </figure>
+            <figure class="screenshot-card">
+              <img src="screenshots/2026-05-30/18-readiness-export-workflow.png" alt="Readiness export workflow">
+              <figcaption>Executive Export Workflow</figcaption>
+            </figure>
+            <figure class="screenshot-card">
+              <img src="screenshots/2026-05-30/19-software-plus-patch-correlation.png" alt="Software and patch endpoint correlation">
+              <figcaption>Software + Patch Correlation</figcaption>
+            </figure>
           </div>
         </div>
       </section>
@@ -1096,6 +1308,8 @@
               <span id="dataIndicator"><strong>Sample Data</strong> | Built-in software visibility scenario</span>
               <span class="message" id="importMessage" role="status" aria-live="polite"></span>
             </div>
+
+            <div class="import-summary-panel" id="softwareImportSummary" aria-label="Software import summary"></div>
 
             <div class="visibility-summary" id="visibilitySummary" aria-label="Operational summary cards"></div>
 
@@ -1154,11 +1368,72 @@
               <span class="message" id="patchImportMessage" role="status" aria-live="polite"></span>
             </div>
 
+            <div class="import-summary-panel" id="patchImportSummary" aria-label="Patch import summary"></div>
+
             <div class="visibility-summary" id="patchSummary" aria-label="Patch readiness summary cards"></div>
 
             <div class="visibility-grid">
               <div class="product-list" id="patchList" aria-label="Patch KB list"></div>
               <article class="product-detail" id="patchDetail" aria-label="Selected KB endpoint details"></article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="endpoint-risk">
+        <div class="wrap">
+          <div class="section-heading">
+            <p class="eyebrow">Endpoint Operational Risk</p>
+            <h2>Correlated readiness from software and patch evidence.</h2>
+            <p>
+              A single endpoint can accumulate operational risk from stale software, missing
+              agents, missing KBs, unsupported OS status, pending reboot signals, and version drift.
+              This remains visibility/reporting only.
+            </p>
+          </div>
+
+          <div class="visibility-shell" aria-label="Endpoint operational risk dashboard">
+            <div class="data-state">
+              <span id="correlationIndicator"><strong>Correlation Active</strong> | Software and patch evidence linked by endpoint hostname</span>
+              <span class="message" id="correlationTrend" role="status" aria-live="polite"></span>
+            </div>
+
+            <div class="visibility-summary wide" id="correlationSummary" aria-label="Endpoint readiness summary cards"></div>
+
+            <div class="correlation-layout">
+              <div class="correlation-main">
+                <div class="detail-header">
+                  <div>
+                    <h3>Correlated Endpoint Table</h3>
+                    <p class="correlation-text" id="correlationSummaryText"></p>
+                  </div>
+                </div>
+                <div class="table-wrap">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Endpoint</th>
+                        <th>Readiness</th>
+                        <th>Badge</th>
+                        <th>Software Signals</th>
+                        <th>Patch Signals</th>
+                        <th>OS / Reboot</th>
+                      </tr>
+                    </thead>
+                    <tbody id="correlationRows"></tbody>
+                  </table>
+                </div>
+              </div>
+              <aside class="correlation-side" aria-label="Top endpoint risk and concerns">
+                <div>
+                  <h3>Top Affected Endpoints</h3>
+                  <ul class="top-endpoint-list" id="topAffectedEndpoints"></ul>
+                </div>
+                <div>
+                  <h3>Top Operational Concerns</h3>
+                  <ul class="concern-list" id="topOperationalConcerns"></ul>
+                </div>
+              </aside>
             </div>
           </div>
         </div>
@@ -1735,6 +2010,40 @@
         return `"${String(value).replaceAll('"', '""')}"`;
       }
 
+      function renderImportSummary(targetId, summary, labels = {}) {
+        const panel = document.getElementById(targetId);
+        if (!panel) return;
+        const notes = summary.notes.length
+          ? `<div class="import-notes">${summary.notes.map(escapeHtml).join(" ")}</div>`
+          : "";
+
+        panel.classList.add("active");
+        panel.innerHTML = `
+          <div class="summary-card good"><strong>${summary.importedRecords}</strong><span>Imported records</span></div>
+          <div class="summary-card warning"><strong>${summary.skippedRecords}</strong><span>Skipped records</span></div>
+          <div class="summary-card warning"><strong>${summary.duplicateRecords}</strong><span>Duplicate records</span></div>
+          <div class="summary-card danger"><strong>${summary.malformedRows}</strong><span>Malformed rows</span></div>
+          <div class="summary-card"><strong>${summary.softwareGroups}</strong><span>${labels.software || "Detected software groups"}</span></div>
+          <div class="summary-card"><strong>${summary.kbGroups}</strong><span>${labels.kb || "Detected KB groups"}</span></div>
+          ${notes}
+        `;
+      }
+
+      function baseImportSummary() {
+        return {
+          importedRecords: 0,
+          skippedRecords: 0,
+          duplicateRecords: 0,
+          malformedRows: 0,
+          missingRequiredFields: 0,
+          duplicateEndpoints: 0,
+          duplicateSoftwareEntries: 0,
+          softwareGroups: 0,
+          kbGroups: 0,
+          notes: []
+        };
+      }
+
       function exportCsv() {
         const rows = reportRows(visibleProducts());
         const headers = Object.keys(rows[0] || {
@@ -1759,6 +2068,7 @@
           dataMode: state.dataMode,
           sourceFile: state.sourceFile,
           filters: { search: state.query, status: state.status },
+          endpointCorrelation: typeof buildEndpointCorrelation === "function" ? buildEndpointCorrelation().summary : null,
           products: visibleProducts()
         };
         downloadFile("bayouops-software-agent-visibility.json", JSON.stringify(payload, null, 2), "application/json");
@@ -1784,19 +2094,70 @@
         return [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))[0][0];
       }
 
-      function collectorRecordsToProducts(records) {
+      function prepareSoftwareImportRecords(records, summary) {
         if (!Array.isArray(records) || records.length === 0) {
           throw new Error("No collector records were found.");
         }
 
-        records.forEach(validateCollectorRecord);
+        const endpointCounts = new Map();
+        const seenSoftwareEntries = new Set();
+        const cleanRecords = [];
 
-        const grouped = records.reduce((groups, record) => {
+        records.forEach((record, index) => {
+          try {
+            validateCollectorRecord(record, index);
+          } catch (error) {
+            summary.skippedRecords += 1;
+            summary.missingRequiredFields += 1;
+            return;
+          }
+
+          const computer = String(record.ComputerName || "Unknown computer").trim();
+          const displayName = String(record.DisplayName || "").trim();
+          const version = String(record.DisplayVersion || "").trim();
+          const registryPath = String(record.RegistryPath || "").trim();
+          const duplicateKey = [computer.toLowerCase(), displayName.toLowerCase(), version.toLowerCase(), registryPath.toLowerCase()].join("|");
+
+          endpointCounts.set(computer, (endpointCounts.get(computer) || 0) + 1);
+          if (seenSoftwareEntries.has(duplicateKey)) {
+            summary.duplicateRecords += 1;
+            summary.duplicateSoftwareEntries += 1;
+            summary.skippedRecords += 1;
+            return;
+          }
+
+          seenSoftwareEntries.add(duplicateKey);
+          cleanRecords.push(record);
+        });
+
+        summary.duplicateEndpoints = [...endpointCounts.values()].filter((count) => count > 1).length;
+        summary.importedRecords = cleanRecords.length;
+        summary.notes.push(`${summary.duplicateEndpoints} endpoint hostnames appeared more than once across software inventory records.`);
+        if (summary.missingRequiredFields) {
+          summary.notes.push(`${summary.missingRequiredFields} software records were skipped because required fields were missing.`);
+        }
+        if (summary.duplicateSoftwareEntries) {
+          summary.notes.push(`${summary.duplicateSoftwareEntries} duplicate software entries were skipped by ComputerName, DisplayName, DisplayVersion, and RegistryPath.`);
+        }
+
+        if (!cleanRecords.length) {
+          throw new Error("No valid software records remained after import validation.");
+        }
+
+        return cleanRecords;
+      }
+
+      function collectorRecordsToProducts(records, summary = baseImportSummary()) {
+        const cleanRecords = prepareSoftwareImportRecords(records, summary);
+
+        const grouped = cleanRecords.reduce((groups, record) => {
           const key = String(record.DisplayName).trim();
           if (!groups.has(key)) groups.set(key, []);
           groups.get(key).push(record);
           return groups;
         }, new Map());
+
+        summary.softwareGroups = grouped.size;
 
         return [...grouped.entries()].map(([displayName, group]) => {
           const primaryVersion = mostCommonVersion(group);
@@ -1842,8 +2203,8 @@
         }).sort((a, b) => a.name.localeCompare(b.name));
       }
 
-      function parseCollectorJson(text) {
-        const parsed = JSON.parse(text);
+      function parseCollectorJson(text, summary = baseImportSummary()) {
+        const parsed = safeParseJson(text, summary, "collector output");
         if (Array.isArray(parsed)) return parsed;
         if (Array.isArray(parsed.records)) return parsed.records;
         if (Array.isArray(parsed.products)) {
@@ -1883,6 +2244,10 @@
           }
         }
 
+        if (inQuotes) {
+          throw new Error("Malformed CSV: an open quoted value was not closed.");
+        }
+
         row.push(cell);
         if (row.some((value) => value !== "")) rows.push(row);
 
@@ -1893,30 +2258,53 @@
         const headers = rows[0].map((header, index) =>
           (index === 0 ? header.replace(/^\uFEFF/, "") : header).trim()
         );
-        return rows.slice(1).map((values) =>
-          headers.reduce((record, header, index) => {
+        return rows.slice(1).map((values, rowIndex) => {
+          if (values.length !== headers.length) {
+            throw new Error(`Malformed CSV row ${rowIndex + 2}: expected ${headers.length} columns and found ${values.length}.`);
+          }
+          return headers.reduce((record, header, index) => {
             record[header] = values[index] || "";
             return record;
-          }, {})
-        );
+          }, {});
+        });
+      }
+
+      function parseCsvWithValidation(text, summary) {
+        try {
+          return parseCsv(text);
+        } catch (error) {
+          summary.malformedRows += 1;
+          throw error;
+        }
+      }
+
+      function safeParseJson(text, summary, label) {
+        try {
+          return JSON.parse(text);
+        } catch (error) {
+          summary.malformedRows += 1;
+          throw new Error(`Malformed JSON ${label}: ${error.message}`);
+        }
       }
 
       async function importCollectorFile(file, type) {
         try {
           setImportMessage("");
           const text = await file.text();
-          const records = type === "json" ? parseCollectorJson(text) : parseCsv(text);
-          const products = collectorRecordsToProducts(records);
+          const summary = baseImportSummary();
+          const records = type === "json" ? parseCollectorJson(text, summary) : parseCsvWithValidation(text, summary);
+          const products = collectorRecordsToProducts(records, summary);
 
           activeInventory = products;
           state.dataMode = "Imported Data";
-          state.sourceFile = `${file.name} | ${records.length} records | ${products.length} software groups`;
+          state.sourceFile = `${file.name} | ${summary.importedRecords} imported | ${products.length} software groups`;
           state.selectedName = products[0].name;
           state.query = "";
           state.status = "All";
           document.getElementById("softwareSearch").value = "";
           document.getElementById("statusFilter").value = "All";
-          setImportMessage("Collector output imported for visibility/reporting.");
+          renderImportSummary("softwareImportSummary", summary);
+          setImportMessage("Collector output imported with validation summary.");
           render();
         } catch (error) {
           setImportMessage(`Import failed: ${error.message}`, true);
@@ -1929,6 +2317,7 @@
         renderSummary(products);
         renderProductList(products);
         renderDetail(products);
+        if (typeof renderCorrelationDashboard === "function") renderCorrelationDashboard();
       }
 
       document.getElementById("softwareSearch").addEventListener("input", (event) => {
@@ -2419,6 +2808,7 @@
           sourceFile: patchState.sourceFile,
           filters: { search: patchState.query, status: patchState.status },
           baseline: requiredPatchBaseline,
+          endpointCorrelation: typeof buildEndpointCorrelation === "function" ? buildEndpointCorrelation().summary : null,
           products
         }, null, 2), "application/json");
       }
@@ -2435,26 +2825,261 @@
         }
       }
 
-      function parsePatchJson(text) {
-        const parsed = JSON.parse(text);
+      function parsePatchJson(text, summary = baseImportSummary()) {
+        const parsed = safeParseJson(text, summary, "patch collector output");
         if (Array.isArray(parsed)) return parsed;
         if (Array.isArray(parsed.records)) return parsed.records;
         throw new Error("JSON patch collector output must be an array of records.");
       }
 
-      function parsePatchCsv(text) {
-        return parseCsv(text);
+      function parsePatchCsv(text, summary = baseImportSummary()) {
+        return parseCsvWithValidation(text, summary);
+      }
+
+      function preparePatchImportRecords(records, summary) {
+        if (!Array.isArray(records) || !records.length) throw new Error("No patch records were found.");
+
+        const endpointCounts = new Map();
+        const seenKbEntries = new Set();
+        const cleanRecords = [];
+
+        records.forEach((record, index) => {
+          try {
+            validatePatchRecord(record, index);
+          } catch (error) {
+            summary.skippedRecords += 1;
+            summary.missingRequiredFields += 1;
+            return;
+          }
+
+          const computer = String(record.ComputerName || "").trim();
+          const hotfix = String(record.HotFixID || "").trim().toUpperCase();
+          const duplicateKey = [computer.toLowerCase(), hotfix].join("|");
+          endpointCounts.set(computer, (endpointCounts.get(computer) || 0) + 1);
+
+          if (seenKbEntries.has(duplicateKey)) {
+            summary.duplicateRecords += 1;
+            summary.skippedRecords += 1;
+            return;
+          }
+
+          seenKbEntries.add(duplicateKey);
+          cleanRecords.push(record);
+        });
+
+        summary.importedRecords = cleanRecords.length;
+        summary.duplicateEndpoints = [...endpointCounts.values()].filter((count) => count > 1).length;
+        summary.kbGroups = new Set(cleanRecords.map((record) => String(record.HotFixID || "").trim().toUpperCase())).size;
+        summary.notes.push(`${summary.duplicateEndpoints} endpoint hostnames appeared more than once across patch inventory records.`);
+        if (summary.missingRequiredFields) {
+          summary.notes.push(`${summary.missingRequiredFields} patch records were skipped because ComputerName or HotFixID was missing.`);
+        }
+        if (summary.duplicateRecords) {
+          summary.notes.push(`${summary.duplicateRecords} duplicate endpoint/KB records were skipped.`);
+        }
+
+        if (!cleanRecords.length) {
+          throw new Error("No valid patch records remained after import validation.");
+        }
+
+        return cleanRecords;
+      }
+
+      function isCriticalAgentName(name) {
+        const value = normalize(name || "");
+        return [
+          "agent",
+          "crowdstrike",
+          "sentinelone",
+          "defender",
+          "cisco secure",
+          "fireeye",
+          "qualys",
+          "rapid7",
+          "bigfix",
+          "dynatrace",
+          "splunk"
+        ].some((token) => value.includes(token));
+      }
+
+      function ensureCorrelationEndpoint(map, hostname) {
+        const key = String(hostname || "Unknown computer").trim() || "Unknown computer";
+        if (!map.has(key)) {
+          map.set(key, {
+            endpoint: key,
+            os: "",
+            staleSoftware: 0,
+            missingAgents: 0,
+            missingCriticalAgents: 0,
+            versionDrift: 0,
+            missingKbs: 0,
+            pendingReboot: false,
+            unsupportedOs: false,
+            softwareSignals: [],
+            patchSignals: [],
+            latestPatchDate: ""
+          });
+        }
+        return map.get(key);
+      }
+
+      function softwareEndpointRecords() {
+        return activeInventory.flatMap((product) => (product.endpoints || []).map((endpoint) => ({
+          product,
+          hostname: endpointValue(endpoint, 0, "hostname"),
+          os: endpointValue(endpoint, 1, "os") || "",
+          version: endpointValue(endpoint, 2, "version") || "",
+          status: endpointValue(endpoint, 4, "status") || productStatus(product)
+        })));
+      }
+
+      function endpointBadge(score) {
+        if (score >= 90) return "Healthy";
+        if (score >= 74) return "Review";
+        if (score >= 50) return "Risk";
+        return "Critical";
+      }
+
+      function buildEndpointCorrelation() {
+        const endpoints = new Map();
+
+        softwareEndpointRecords().forEach((record) => {
+          const endpoint = ensureCorrelationEndpoint(endpoints, record.hostname);
+          endpoint.os = endpoint.os || record.os;
+          const status = String(record.status || "");
+          if (status === "Missing") {
+            endpoint.missingAgents += 1;
+            if (isCriticalAgentName(record.product.name)) endpoint.missingCriticalAgents += 1;
+            endpoint.softwareSignals.push(`${record.product.name}: missing`);
+          } else if (status === "Old") {
+            endpoint.staleSoftware += 1;
+            endpoint.versionDrift += 1;
+            endpoint.softwareSignals.push(`${record.product.name}: stale ${record.version}`);
+          } else if (status === "Review") {
+            endpoint.versionDrift += 1;
+            endpoint.softwareSignals.push(`${record.product.name}: review ${record.version}`);
+          }
+        });
+
+        const patchEndpoints = endpointPatchMap(activePatchRecords);
+        patchEndpoints.forEach((patchEndpoint) => {
+          const endpoint = ensureCorrelationEndpoint(endpoints, patchEndpoint.computer);
+          endpoint.os = endpoint.os || patchEndpoint.os;
+          endpoint.pendingReboot = endpoint.pendingReboot || patchEndpoint.pendingReboot;
+          endpoint.unsupportedOs = endpoint.unsupportedOs || patchIsUnsupportedOs(patchEndpoint.os);
+          endpoint.latestPatchDate = patchEndpoint.latestInstalledOn || endpoint.latestPatchDate;
+          const missingRequired = requiredPatchBaseline
+            .filter((kb) => !patchEndpoint.installed.has(kb.HotFixID))
+            .map((kb) => kb.HotFixID);
+          endpoint.missingKbs = missingRequired.length;
+          if (missingRequired.length) endpoint.patchSignals.push(`Missing ${missingRequired.join(", ")}`);
+          if (endpoint.pendingReboot) endpoint.patchSignals.push("Pending reboot");
+          if (endpoint.unsupportedOs) endpoint.patchSignals.push("Unsupported OS");
+        });
+
+        const rows = [...endpoints.values()].map((endpoint) => {
+          const penalties = {
+            unsupportedOs: endpoint.unsupportedOs ? 30 : 0,
+            missingCriticalAgent: Math.min(endpoint.missingCriticalAgents * 30, 60),
+            missingKb: Math.min(endpoint.missingKbs * 12, 36),
+            staleEndpoint: Math.min(endpoint.staleSoftware * 15, 30),
+            pendingReboot: endpoint.pendingReboot ? 8 : 0,
+            versionDrift: Math.min(endpoint.versionDrift * 15, 30)
+          };
+          const score = Math.max(0, 100 - Object.values(penalties).reduce((sum, value) => sum + value, 0));
+          return { ...endpoint, penalties, score, badge: endpointBadge(score) };
+        }).sort((a, b) => a.score - b.score || a.endpoint.localeCompare(b.endpoint));
+
+        const distribution = rows.reduce((acc, row) => {
+          acc[row.badge] = (acc[row.badge] || 0) + 1;
+          return acc;
+        }, { Healthy: 0, Review: 0, Risk: 0, Critical: 0 });
+
+        const softwareRecords = softwareEndpointRecords();
+        const softwareInstalled = softwareRecords.filter((record) => record.status !== "Missing").length;
+        const softwareCoverage = softwareRecords.length ? Math.round((softwareInstalled / softwareRecords.length) * 100) : 0;
+        const patchEndpointList = [...patchEndpoints.values()];
+        const totalRequired = patchEndpointList.length * requiredPatchBaseline.length;
+        const installedRequired = requiredPatchBaseline.reduce((count, kb) =>
+          count + patchEndpointList.filter((endpoint) => endpoint.installed.has(kb.HotFixID)).length, 0);
+        const patchCoverage = totalRequired ? Math.round((installedRequired / totalRequired) * 100) : 0;
+        const avgScore = rows.length ? Math.round(rows.reduce((sum, row) => sum + row.score, 0) / rows.length) : 0;
+        const unsupported = rows.filter((row) => row.unsupportedOs).length;
+        const critical = distribution.Critical || 0;
+
+        return {
+          rows,
+          summary: {
+            endpointCount: rows.length,
+            avgScore,
+            softwareCoverage,
+            patchCoverage,
+            unsupported,
+            critical,
+            distribution
+          }
+        };
+      }
+
+      function renderCorrelationDashboard() {
+        const { rows, summary } = buildEndpointCorrelation();
+        const topRows = rows.slice(0, 10);
+        const concerns = [
+          { label: "Missing required KBs", count: rows.filter((row) => row.missingKbs > 0).length },
+          { label: "Version drift", count: rows.filter((row) => row.versionDrift > 0).length },
+          { label: "Missing critical agents", count: rows.filter((row) => row.missingCriticalAgents > 0).length },
+          { label: "Unsupported OS", count: summary.unsupported },
+          { label: "Pending reboot", count: rows.filter((row) => row.pendingReboot).length }
+        ].sort((a, b) => b.count - a.count);
+
+        document.getElementById("correlationSummary").innerHTML = `
+          <div class="summary-card good"><strong>${summary.avgScore}</strong><span>Average endpoint readiness score</span></div>
+          <div class="summary-card"><strong>${summary.softwareCoverage}%</strong><span>Software coverage</span></div>
+          <div class="summary-card"><strong>${summary.patchCoverage}%</strong><span>Patch coverage</span></div>
+          <div class="summary-card warning"><strong>${summary.unsupported}</strong><span>Unsupported OS endpoints</span></div>
+          <div class="summary-card danger"><strong>${summary.critical}</strong><span>Critical endpoints</span></div>
+        `;
+
+        document.getElementById("correlationSummaryText").textContent =
+          `${summary.endpointCount} endpoints are correlated by hostname. Distribution: ${summary.distribution.Healthy} healthy, ${summary.distribution.Review} review, ${summary.distribution.Risk} risk, ${summary.distribution.Critical} critical.`;
+        document.getElementById("correlationTrend").textContent =
+          summary.avgScore >= 85 ? "Trend: stable readiness" : summary.avgScore >= 70 ? "Trend: review pressure rising" : "Trend: elevated operational risk";
+
+        document.getElementById("correlationRows").innerHTML = topRows.map((row) => `
+          <tr>
+            <td>${patchEscape(row.endpoint)}</td>
+            <td>${row.score}</td>
+            <td><span class="status-pill ${row.badge.toLowerCase()}">${row.badge}</span></td>
+            <td>${patchEscape(row.softwareSignals.slice(0, 3).join(" | ") || "No software drift signal")}</td>
+            <td>${patchEscape(row.patchSignals.slice(0, 3).join(" | ") || "No patch drift signal")}</td>
+            <td>${patchEscape(row.os || "Unknown OS")} | Reboot: ${row.pendingReboot ? "Yes" : "No"}</td>
+          </tr>
+        `).join("");
+
+        document.getElementById("topAffectedEndpoints").innerHTML = topRows.slice(0, 5).map((row) => `
+          <li>
+            <strong>${patchEscape(row.endpoint)} | ${row.score} ${patchEscape(row.badge)}</strong>
+            <span>${patchEscape([...row.softwareSignals, ...row.patchSignals].slice(0, 3).join(" | ") || "No active risk factors")}</span>
+          </li>
+        `).join("");
+
+        document.getElementById("topOperationalConcerns").innerHTML = concerns.map((concern) => `
+          <li>
+            <strong>${concern.count}</strong>
+            <span>${patchEscape(concern.label)}</span>
+          </li>
+        `).join("");
       }
 
       async function importPatchFile(file, type) {
         try {
           setPatchMessage("");
           const text = await file.text();
-          const records = type === "json" ? parsePatchJson(text) : parsePatchCsv(text);
-          if (!records.length) throw new Error("No patch records were found.");
-          records.forEach(validatePatchRecord);
+          const summary = baseImportSummary();
+          const records = type === "json" ? parsePatchJson(text, summary) : parsePatchCsv(text, summary);
+          const cleanRecords = preparePatchImportRecords(records, summary);
 
-          activePatchRecords = records.map((record) => ({
+          activePatchRecords = cleanRecords.map((record) => ({
             ComputerName: record.ComputerName,
             HotFixID: String(record.HotFixID || "").trim().toUpperCase(),
             InstalledOn: record.InstalledOn || "",
@@ -2466,13 +3091,14 @@
             CollectedAt: record.CollectedAt || ""
           }));
           patchState.dataMode = "Imported Data";
-          patchState.sourceFile = `${file.name} | ${records.length} records | ${endpointPatchMap(activePatchRecords).size} endpoints`;
+          patchState.sourceFile = `${file.name} | ${summary.importedRecords} imported | ${endpointPatchMap(activePatchRecords).size} endpoints`;
           patchState.selectedKb = activePatchRecords[0].HotFixID;
           patchState.query = "";
           patchState.status = "All";
           document.getElementById("patchSearch").value = "";
           document.getElementById("patchStatusFilter").value = "All";
-          setPatchMessage("Patch collector output imported for visibility/reporting.");
+          renderImportSummary("patchImportSummary", summary);
+          setPatchMessage("Patch collector output imported with validation summary.");
           renderPatchDashboard();
         } catch (error) {
           setPatchMessage(`Import failed: ${error.message}`, true);
@@ -2485,6 +3111,7 @@
         renderPatchSummary(products);
         renderPatchList(products);
         renderPatchDetail(products);
+        if (typeof renderCorrelationDashboard === "function") renderCorrelationDashboard();
       }
 
       document.getElementById("patchSearch").addEventListener("input", (event) => {

@@ -6,6 +6,63 @@ BayouOps Suite Pro focuses on practical operational visibility without requiring
 
 BayouOps is visibility and reporting focused. It is not positioned as an RMM, agent-control platform, deployment orchestrator, remediation system, or remote execution tool.
 
+- Netlify site: https://bayouops-suite-pro.netlify.app
+- GitHub repo: https://github.com/dewaynecox123456-lang/bayouops-suite-pro
+
+---
+
+# Latest Demo
+
+The latest operational readiness demo shows BayouOps Suite Pro as a lightweight,
+local-first visibility layer for small IT teams that need trustworthy reporting
+without turning the product into a remediation or remote-control platform.
+
+Demo workflow coverage:
+
+- Software Visibility
+- Patch Readiness
+- Endpoint Risk Correlation
+- Executive Export Workflow
+
+The homepage includes an embedded local MP4 demo player when the bundled video
+asset is available, plus a screenshot gallery from the completed operational
+readiness workflow.
+
+BayouOps is:
+
+- visibility/reporting focused
+- lightweight
+- local-first
+- operational readiness oriented
+
+BayouOps is not:
+
+- an RMM
+- a patch deployment system
+- remote remediation tooling
+
+## Screenshot Gallery
+
+![Operational Readiness Summary](screenshots/2026-05-30/16-operational-readiness-summary.png)
+
+![Top Operational Risks](screenshots/2026-05-30/17-top-operational-risks.png)
+
+![Readiness Export Workflow](screenshots/2026-05-30/18-readiness-export-workflow.png)
+
+![Software and Patch Correlation](screenshots/2026-05-30/19-software-plus-patch-correlation.png)
+
+## Operational Workflow
+
+BayouOps keeps the workflow intentionally narrow and auditable:
+
+1. Import local software and patch evidence from read-only collectors or sample files.
+2. Review software coverage, stale agents, missing agents, version drift, KB compliance, pending reboot state, and unsupported OS indicators.
+3. Correlate endpoint-level risk factors into an operational readiness score.
+4. Export operator-readable or executive-ready evidence for leadership, CAB, audit, or handoff discussions.
+
+No deployment, reboot, remediation, registry modification, Windows Update
+triggering, or remote execution behavior is included.
+
 ---
 
 # Why BayouOps Exists
@@ -119,3 +176,7 @@ pwsh -NoProfile -File .\windows\Export-PatchReadiness.ps1
 # Demo Materials
 
 Polished demo scripts, walkthrough notes, buyer-story framing, video planning assets, and launch copy are available in [`videos/2026-05-29/`](videos/2026-05-29/). These materials position BayouOps Suite Pro as an operational readiness and visibility layer for patch, compliance, CAB, and executive reporting workflows.
+
+The current homepage demo player uses the bundled final MP4 at
+[`videos/2026-05-29/final/BayouOps_Operational_Readiness_Demo_FINAL_v1.mp4`](videos/2026-05-29/final/BayouOps_Operational_Readiness_Demo_FINAL_v1.mp4).
+No `videos/2026-05-30/final/` directory is present in this checkout.
