@@ -1,2 +1,17 @@
 __pycache__/
 *.py[cod]
+
+# Local Netlify folder
+.netlify
+
+# Release artifacts
+dist/
+*.zip
+
+# Video renders
+videos/**/raw/
+videos/**/final/
+*.mp4
+
+# Netlify local state
+.netlify

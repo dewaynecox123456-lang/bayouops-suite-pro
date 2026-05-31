@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" role="img" aria-labelledby="title desc">
+  <title id="title">BayouOps Cleanup</title>
+  <desc id="desc">BayouOps platform lockup for operational infrastructure tooling.</desc>
+  
+  <g transform="translate(56 48) scale(.515)">
+  <title id="title">BayouOps emblem</title>
+  <desc id="desc">Hexagonal operational readiness emblem with radar, telemetry nodes, and a subtle bayou navigation line.</desc>
+  
+  <g fill="none" stroke="#0B1220" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M256 44 420 139v190L256 468 92 329V139L256 44Z" stroke-width="18"/>
+    <path d="M256 83 384 157v149L256 414 128 306V157L256 83Z" stroke-width="8" opacity=".52"/>
+    <circle cx="256" cy="256" r="77" stroke-width="12"/>
+    <path d="M184 256a72 72 0 0 1 144 0" stroke="#38BDF8" stroke-width="10"/>
+    <path d="M152 256a104 104 0 0 1 208 0" stroke="#38BDF8" stroke-width="7" opacity=".68"/>
+    <path d="M120 256a136 136 0 0 1 272 0" stroke="#38BDF8" stroke-width="5" opacity=".42"/>
+    <path d="M154 315c42-51 82-47 122-7 25 25 54 24 85-4" stroke="#C47A3A" stroke-width="12"/>
+    <path d="M213 258h86" stroke="#1FB6A6" stroke-width="14"/>
+    <path d="M256 215v86" stroke="#1FB6A6" stroke-width="14"/>
+    <circle cx="256" cy="256" r="20" fill="#1FB6A6" stroke="none"/>
+    <circle cx="154" cy="315" r="11" fill="#C47A3A" stroke="none"/>
+    <circle cx="361" cy="304" r="11" fill="#C47A3A" stroke="none"/>
+    <circle cx="159" cy="176" r="9" fill="#0B1220" stroke="none" opacity=".75"/>
+    <circle cx="353" cy="176" r="9" fill="#0B1220" stroke="none" opacity=".75"/>
+    <path d="M168 176h59M285 176h59M256 110v57M256 345v57" stroke-width="6" opacity=".55"/>
+  </g>
+</g>
+  <g font-family="Inter, Segoe UI, Arial, sans-serif">
+    <text x="350" y="158" fill="#0B1220" font-size="78" font-weight="760" letter-spacing="0">BayouOps</text>
+    <text x="354" y="220" fill="#334155" font-size="32" font-weight="520" letter-spacing="2">CLEANUP</text>
+    <path d="M354 248h430" stroke="#1FB6A6" stroke-width="8" stroke-linecap="round"/>
+    <path d="M798 248h82" stroke="#C47A3A" stroke-width="8" stroke-linecap="round"/>
+  </g>
+</svg>

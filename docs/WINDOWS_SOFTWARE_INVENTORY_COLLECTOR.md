@@ -112,10 +112,32 @@ not be able to read every machine-wide registry entry in some locked-down
 environments. In that case, run under an account that has read access to the
 target registry locations.
 
-## Importing Into BayouOps Later
+## Importing Into BayouOps
 
-BayouOps can use the JSON or CSV output as a future import source for the
-Software / Agent Visibility module. A later importer can map records by:
+BayouOps can use the JSON or CSV output as an import source for the Software /
+Agent Visibility module.
+
+The workflow is:
+
+```text
+Windows endpoint collector -> JSON/CSV export -> BayouOps import -> visibility/reporting
+```
+
+Import steps:
+
+1. Run `Get-BayouOpsSoftwareInventory.ps1` on a Windows endpoint.
+2. Export JSON or CSV.
+3. Open the BayouOps landing page.
+4. Go to the Software / Agent Visibility section.
+5. Select `Import JSON` or `Import CSV`.
+6. Choose the collector output file.
+
+After import, BayouOps groups inventory records by `DisplayName`, shows observed
+version drift by `DisplayVersion`, shows inventory record counts, preserves
+per-endpoint registry source details, and keeps JSON/CSV dashboard exports
+available for reporting.
+
+The importer maps records by:
 
 - `ComputerName`
 - `DisplayName`
@@ -125,8 +147,14 @@ Software / Agent Visibility module. A later importer can map records by:
 - `RegistryPath`
 - `CollectedAt`
 
-Until that import flow is implemented, attach the JSON or CSV output to
-BayouOps operational reports, review packets, CAB notes, or handoff artifacts.
+The dashboard displays a `Sample Data` or `Imported Data` indicator so operators
+can tell whether they are reviewing the built-in scenario or a collector export.
+Bad or unsupported files display an import validation message and do not replace
+the currently loaded dashboard data.
+
+Imported records remain local to the browser session. BayouOps does not upload
+the file, deploy software, uninstall software, execute remote commands, modify
+registry state, or perform remediation.
 
 Sample output files are available at:
 

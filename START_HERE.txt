@@ -1,0 +1,16 @@
+BAYOUOPS QUICK START
+=================================
+
+1. Extract the ZIP file first.
+2. Open the BayouOps folder.
+3. Double-click BayouOps.exe
+4. Click "Load Demo Environment"
+5. Review dashboards and reports.
+
+Exports are saved under:
+./exports/
+
+Logs are saved under:
+./logs/
+
+BayouOps is read-only software and does not modify endpoints.
