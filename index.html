@@ -392,7 +392,7 @@
 
       .visibility-toolbar {
         display: grid;
-        grid-template-columns: minmax(220px, 1fr) auto auto;
+        grid-template-columns: minmax(220px, 1fr) auto auto auto;
         align-items: center;
         gap: 12px;
         border-bottom: 1px solid rgba(51, 65, 85, 0.72);
@@ -423,6 +423,47 @@
         background: rgba(8, 16, 29, 0.92);
         color: var(--mist);
         font: inherit;
+      }
+
+      .import-controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .file-input {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+      }
+
+      .data-state {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        border-bottom: 1px solid rgba(51, 65, 85, 0.72);
+        padding: 12px 16px;
+        background: rgba(8, 16, 29, 0.86);
+      }
+
+      .data-state span {
+        color: var(--muted);
+        font-size: 0.88rem;
+      }
+
+      .data-state strong {
+        color: var(--teal);
+      }
+
+      .message {
+        min-height: 1.4em;
+        color: #f5b26d;
+        font-size: 0.86rem;
+        text-align: right;
       }
 
       .visibility-summary {
@@ -582,9 +623,17 @@
       }
 
       .status-pill.old,
-      .status-pill.missing {
+      .status-pill.missing,
+      .status-pill.pending-reboot,
+      .status-pill.stale,
+      .status-pill.unsupported-os {
         border-color: rgba(196, 122, 58, 0.62);
         color: #f5b26d;
+      }
+
+      .status-pill.installed {
+        border-color: rgba(31, 182, 166, 0.52);
+        color: var(--teal);
       }
 
       .status-pill.review {
@@ -831,8 +880,18 @@
         .visibility-toolbar,
         .visibility-grid,
         .detail-metrics,
-        .install-notes {
+        .install-notes,
+        .data-state {
           grid-template-columns: 1fr;
+        }
+
+        .visibility-toolbar,
+        .data-state {
+          align-items: stretch;
+        }
+
+        .message {
+          text-align: left;
         }
 
         .visibility-summary {
@@ -909,6 +968,7 @@
         <div class="nav-links">
           <a href="#demo">Demo</a>
           <a href="#software-visibility">Software</a>
+          <a href="#patch-visibility">Patches</a>
           <a href="#features">Features</a>
           <a href="#mission">Mission</a>
           <a href="#team">Team</a>
@@ -1024,6 +1084,17 @@
                 <button class="button secondary" id="exportCsv" type="button">Export CSV</button>
                 <button class="button secondary" id="exportJson" type="button">Export JSON</button>
               </div>
+              <div class="import-controls" aria-label="Import collector output">
+                <label class="button secondary" for="importJson">Import JSON</label>
+                <input class="file-input" id="importJson" type="file" accept=".json,application/json">
+                <label class="button secondary" for="importCsv">Import CSV</label>
+                <input class="file-input" id="importCsv" type="file" accept=".csv,text/csv">
+              </div>
+            </div>
+
+            <div class="data-state">
+              <span id="dataIndicator"><strong>Sample Data</strong> | Built-in software visibility scenario</span>
+              <span class="message" id="importMessage" role="status" aria-live="polite"></span>
             </div>
 
             <div class="visibility-summary" id="visibilitySummary" aria-label="Operational summary cards"></div>
@@ -1031,6 +1102,63 @@
             <div class="visibility-grid">
               <div class="product-list" id="productList" aria-label="Software product list"></div>
               <article class="product-detail" id="productDetail" aria-label="Selected product details"></article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="patch-visibility">
+        <div class="wrap">
+          <div class="section-heading">
+            <p class="eyebrow">Patch / KB Visibility</p>
+            <h2>Operational readiness for Windows patch evidence.</h2>
+            <p>
+              Review missing KBs, pending reboot signals, stale patch timelines, and OS support
+              drift from read-only patch inventory data. This module is visibility/reporting only;
+              it does not deploy patches, trigger Windows Update, reboot systems, remediate
+              endpoints, or perform remote execution.
+            </p>
+          </div>
+
+          <div class="visibility-shell" aria-label="Patch and KB visibility dashboard">
+            <div class="visibility-toolbar">
+              <input
+                class="search-field"
+                id="patchSearch"
+                type="search"
+                placeholder="Search KB, endpoint, OS, or description"
+                aria-label="Search patch visibility data"
+              >
+              <select class="select-field" id="patchStatusFilter" aria-label="Filter patch status">
+                <option value="All">All statuses</option>
+                <option value="Installed">Installed</option>
+                <option value="Missing">Missing</option>
+                <option value="Pending Reboot">Pending reboot</option>
+                <option value="Stale">Stale &gt;30 days</option>
+                <option value="Unsupported OS">Unsupported OS</option>
+              </select>
+              <div class="actions" aria-label="Export patch visibility reports">
+                <button class="button secondary" id="exportPatchCsv" type="button">Export CSV</button>
+                <button class="button secondary" id="exportPatchJson" type="button">Export JSON</button>
+              </div>
+              <div class="import-controls" aria-label="Import patch collector output">
+                <label class="button secondary" for="importPatchJson">Import JSON</label>
+                <input class="file-input" id="importPatchJson" type="file" accept=".json,application/json">
+                <label class="button secondary" for="importPatchCsv">Import CSV</label>
+                <input class="file-input" id="importPatchCsv" type="file" accept=".csv,text/csv">
+              </div>
+            </div>
+
+            <div class="data-state">
+              <span id="patchDataIndicator"><strong>Sample Data</strong> | Built-in patch readiness scenario</span>
+              <span class="message" id="patchImportMessage" role="status" aria-live="polite"></span>
+            </div>
+
+            <div class="visibility-summary" id="patchSummary" aria-label="Patch readiness summary cards"></div>
+
+            <div class="visibility-grid">
+              <div class="product-list" id="patchList" aria-label="Patch KB list"></div>
+              <article class="product-detail" id="patchDetail" aria-label="Selected KB endpoint details"></article>
             </div>
           </div>
         </div>
@@ -1352,8 +1480,12 @@
       const state = {
         query: "",
         status: "All",
-        selectedName: softwareInventory[0].name
+        selectedName: softwareInventory[0].name,
+        dataMode: "Sample Data",
+        sourceFile: "Built-in software visibility scenario"
       };
+
+      let activeInventory = softwareInventory;
 
       const normalize = (value) => String(value).toLowerCase();
       const escapeHtml = (value) => String(value)
@@ -1363,7 +1495,23 @@
         .replaceAll('"', "&quot;")
         .replaceAll("'", "&#39;");
       const riskPercent = (product) =>
-        Math.min(100, Math.round(((product.staleEndpointCount + product.missingEndpointCount) / product.endpointCount) * 100));
+        product.endpointCount > 0
+          ? Math.min(100, Math.round(((product.staleEndpointCount + product.missingEndpointCount) / product.endpointCount) * 100))
+          : 0;
+
+      const endpointValue = (endpoint, index, key) =>
+        Array.isArray(endpoint) ? endpoint[index] : endpoint[key];
+
+      function setImportMessage(message, isError = false) {
+        const element = document.getElementById("importMessage");
+        element.textContent = message;
+        element.style.color = isError ? "#f5b26d" : "#9fb0c3";
+      }
+
+      function updateDataIndicator() {
+        document.getElementById("dataIndicator").innerHTML =
+          `<strong>${escapeHtml(state.dataMode)}</strong> | ${escapeHtml(state.sourceFile)}`;
+      }
 
       function productStatus(product) {
         if (product.missingEndpointCount > 10) return "Missing";
@@ -1373,16 +1521,18 @@
       }
 
       function visibleProducts() {
-        return softwareInventory.filter((product) => {
+        return activeInventory.filter((product) => {
           const haystack = normalize([
             product.name,
             product.currentVersion,
             product.notes,
-            ...product.endpoints.flat()
+            ...(product.endpoints || []).flatMap((endpoint) =>
+              Array.isArray(endpoint) ? endpoint : Object.values(endpoint)
+            )
           ].join(" "));
           const matchesQuery = !state.query || haystack.includes(normalize(state.query));
           const matchesStatus = state.status === "All" || productStatus(product) === state.status ||
-            product.endpoints.some((endpoint) => endpoint[4] === state.status);
+            product.endpoints.some((endpoint) => endpointValue(endpoint, 4, "status") === state.status);
           return matchesQuery && matchesStatus;
         });
       }
@@ -1419,10 +1569,10 @@
           const status = productStatus(product);
           const percent = riskPercent(product);
           return `
-            <button class="product-row ${product.name === state.selectedName ? "active" : ""}" type="button" data-product="${product.name}">
+            <button class="product-row ${product.name === state.selectedName ? "active" : ""}" type="button" data-product="${escapeHtml(product.name)}">
               <span>
                 <strong>${escapeHtml(product.name)}</strong>
-                <small>${product.endpointCount} endpoints | Current ${escapeHtml(product.currentVersion)}</small>
+                <small>${product.endpointCount} records | ${escapeHtml(product.versionSummary || `Current ${product.currentVersion}`)}</small>
               </span>
               <span class="risk-stack">
                 <span class="status-pill ${status.toLowerCase()}">${status}</span>
@@ -1442,19 +1592,63 @@
 
       function endpointRows(product) {
         const rows = product.endpoints.filter((endpoint) =>
-          state.status === "All" || endpoint[4] === state.status || productStatus(product) === state.status
+          state.status === "All" || endpointValue(endpoint, 4, "status") === state.status || productStatus(product) === state.status
         );
 
-        return rows.map((endpoint) => `
+        if (product.source === "collector") {
+          return rows.map((endpoint) => `
+            <tr>
+              <td>${escapeHtml(endpoint.hostname)}</td>
+              <td>${escapeHtml(endpoint.publisher || "")}</td>
+              <td>${escapeHtml(endpoint.version || "")}</td>
+              <td>${escapeHtml(endpoint.registryHive || "")}</td>
+              <td>${escapeHtml(endpoint.collectedAt || "")}</td>
+              <td><span class="status-pill ${endpoint.status.toLowerCase()}">${endpoint.status}</span></td>
+              <td>${escapeHtml(endpoint.registryPath || "")}</td>
+            </tr>
+          `).join("");
+        }
+
+        return rows.map((endpoint) => {
+          const status = endpointValue(endpoint, 4, "status");
+          return `
+            <tr>
+              <td>${escapeHtml(endpointValue(endpoint, 0, "hostname"))}</td>
+              <td>${escapeHtml(endpointValue(endpoint, 1, "os"))}</td>
+              <td>${escapeHtml(endpointValue(endpoint, 2, "version"))}</td>
+              <td>${escapeHtml(product.currentVersion)}</td>
+              <td>${escapeHtml(endpointValue(endpoint, 3, "lastCheckIn"))}</td>
+              <td><span class="status-pill ${status.toLowerCase()}">${status}</span></td>
+            </tr>
+          `;
+        }).join("");
+      }
+
+      function endpointTableHead(product) {
+        if (product.source === "collector") {
+          return `
+            <tr>
+              <th>ComputerName</th>
+              <th>Publisher</th>
+              <th>DisplayVersion</th>
+              <th>Registry Hive</th>
+              <th>Collected At</th>
+              <th>Operational Status</th>
+              <th>Registry Path</th>
+            </tr>
+          `;
+        }
+
+        return `
           <tr>
-            <td>${escapeHtml(endpoint[0])}</td>
-            <td>${escapeHtml(endpoint[1])}</td>
-            <td>${escapeHtml(endpoint[2])}</td>
-            <td>${escapeHtml(product.currentVersion)}</td>
-            <td>${escapeHtml(endpoint[3])}</td>
-            <td><span class="status-pill ${endpoint[4].toLowerCase()}">${endpoint[4]}</span></td>
+            <th>Endpoint Hostname</th>
+            <th>OS</th>
+            <th>Installed Version</th>
+            <th>Recommended Version</th>
+            <th>Last Check-In</th>
+            <th>Operational Status</th>
           </tr>
-        `).join("");
+        `;
       }
 
       function renderDetail(products) {
@@ -1476,35 +1670,26 @@
           </div>
 
           <div class="detail-metrics">
-            <div class="detail-metric"><strong>${escapeHtml(product.currentVersion)}</strong><span>Current / recommended version</span></div>
-            <div class="detail-metric"><strong>${product.endpointCount}</strong><span>Endpoint count</span></div>
-            <div class="detail-metric"><strong>${product.staleEndpointCount}</strong><span>Stale endpoint count</span></div>
-            <div class="detail-metric"><strong>${product.missingEndpointCount}</strong><span>Missing endpoint count</span></div>
+            <div class="detail-metric"><strong>${escapeHtml(product.currentVersion || "Mixed")}</strong><span>${product.source === "collector" ? "Most common observed version" : "Current / recommended version"}</span></div>
+            <div class="detail-metric"><strong>${product.endpointCount}</strong><span>${product.source === "collector" ? "Inventory records" : "Endpoint count"}</span></div>
+            <div class="detail-metric"><strong>${product.staleEndpointCount}</strong><span>${product.source === "collector" ? "Version drift records" : "Stale endpoint count"}</span></div>
+            <div class="detail-metric"><strong>${product.versionCount || product.missingEndpointCount}</strong><span>${product.source === "collector" ? "Observed versions" : "Missing endpoint count"}</span></div>
           </div>
 
           <div class="install-notes">
             <div class="note-box">
-              <span>Install String</span>
+              <span>${product.source === "collector" ? "Install Location / Source" : "Install String"}</span>
               <code>${escapeHtml(product.installString)}</code>
             </div>
             <div class="note-box">
-              <span>Uninstall String</span>
+              <span>${product.source === "collector" ? "Uninstall / Modify Metadata" : "Uninstall String"}</span>
               <code>${escapeHtml(product.uninstallString)}</code>
             </div>
           </div>
 
           <div class="table-wrap">
             <table>
-              <thead>
-                <tr>
-                  <th>Endpoint Hostname</th>
-                  <th>OS</th>
-                  <th>Installed Version</th>
-                  <th>Recommended Version</th>
-                  <th>Last Check-In</th>
-                  <th>Operational Status</th>
-                </tr>
-              </thead>
+              <thead>${endpointTableHead(product)}</thead>
               <tbody>${endpointRows(product)}</tbody>
             </table>
           </div>
@@ -1525,18 +1710,23 @@
         return products.flatMap((product) =>
           product.endpoints.map((endpoint) => ({
             softwareName: product.name,
-            installedVersion: endpoint[2],
+            installedVersion: endpointValue(endpoint, 2, "version"),
             recommendedVersion: product.currentVersion,
             endpointCount: product.endpointCount,
             staleEndpointCount: product.staleEndpointCount,
             missingEndpointCount: product.missingEndpointCount,
-            endpointHostname: endpoint[0],
-            os: endpoint[1],
-            lastCheckIn: endpoint[3],
+            endpointHostname: endpointValue(endpoint, 0, "hostname"),
+            os: endpointValue(endpoint, 1, "os") || "Windows Inventory",
+            lastCheckIn: endpointValue(endpoint, 3, "lastCheckIn") || endpointValue(endpoint, 3, "collectedAt"),
             deploymentNotes: product.notes,
             installString: product.installString,
             uninstallString: product.uninstallString,
-            operationalStatus: endpoint[4]
+            operationalStatus: endpointValue(endpoint, 4, "status"),
+            publisher: endpoint.publisher || product.publisher || "",
+            registryHive: endpoint.registryHive || "",
+            registryPath: endpoint.registryPath || "",
+            collectedAt: endpoint.collectedAt || "",
+            importSource: product.source || "sample"
           }))
         );
       }
@@ -1551,7 +1741,8 @@
           softwareName: "", installedVersion: "", recommendedVersion: "", endpointCount: "",
           staleEndpointCount: "", missingEndpointCount: "", endpointHostname: "", os: "",
           lastCheckIn: "", deploymentNotes: "", installString: "", uninstallString: "",
-          operationalStatus: ""
+          operationalStatus: "", publisher: "", registryHive: "", registryPath: "", collectedAt: "",
+          importSource: ""
         });
         const csv = [
           headers.join(","),
@@ -1565,14 +1756,176 @@
           reportName: "BayouOps Software / Agent Visibility",
           generatedAt: new Date().toISOString(),
           positioning: "Visibility and reporting only. No deployment, uninstall, remote execution, remediation, patch orchestration, or agent control.",
+          dataMode: state.dataMode,
+          sourceFile: state.sourceFile,
           filters: { search: state.query, status: state.status },
           products: visibleProducts()
         };
         downloadFile("bayouops-software-agent-visibility.json", JSON.stringify(payload, null, 2), "application/json");
       }
 
+      function validateCollectorRecord(record, index) {
+        if (!record || typeof record !== "object" || Array.isArray(record)) {
+          throw new Error(`Record ${index + 1} is not an object.`);
+        }
+
+        if (!String(record.DisplayName || "").trim()) {
+          throw new Error(`Record ${index + 1} is missing DisplayName.`);
+        }
+      }
+
+      function mostCommonVersion(records) {
+        const counts = new Map();
+        records.forEach((record) => {
+          const version = String(record.DisplayVersion || "Unknown").trim() || "Unknown";
+          counts.set(version, (counts.get(version) || 0) + 1);
+        });
+
+        return [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))[0][0];
+      }
+
+      function collectorRecordsToProducts(records) {
+        if (!Array.isArray(records) || records.length === 0) {
+          throw new Error("No collector records were found.");
+        }
+
+        records.forEach(validateCollectorRecord);
+
+        const grouped = records.reduce((groups, record) => {
+          const key = String(record.DisplayName).trim();
+          if (!groups.has(key)) groups.set(key, []);
+          groups.get(key).push(record);
+          return groups;
+        }, new Map());
+
+        return [...grouped.entries()].map(([displayName, group]) => {
+          const primaryVersion = mostCommonVersion(group);
+          const versions = [...new Set(group.map((record) => String(record.DisplayVersion || "Unknown").trim() || "Unknown"))].sort();
+          const driftCount = group.filter((record) => (String(record.DisplayVersion || "Unknown").trim() || "Unknown") !== primaryVersion).length;
+          const first = group[0];
+          const endpoints = group.map((record) => {
+            const version = String(record.DisplayVersion || "Unknown").trim() || "Unknown";
+            return {
+              hostname: record.ComputerName || "Unknown computer",
+              os: "Windows Inventory",
+              version,
+              lastCheckIn: record.CollectedAt || "",
+              status: version === primaryVersion ? "Current" : "Review",
+              publisher: record.Publisher || "",
+              collectedAt: record.CollectedAt || "",
+              registryHive: record.RegistryHive || "",
+              registryPath: record.RegistryPath || "",
+              installLocation: record.InstallLocation || "",
+              installSource: record.InstallSource || "",
+              uninstallString: record.UninstallString || "",
+              quietUninstallString: record.QuietUninstallString || "",
+              modifyPath: record.ModifyPath || "",
+              estimatedSize: record.EstimatedSize || ""
+            };
+          });
+
+          return {
+            name: displayName,
+            currentVersion: primaryVersion,
+            versionSummary: `${versions.length} observed version${versions.length === 1 ? "" : "s"} | Most common ${primaryVersion}`,
+            versionCount: versions.length,
+            publisher: first.Publisher || "",
+            endpointCount: group.length,
+            staleEndpointCount: driftCount,
+            missingEndpointCount: 0,
+            notes: `Imported from Windows Software Inventory Collector output. Grouped by DisplayName for visibility and reporting only; no deployment, uninstall, remediation, remote execution, or registry modification is performed.`,
+            installString: [first.InstallLocation, first.InstallSource].filter(Boolean).join(" | ") || "Not reported by uninstall registry metadata",
+            uninstallString: [first.UninstallString, first.QuietUninstallString, first.ModifyPath].filter(Boolean).join(" | ") || "Not reported by uninstall registry metadata",
+            source: "collector",
+            endpoints
+          };
+        }).sort((a, b) => a.name.localeCompare(b.name));
+      }
+
+      function parseCollectorJson(text) {
+        const parsed = JSON.parse(text);
+        if (Array.isArray(parsed)) return parsed;
+        if (Array.isArray(parsed.records)) return parsed.records;
+        if (Array.isArray(parsed.products)) {
+          throw new Error("This appears to be a BayouOps dashboard export, not collector output.");
+        }
+        throw new Error("JSON collector output must be an array of inventory records.");
+      }
+
+      function parseCsv(text) {
+        const rows = [];
+        let row = [];
+        let cell = "";
+        let inQuotes = false;
+
+        for (let index = 0; index < text.length; index += 1) {
+          const char = text[index];
+          const next = text[index + 1];
+
+          if (char === '"') {
+            if (inQuotes && next === '"') {
+              cell += '"';
+              index += 1;
+            } else {
+              inQuotes = !inQuotes;
+            }
+          } else if (char === "," && !inQuotes) {
+            row.push(cell);
+            cell = "";
+          } else if ((char === "\n" || char === "\r") && !inQuotes) {
+            if (char === "\r" && next === "\n") index += 1;
+            row.push(cell);
+            if (row.some((value) => value !== "")) rows.push(row);
+            row = [];
+            cell = "";
+          } else {
+            cell += char;
+          }
+        }
+
+        row.push(cell);
+        if (row.some((value) => value !== "")) rows.push(row);
+
+        if (rows.length < 2) {
+          throw new Error("CSV collector output must include a header row and at least one inventory record.");
+        }
+
+        const headers = rows[0].map((header, index) =>
+          (index === 0 ? header.replace(/^\uFEFF/, "") : header).trim()
+        );
+        return rows.slice(1).map((values) =>
+          headers.reduce((record, header, index) => {
+            record[header] = values[index] || "";
+            return record;
+          }, {})
+        );
+      }
+
+      async function importCollectorFile(file, type) {
+        try {
+          setImportMessage("");
+          const text = await file.text();
+          const records = type === "json" ? parseCollectorJson(text) : parseCsv(text);
+          const products = collectorRecordsToProducts(records);
+
+          activeInventory = products;
+          state.dataMode = "Imported Data";
+          state.sourceFile = `${file.name} | ${records.length} records | ${products.length} software groups`;
+          state.selectedName = products[0].name;
+          state.query = "";
+          state.status = "All";
+          document.getElementById("softwareSearch").value = "";
+          document.getElementById("statusFilter").value = "All";
+          setImportMessage("Collector output imported for visibility/reporting.");
+          render();
+        } catch (error) {
+          setImportMessage(`Import failed: ${error.message}`, true);
+        }
+      }
+
       function render() {
         const products = visibleProducts();
+        updateDataIndicator();
         renderSummary(products);
         renderProductList(products);
         renderDetail(products);
@@ -1588,7 +1941,573 @@
       });
       document.getElementById("exportCsv").addEventListener("click", exportCsv);
       document.getElementById("exportJson").addEventListener("click", exportJson);
+      document.getElementById("importJson").addEventListener("change", (event) => {
+        const file = event.target.files[0];
+        if (file) importCollectorFile(file, "json");
+        event.target.value = "";
+      });
+      document.getElementById("importCsv").addEventListener("change", (event) => {
+        const file = event.target.files[0];
+        if (file) importCollectorFile(file, "csv");
+        event.target.value = "";
+      });
       render();
+    </script>
+    <script>
+      const requiredPatchBaseline = [
+        { HotFixID: "KB5030219", label: "September cumulative update" },
+        { HotFixID: "KB5031356", label: "October cumulative update" },
+        { HotFixID: "KB5021234", label: "Legacy servicing update" },
+        { HotFixID: "KB5034763", label: "February cumulative update" },
+        { HotFixID: "KB5037771", label: "May cumulative update" }
+      ];
+
+      const patchSampleRecords = [
+        {
+          ComputerName: "ATL-FIN-021",
+          HotFixID: "KB5030219",
+          InstalledOn: "2026-05-12",
+          Description: "Security Update",
+          InstalledBy: "NT AUTHORITY\\SYSTEM",
+          OSCaption: "Microsoft Windows Server 2019 Datacenter",
+          LastBootUpTime: "2026-05-19T03:14:00Z",
+          PendingReboot: false,
+          CollectedAt: "2026-05-30T15:42:18Z"
+        },
+        {
+          ComputerName: "ATL-FIN-021",
+          HotFixID: "KB5031356",
+          InstalledOn: "2026-05-12",
+          Description: "Update",
+          InstalledBy: "NT AUTHORITY\\SYSTEM",
+          OSCaption: "Microsoft Windows Server 2019 Datacenter",
+          LastBootUpTime: "2026-05-19T03:14:00Z",
+          PendingReboot: false,
+          CollectedAt: "2026-05-30T15:42:18Z"
+        },
+        {
+          ComputerName: "ATL-FIN-021",
+          HotFixID: "KB5037771",
+          InstalledOn: "2026-05-20",
+          Description: "Security Update",
+          InstalledBy: "NT AUTHORITY\\SYSTEM",
+          OSCaption: "Microsoft Windows Server 2019 Datacenter",
+          LastBootUpTime: "2026-05-19T03:14:00Z",
+          PendingReboot: false,
+          CollectedAt: "2026-05-30T15:42:18Z"
+        },
+        {
+          ComputerName: "HOU-WMS-014",
+          HotFixID: "KB5030219",
+          InstalledOn: "2026-04-05",
+          Description: "Security Update",
+          InstalledBy: "CORP\\patchsvc",
+          OSCaption: "Microsoft Windows Server 2016 Standard",
+          LastBootUpTime: "2026-04-07T04:44:00Z",
+          PendingReboot: true,
+          CollectedAt: "2026-05-30T15:42:18Z"
+        },
+        {
+          ComputerName: "HOU-WMS-014",
+          HotFixID: "KB5021234",
+          InstalledOn: "2026-03-24",
+          Description: "Update",
+          InstalledBy: "CORP\\patchsvc",
+          OSCaption: "Microsoft Windows Server 2016 Standard",
+          LastBootUpTime: "2026-04-07T04:44:00Z",
+          PendingReboot: true,
+          CollectedAt: "2026-05-30T15:42:18Z"
+        },
+        {
+          ComputerName: "BTR-LAP-104",
+          HotFixID: "KB5031356",
+          InstalledOn: "2026-05-22",
+          Description: "Security Update",
+          InstalledBy: "NT AUTHORITY\\SYSTEM",
+          OSCaption: "Microsoft Windows 11 Enterprise",
+          LastBootUpTime: "2026-05-24T11:21:00Z",
+          PendingReboot: false,
+          CollectedAt: "2026-05-30T15:42:18Z"
+        },
+        {
+          ComputerName: "BTR-LAP-104",
+          HotFixID: "KB5037771",
+          InstalledOn: "2026-05-22",
+          Description: "Security Update",
+          InstalledBy: "NT AUTHORITY\\SYSTEM",
+          OSCaption: "Microsoft Windows 11 Enterprise",
+          LastBootUpTime: "2026-05-24T11:21:00Z",
+          PendingReboot: false,
+          CollectedAt: "2026-05-30T15:42:18Z"
+        },
+        {
+          ComputerName: "NOLA-FS-002",
+          HotFixID: "KB5021234",
+          InstalledOn: "2026-02-18",
+          Description: "Security Update",
+          InstalledBy: "CORP\\patchsvc",
+          OSCaption: "Microsoft Windows Server 2012 R2 Standard",
+          LastBootUpTime: "2026-02-20T02:03:00Z",
+          PendingReboot: false,
+          CollectedAt: "2026-05-30T15:42:18Z"
+        },
+        {
+          ComputerName: "DAL-VDI-221",
+          HotFixID: "KB5030219",
+          InstalledOn: "2026-05-10",
+          Description: "Security Update",
+          InstalledBy: "NT AUTHORITY\\SYSTEM",
+          OSCaption: "Microsoft Windows 10 Enterprise",
+          LastBootUpTime: "2026-05-10T09:42:00Z",
+          PendingReboot: true,
+          CollectedAt: "2026-05-30T15:42:18Z"
+        },
+        {
+          ComputerName: "DAL-VDI-221",
+          HotFixID: "KB5034763",
+          InstalledOn: "2026-05-10",
+          Description: "Update",
+          InstalledBy: "NT AUTHORITY\\SYSTEM",
+          OSCaption: "Microsoft Windows 10 Enterprise",
+          LastBootUpTime: "2026-05-10T09:42:00Z",
+          PendingReboot: true,
+          CollectedAt: "2026-05-30T15:42:18Z"
+        }
+      ];
+
+      const patchState = {
+        query: "",
+        status: "All",
+        selectedKb: "KB5030219",
+        dataMode: "Sample Data",
+        sourceFile: "Built-in patch readiness scenario"
+      };
+
+      let activePatchRecords = patchSampleRecords;
+
+      const patchNormalize = (value) => String(value || "").toLowerCase();
+      const patchEscape = (value) => String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+      const patchBool = (value) => value === true || String(value).toLowerCase() === "true";
+
+      function patchCsvEscape(value) {
+        return `"${String(value ?? "").replaceAll('"', '""')}"`;
+      }
+
+      function patchDateValue(value) {
+        if (!value) return null;
+        const parsed = new Date(value);
+        return Number.isNaN(parsed.getTime()) ? null : parsed;
+      }
+
+      function patchDaysSince(value) {
+        const date = patchDateValue(value);
+        if (!date) return null;
+        return Math.floor((Date.now() - date.getTime()) / 86400000);
+      }
+
+      function patchIsUnsupportedOs(osCaption) {
+        const os = patchNormalize(osCaption);
+        return os.includes("server 2012") || os.includes("server 2008") || os.includes("windows 7") || os.includes("windows 8");
+      }
+
+      function setPatchMessage(message, isError = false) {
+        const element = document.getElementById("patchImportMessage");
+        element.textContent = message;
+        element.style.color = isError ? "#f5b26d" : "#9fb0c3";
+      }
+
+      function updatePatchIndicator() {
+        document.getElementById("patchDataIndicator").innerHTML =
+          `<strong>${patchEscape(patchState.dataMode)}</strong> | ${patchEscape(patchState.sourceFile)}`;
+      }
+
+      function endpointPatchMap(records) {
+        const endpoints = new Map();
+        records.forEach((record) => {
+          const computer = String(record.ComputerName || "Unknown computer").trim();
+          if (!endpoints.has(computer)) {
+            endpoints.set(computer, {
+              computer,
+              os: record.OSCaption || "",
+              lastBoot: record.LastBootUpTime || "",
+              pendingReboot: false,
+              collectedAt: record.CollectedAt || "",
+              installed: new Map(),
+              latestInstalledOn: ""
+            });
+          }
+
+          const endpoint = endpoints.get(computer);
+          endpoint.os = endpoint.os || record.OSCaption || "";
+          endpoint.lastBoot = endpoint.lastBoot || record.LastBootUpTime || "";
+          endpoint.collectedAt = endpoint.collectedAt || record.CollectedAt || "";
+          endpoint.pendingReboot = endpoint.pendingReboot || patchBool(record.PendingReboot);
+
+          const hotfix = String(record.HotFixID || "").trim().toUpperCase();
+          if (hotfix) {
+            endpoint.installed.set(hotfix, record);
+          }
+
+          if (!endpoint.latestInstalledOn || (patchDateValue(record.InstalledOn) > patchDateValue(endpoint.latestInstalledOn))) {
+            endpoint.latestInstalledOn = record.InstalledOn || endpoint.latestInstalledOn;
+          }
+        });
+        return endpoints;
+      }
+
+      function patchBaselineIds(records) {
+        const ids = new Set(requiredPatchBaseline.map((kb) => kb.HotFixID));
+        records.forEach((record) => {
+          if (record.HotFixID) ids.add(String(record.HotFixID).trim().toUpperCase());
+        });
+        return [...ids].sort();
+      }
+
+      function patchKbLabel(hotfixId) {
+        const match = requiredPatchBaseline.find((kb) => kb.HotFixID === hotfixId);
+        return match ? match.label : "Observed installed update";
+      }
+
+      function buildPatchProducts(records) {
+        const endpoints = endpointPatchMap(records);
+        const endpointList = [...endpoints.values()];
+        const endpointCount = endpointList.length;
+
+        return patchBaselineIds(records).map((hotfixId) => {
+          const rows = endpointList.map((endpoint) => {
+            const installedRecord = endpoint.installed.get(hotfixId);
+            const missing = !installedRecord;
+            const staleDays = patchDaysSince(endpoint.latestInstalledOn);
+            const stale = staleDays !== null && staleDays > 30;
+            const unsupported = patchIsUnsupportedOs(endpoint.os);
+            let status = installedRecord ? "Installed" : "Missing";
+            if (endpoint.pendingReboot) status = "Pending Reboot";
+            if (stale && installedRecord) status = "Stale";
+            if (unsupported) status = "Unsupported OS";
+
+            return {
+              ComputerName: endpoint.computer,
+              HotFixID: hotfixId,
+              InstalledOn: installedRecord ? installedRecord.InstalledOn || "" : "",
+              Description: installedRecord ? installedRecord.Description || "" : "Missing from endpoint inventory",
+              InstalledBy: installedRecord ? installedRecord.InstalledBy || "" : "",
+              OSCaption: endpoint.os,
+              LastBootUpTime: endpoint.lastBoot,
+              PendingReboot: endpoint.pendingReboot,
+              CollectedAt: endpoint.collectedAt,
+              Status: status,
+              Missing: missing,
+              StaleEndpoint: stale,
+              UnsupportedOS: unsupported,
+              LatestInstalledOn: endpoint.latestInstalledOn || ""
+            };
+          });
+
+          const installed = rows.filter((row) => !row.Missing).length;
+          const missing = rows.filter((row) => row.Missing).length;
+          const pendingReboot = rows.filter((row) => row.PendingReboot).length;
+          const stale = rows.filter((row) => row.StaleEndpoint).length;
+          const unsupported = rows.filter((row) => row.UnsupportedOS).length;
+          const compliance = endpointCount > 0 ? Math.round((installed / endpointCount) * 100) : 0;
+
+          return {
+            hotfixId,
+            label: patchKbLabel(hotfixId),
+            endpointCount,
+            installedCount: installed,
+            missingCount: missing,
+            pendingRebootCount: pendingReboot,
+            staleEndpointCount: stale,
+            unsupportedOsCount: unsupported,
+            compliance,
+            rows
+          };
+        });
+      }
+
+      function patchProductStatus(product) {
+        if (product.unsupportedOsCount > 0) return "Unsupported OS";
+        if (product.missingCount > 0) return "Missing";
+        if (product.pendingRebootCount > 0) return "Pending Reboot";
+        if (product.staleEndpointCount > 0) return "Stale";
+        return "Installed";
+      }
+
+      function visiblePatchProducts() {
+        return buildPatchProducts(activePatchRecords).filter((product) => {
+          const haystack = patchNormalize([
+            product.hotfixId,
+            product.label,
+            ...product.rows.flatMap((row) => Object.values(row))
+          ].join(" "));
+          const matchesQuery = !patchState.query || haystack.includes(patchNormalize(patchState.query));
+          const matchesStatus = patchState.status === "All" ||
+            patchProductStatus(product) === patchState.status ||
+            product.rows.some((row) => row.Status === patchState.status);
+          return matchesQuery && matchesStatus;
+        });
+      }
+
+      function renderPatchSummary(products) {
+        const endpoints = endpointPatchMap(activePatchRecords);
+        const endpointList = [...endpoints.values()];
+        const totalRequired = requiredPatchBaseline.length * endpointList.length;
+        const installedRequired = requiredPatchBaseline.reduce((count, kb) =>
+          count + endpointList.filter((endpoint) => endpoint.installed.has(kb.HotFixID)).length, 0);
+        const missingRequired = Math.max(totalRequired - installedRequired, 0);
+        const compliance = totalRequired > 0 ? Math.round((installedRequired / totalRequired) * 100) : 0;
+        const pending = endpointList.filter((endpoint) => endpoint.pendingReboot).length;
+        const stale = endpointList.filter((endpoint) => {
+          const days = patchDaysSince(endpoint.latestInstalledOn);
+          return days !== null && days > 30;
+        }).length;
+        const unsupported = endpointList.filter((endpoint) => patchIsUnsupportedOs(endpoint.os)).length;
+
+        document.getElementById("patchSummary").innerHTML = `
+          <div class="summary-card good"><strong>${compliance}%</strong><span>Required KB compliance</span></div>
+          <div class="summary-card warning"><strong>${missingRequired}</strong><span>Missing required KB records</span></div>
+          <div class="summary-card warning"><strong>${pending}</strong><span>Endpoints pending reboot review</span></div>
+          <div class="summary-card warning"><strong>${stale}</strong><span>Endpoints stale &gt;30 days</span></div>
+          <div class="summary-card warning"><strong>${unsupported}</strong><span>Unsupported OS review items</span></div>
+        `;
+      }
+
+      function renderPatchList(products) {
+        const list = document.getElementById("patchList");
+        if (!products.length) {
+          list.innerHTML = "<p>No patch records match the current filters.</p>";
+          return;
+        }
+
+        if (!products.some((product) => product.hotfixId === patchState.selectedKb)) {
+          patchState.selectedKb = products[0].hotfixId;
+        }
+
+        list.innerHTML = products.map((product) => {
+          const status = patchProductStatus(product);
+          return `
+            <button class="product-row ${product.hotfixId === patchState.selectedKb ? "active" : ""}" type="button" data-kb="${patchEscape(product.hotfixId)}">
+              <span>
+                <strong>${patchEscape(product.hotfixId)}</strong>
+                <small>${product.compliance}% compliant | ${product.missingCount} missing | ${patchEscape(product.label)}</small>
+              </span>
+              <span class="risk-stack">
+                <span class="status-pill ${status.toLowerCase().replaceAll(" ", "-")}">${status}</span>
+                <span class="bar" aria-hidden="true"><span style="width: ${product.compliance}%"></span></span>
+              </span>
+            </button>
+          `;
+        }).join("");
+
+        list.querySelectorAll(".product-row").forEach((button) => {
+          button.addEventListener("click", () => {
+            patchState.selectedKb = button.dataset.kb;
+            renderPatchDashboard();
+          });
+        });
+      }
+
+      function renderPatchDetail(products) {
+        const product = products.find((item) => item.hotfixId === patchState.selectedKb) || products[0];
+        const detail = document.getElementById("patchDetail");
+
+        if (!product) {
+          detail.innerHTML = "<p>Select a KB to review endpoint patch detail.</p>";
+          return;
+        }
+
+        const filteredRows = product.rows.filter((row) =>
+          patchState.status === "All" || row.Status === patchState.status || patchProductStatus(product) === patchState.status
+        );
+
+        detail.innerHTML = `
+          <div class="detail-header">
+            <div>
+              <h3>${patchEscape(product.hotfixId)}</h3>
+              <p>${patchEscape(product.label)}. Endpoint drift indicators are calculated from imported or sample read-only patch evidence.</p>
+            </div>
+            <span class="status-pill ${patchProductStatus(product).toLowerCase().replaceAll(" ", "-")}">${patchProductStatus(product)}</span>
+          </div>
+
+          <div class="detail-metrics">
+            <div class="detail-metric"><strong>${product.compliance}%</strong><span>Compliance</span></div>
+            <div class="detail-metric"><strong>${product.missingCount}</strong><span>Missing KB count</span></div>
+            <div class="detail-metric"><strong>${product.pendingRebootCount}</strong><span>Pending reboot count</span></div>
+            <div class="detail-metric"><strong>${product.staleEndpointCount}</strong><span>Stale endpoint count</span></div>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>ComputerName</th>
+                  <th>KB Status</th>
+                  <th>InstalledOn</th>
+                  <th>Description</th>
+                  <th>OS Caption</th>
+                  <th>Last Boot</th>
+                  <th>Pending Reboot</th>
+                  <th>Collected At</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${filteredRows.map((row) => `
+                  <tr>
+                    <td>${patchEscape(row.ComputerName)}</td>
+                    <td><span class="status-pill ${row.Status.toLowerCase().replaceAll(" ", "-")}">${patchEscape(row.Status)}</span></td>
+                    <td>${patchEscape(row.InstalledOn || "Missing")}</td>
+                    <td>${patchEscape(row.Description)}</td>
+                    <td>${patchEscape(row.OSCaption)}</td>
+                    <td>${patchEscape(row.LastBootUpTime)}</td>
+                    <td>${row.PendingReboot ? "Yes" : "No"}</td>
+                    <td>${patchEscape(row.CollectedAt)}</td>
+                  </tr>
+                `).join("")}
+              </tbody>
+            </table>
+          </div>
+        `;
+      }
+
+      function patchReportRows(products) {
+        return products.flatMap((product) => product.rows.map((row) => ({
+          HotFixID: product.hotfixId,
+          CompliancePercent: product.compliance,
+          MissingKbCount: product.missingCount,
+          ComputerName: row.ComputerName,
+          KBStatus: row.Status,
+          InstalledOn: row.InstalledOn,
+          Description: row.Description,
+          InstalledBy: row.InstalledBy,
+          OSCaption: row.OSCaption,
+          LastBootUpTime: row.LastBootUpTime,
+          PendingReboot: row.PendingReboot,
+          StaleEndpoint: row.StaleEndpoint,
+          UnsupportedOS: row.UnsupportedOS,
+          CollectedAt: row.CollectedAt,
+          DataMode: patchState.dataMode
+        })));
+      }
+
+      function exportPatchCsv() {
+        const rows = patchReportRows(visiblePatchProducts());
+        const headers = Object.keys(rows[0] || {
+          HotFixID: "", CompliancePercent: "", MissingKbCount: "", ComputerName: "",
+          KBStatus: "", InstalledOn: "", Description: "", InstalledBy: "", OSCaption: "",
+          LastBootUpTime: "", PendingReboot: "", StaleEndpoint: "", UnsupportedOS: "",
+          CollectedAt: "", DataMode: ""
+        });
+        const csv = [
+          headers.join(","),
+          ...rows.map((row) => headers.map((header) => patchCsvEscape(row[header])).join(","))
+        ].join("\n");
+        downloadFile("bayouops-patch-kb-visibility.csv", csv, "text/csv");
+      }
+
+      function exportPatchJson() {
+        const products = visiblePatchProducts();
+        downloadFile("bayouops-patch-kb-visibility.json", JSON.stringify({
+          reportName: "BayouOps Patch / KB Visibility",
+          generatedAt: new Date().toISOString(),
+          positioning: "Visibility and reporting only. No patch deployment, remediation, Windows Update trigger, reboot, remote execution, or registry modification.",
+          dataMode: patchState.dataMode,
+          sourceFile: patchState.sourceFile,
+          filters: { search: patchState.query, status: patchState.status },
+          baseline: requiredPatchBaseline,
+          products
+        }, null, 2), "application/json");
+      }
+
+      function validatePatchRecord(record, index) {
+        if (!record || typeof record !== "object" || Array.isArray(record)) {
+          throw new Error(`Record ${index + 1} is not an object.`);
+        }
+        if (!String(record.ComputerName || "").trim()) {
+          throw new Error(`Record ${index + 1} is missing ComputerName.`);
+        }
+        if (!String(record.HotFixID || "").trim()) {
+          throw new Error(`Record ${index + 1} is missing HotFixID.`);
+        }
+      }
+
+      function parsePatchJson(text) {
+        const parsed = JSON.parse(text);
+        if (Array.isArray(parsed)) return parsed;
+        if (Array.isArray(parsed.records)) return parsed.records;
+        throw new Error("JSON patch collector output must be an array of records.");
+      }
+
+      function parsePatchCsv(text) {
+        return parseCsv(text);
+      }
+
+      async function importPatchFile(file, type) {
+        try {
+          setPatchMessage("");
+          const text = await file.text();
+          const records = type === "json" ? parsePatchJson(text) : parsePatchCsv(text);
+          if (!records.length) throw new Error("No patch records were found.");
+          records.forEach(validatePatchRecord);
+
+          activePatchRecords = records.map((record) => ({
+            ComputerName: record.ComputerName,
+            HotFixID: String(record.HotFixID || "").trim().toUpperCase(),
+            InstalledOn: record.InstalledOn || "",
+            Description: record.Description || "",
+            InstalledBy: record.InstalledBy || "",
+            OSCaption: record.OSCaption || "",
+            LastBootUpTime: record.LastBootUpTime || "",
+            PendingReboot: patchBool(record.PendingReboot),
+            CollectedAt: record.CollectedAt || ""
+          }));
+          patchState.dataMode = "Imported Data";
+          patchState.sourceFile = `${file.name} | ${records.length} records | ${endpointPatchMap(activePatchRecords).size} endpoints`;
+          patchState.selectedKb = activePatchRecords[0].HotFixID;
+          patchState.query = "";
+          patchState.status = "All";
+          document.getElementById("patchSearch").value = "";
+          document.getElementById("patchStatusFilter").value = "All";
+          setPatchMessage("Patch collector output imported for visibility/reporting.");
+          renderPatchDashboard();
+        } catch (error) {
+          setPatchMessage(`Import failed: ${error.message}`, true);
+        }
+      }
+
+      function renderPatchDashboard() {
+        const products = visiblePatchProducts();
+        updatePatchIndicator();
+        renderPatchSummary(products);
+        renderPatchList(products);
+        renderPatchDetail(products);
+      }
+
+      document.getElementById("patchSearch").addEventListener("input", (event) => {
+        patchState.query = event.target.value.trim();
+        renderPatchDashboard();
+      });
+      document.getElementById("patchStatusFilter").addEventListener("change", (event) => {
+        patchState.status = event.target.value;
+        renderPatchDashboard();
+      });
+      document.getElementById("exportPatchCsv").addEventListener("click", exportPatchCsv);
+      document.getElementById("exportPatchJson").addEventListener("click", exportPatchJson);
+      document.getElementById("importPatchJson").addEventListener("change", (event) => {
+        const file = event.target.files[0];
+        if (file) importPatchFile(file, "json");
+        event.target.value = "";
+      });
+      document.getElementById("importPatchCsv").addEventListener("change", (event) => {
+        const file = event.target.files[0];
+        if (file) importPatchFile(file, "csv");
+        event.target.value = "";
+      });
+      renderPatchDashboard();
     </script>
   </body>
 </html>

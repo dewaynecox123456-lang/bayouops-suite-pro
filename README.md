@@ -60,11 +60,31 @@ Export-ready JSON and CSV downloads are available directly from the dashboard fo
 Future real endpoint data can come from the read-only Windows Software Inventory
 Collector at [`collectors/windows/Get-BayouOpsSoftwareInventory.ps1`](collectors/windows/Get-BayouOpsSoftwareInventory.ps1).
 The collector reads Windows uninstall registry metadata and exports JSON or CSV
-for BayouOps visibility/reporting workflows. It is not a deployment, uninstall,
-remediation, or agent control tool.
+for BayouOps visibility/reporting workflows. The Software / Agent Visibility
+module can import that JSON or CSV, group records by `DisplayName`, show version
+drift by `DisplayVersion`, and keep report exports available. It is not a
+deployment, uninstall, remediation, remote execution, registry modification, or
+agent control tool.
 
 Collector documentation is available at
 [`docs/WINDOWS_SOFTWARE_INVENTORY_COLLECTOR.md`](docs/WINDOWS_SOFTWARE_INVENTORY_COLLECTOR.md).
+
+## Patch / KB Visibility
+
+The product site includes a Patch / KB Visibility module for read-only
+operational readiness reporting. It supports KB search, missing KB visibility,
+pending reboot review, stale endpoint indicators, unsupported OS review, and
+CSV/JSON report exports.
+
+Future real patch data can come from the read-only Windows Patch Inventory
+Collector at [`collectors/windows/Get-BayouOpsPatchInventory.ps1`](collectors/windows/Get-BayouOpsPatchInventory.ps1).
+The collector uses `Get-HotFix` and `Get-CimInstance Win32_QuickFixEngineering`
+to export local patch evidence for BayouOps import. It is not a patch deployment,
+remediation, reboot, Windows Update trigger, registry modification, or remote
+execution tool.
+
+Collector documentation is available at
+[`docs/WINDOWS_PATCH_INVENTORY_COLLECTOR.md`](docs/WINDOWS_PATCH_INVENTORY_COLLECTOR.md).
 
 ## Windows Operational Readiness Export
 

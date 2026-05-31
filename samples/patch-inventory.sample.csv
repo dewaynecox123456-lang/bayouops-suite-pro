@@ -1,0 +1,6 @@
+"ComputerName","HotFixID","InstalledOn","Description","InstalledBy","OSCaption","LastBootUpTime","PendingReboot","CollectedAt"
+"ATL-FIN-021","KB5030219","2026-05-12","Security Update","NT AUTHORITY\SYSTEM","Microsoft Windows Server 2019 Datacenter","2026-05-19T03:14:00Z","False","2026-05-30T15:42:18Z"
+"ATL-FIN-021","KB5031356","2026-05-12","Update","NT AUTHORITY\SYSTEM","Microsoft Windows Server 2019 Datacenter","2026-05-19T03:14:00Z","False","2026-05-30T15:42:18Z"
+"HOU-WMS-014","KB5030219","2026-04-05","Security Update","CORP\patchsvc","Microsoft Windows Server 2016 Standard","2026-04-07T04:44:00Z","True","2026-05-30T15:42:18Z"
+"HOU-WMS-014","KB5021234","2026-03-24","Update","CORP\patchsvc","Microsoft Windows Server 2016 Standard","2026-04-07T04:44:00Z","True","2026-05-30T15:42:18Z"
+"NOLA-FS-002","KB5021234","2026-02-18","Security Update","CORP\patchsvc","Microsoft Windows Server 2012 R2 Standard","2026-02-20T02:03:00Z","False","2026-05-30T15:42:18Z"

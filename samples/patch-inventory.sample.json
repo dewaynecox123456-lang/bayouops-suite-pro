@@ -1,0 +1,57 @@
+[
+  {
+    "ComputerName": "ATL-FIN-021",
+    "HotFixID": "KB5030219",
+    "InstalledOn": "2026-05-12",
+    "Description": "Security Update",
+    "InstalledBy": "NT AUTHORITY\\SYSTEM",
+    "OSCaption": "Microsoft Windows Server 2019 Datacenter",
+    "LastBootUpTime": "2026-05-19T03:14:00Z",
+    "PendingReboot": false,
+    "CollectedAt": "2026-05-30T15:42:18Z"
+  },
+  {
+    "ComputerName": "ATL-FIN-021",
+    "HotFixID": "KB5031356",
+    "InstalledOn": "2026-05-12",
+    "Description": "Update",
+    "InstalledBy": "NT AUTHORITY\\SYSTEM",
+    "OSCaption": "Microsoft Windows Server 2019 Datacenter",
+    "LastBootUpTime": "2026-05-19T03:14:00Z",
+    "PendingReboot": false,
+    "CollectedAt": "2026-05-30T15:42:18Z"
+  },
+  {
+    "ComputerName": "HOU-WMS-014",
+    "HotFixID": "KB5030219",
+    "InstalledOn": "2026-04-05",
+    "Description": "Security Update",
+    "InstalledBy": "CORP\\patchsvc",
+    "OSCaption": "Microsoft Windows Server 2016 Standard",
+    "LastBootUpTime": "2026-04-07T04:44:00Z",
+    "PendingReboot": true,
+    "CollectedAt": "2026-05-30T15:42:18Z"
+  },
+  {
+    "ComputerName": "HOU-WMS-014",
+    "HotFixID": "KB5021234",
+    "InstalledOn": "2026-03-24",
+    "Description": "Update",
+    "InstalledBy": "CORP\\patchsvc",
+    "OSCaption": "Microsoft Windows Server 2016 Standard",
+    "LastBootUpTime": "2026-04-07T04:44:00Z",
+    "PendingReboot": true,
+    "CollectedAt": "2026-05-30T15:42:18Z"
+  },
+  {
+    "ComputerName": "NOLA-FS-002",
+    "HotFixID": "KB5021234",
+    "InstalledOn": "2026-02-18",
+    "Description": "Security Update",
+    "InstalledBy": "CORP\\patchsvc",
+    "OSCaption": "Microsoft Windows Server 2012 R2 Standard",
+    "LastBootUpTime": "2026-02-20T02:03:00Z",
+    "PendingReboot": false,
+    "CollectedAt": "2026-05-30T15:42:18Z"
+  }
+]
