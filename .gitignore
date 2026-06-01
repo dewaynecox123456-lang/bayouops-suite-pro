@@ -15,3 +15,6 @@ videos/**/final/
 
 # Netlify local state
 .netlify
+
+# Local generated executive/demo export bundles
+exports/demo/

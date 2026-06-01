@@ -63,6 +63,19 @@ BayouOps keeps the workflow intentionally narrow and auditable:
 No deployment, reboot, remediation, registry modification, Windows Update
 triggering, or remote execution behavior is included.
 
+## Executive Demo Export
+
+Generate the current local executive dashboard, then package it with the latest
+demo dataset into a timestamped local export folder:
+
+```bash
+node scripts/demo/render-demo-dashboard.mjs
+node scripts/demo/export-executive-demo-pack.mjs
+```
+
+Exports are written under `exports/demo/` and include the dashboard HTML, latest
+generated demo JSON dataset, `SUMMARY.md`, and `metadata.json`.
+
 ---
 
 # Why BayouOps Exists
