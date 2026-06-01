@@ -58,19 +58,19 @@ Generated reports are written to `exports/` inside the portable folder.
 
 ---
 
-# Screenshots
+# Executive Demo Pack
 
-## Cleanup Overview
+When Node.js is available, the bundled local demo scripts can refresh and package
+the executive demo without external services:
 
-![Cleanup Overview](screenshots/demo/01-cleanup-overview.png)
+```powershell
+node .\scripts\demo\render-demo-dashboard.mjs
+node .\scripts\demo\export-executive-demo-pack.mjs
+```
 
-## Terminal Workflow
-
-![Terminal Workflow](screenshots/demo/02-terminal-workflow.png)
-
-## Operational Visibility
-
-![Operational Visibility](screenshots/demo/03-operational-visibility.png)
+The generated pack is written under `exports/demo/`. Optional screenshot gallery
+PNGs are intentionally excluded from the portable customer package to keep it
+lightweight.
 
 ---
 

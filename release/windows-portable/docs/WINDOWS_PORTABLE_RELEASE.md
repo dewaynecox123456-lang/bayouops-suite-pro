@@ -15,7 +15,9 @@ agents, start services, schedule tasks, collect telemetry, or phone home.
 - `docs/`: bundled product and workflow documentation.
 - `windows/`: Windows operational readiness exporter.
 - `tools/`: local aggregation engine.
-- `screenshots/demo/`: demo screenshots, when present in the source repo.
+- `scripts/demo/`: local demo generation, dashboard rendering, and export pack scripts.
+- `demo-data/generated/`: seed demo dataset for local report generation.
+- `screenshots/demo/executive-dashboard.html`: rendered executive dashboard HTML.
 - `exports/`: empty output folder for generated reports.
 - `config/`: local customer-editable configuration, when present.
 - `BayouOps-Launcher.ps1`: PowerShell menu launcher.
@@ -43,6 +45,7 @@ Before customer handoff, confirm:
 - `tools/aggregate_operational_reports.py` is present if aggregation will be used.
 - `docs/` is present for offline operator guidance.
 - `config/lines-of-business.json` is present if customer LOB labels are needed.
+- `scripts/demo/` and `demo-data/generated/` are present if executive demo packs will be generated.
 
 ## Support
 
@@ -64,6 +67,10 @@ Generated files are written to `exports/` inside the portable package:
 
 The aggregation engine reads any available input files in `exports/`, including `patch-readiness-report.csv` and `linux-health-summary.csv` if present.
 
+Executive demo packs generated from the portable folder are written under
+`exports/demo/`. Generated export bundles are local artifacts and should not be
+committed back to the source repository.
+
 ## Safety Scope
 
 The portable release is local-first and file-based. The included launcher and bundled scripts:
@@ -74,6 +81,7 @@ The portable release is local-first and file-based. The included launcher and bu
 - perform read-only collection for the Windows readiness export;
 - run aggregation against local CSV inputs only.
 - perform work only after the operator chooses a launcher action.
+- exclude optional screenshot gallery PNG files from the customer package.
 
 ## Future MSI Packaging
 
