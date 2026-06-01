@@ -58,6 +58,10 @@ The launcher shows product metadata, support contact information, license
 status, local preflight checks, and operator-triggered actions. Generated
 reports are written to `exports/` inside the portable folder.
 
+Use of BayouOps Suite Pro requires acceptance of the license terms and
+conditions before protected workflows run. Review `docs/TERMS_AND_CONDITIONS.md`
+and `docs/EULA.md`.
+
 ---
 
 # Executive Demo Pack
@@ -79,7 +83,7 @@ Launcher workflow:
 1. Generate Demo Environment
 2. Render Executive Dashboard
 3. Generate Executive Export Pack
-4. Open Documentation or Support Information as needed
+4. Open Documentation, About, Support, or Terms information as needed
 
 ---
 

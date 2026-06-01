@@ -11,6 +11,7 @@ BAYOUOPS QUICK START
    - Open Documentation
    - Open About BayouOps
    - Open Support Information
+   - Open Terms / License Agreement
 5. Review generated exports and reports locally.
 
 Exports are saved under:
@@ -27,6 +28,11 @@ Place customer license files at:
 ./config/license.json
 
 Contact support@bayoufinds.com if you need a license file.
+
+Use of BayouOps Suite Pro requires acceptance of the license terms and
+conditions before protected workflows run. Review:
+./docs/TERMS_AND_CONDITIONS.md
+./docs/EULA.md
 
 Support:
 Email: support@bayoufinds.com

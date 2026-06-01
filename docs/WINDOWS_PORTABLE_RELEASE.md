@@ -20,6 +20,7 @@ agents, start services, schedule tasks, collect telemetry, or phone home.
 - `screenshots/demo/executive-dashboard.html`: rendered executive dashboard HTML.
 - `exports/`: empty output folder for generated reports.
 - `config/`: local customer-editable configuration, when present.
+- `icons/`: bundled launcher/icon assets, when present.
 - `BayouOps-Launcher.ps1`: PowerShell menu launcher.
 - `BayouOps-Launcher.bat`: double-click launcher for the PowerShell menu.
 
@@ -35,13 +36,19 @@ agents, start services, schedule tasks, collect telemetry, or phone home.
    - Run Aggregation Engine
    - Open Exports Folder
    - Open Documentation
+   - Open About BayouOps
    - Open Support Information
+   - Open Terms / License Agreement
    - Exit
 
 The launcher displays product name, version, edition, support email, license
 status, package path, export path, and local preflight checks. The readiness
 export runs without admin elevation by default. Some Windows inventory fields
 may be partial if local policy blocks read access.
+
+Protected workflows require the operator to confirm acceptance of the license
+terms and conditions before they run. Documentation, support, about, and terms
+files remain accessible without acceptance.
 
 ## Preflight
 
@@ -53,6 +60,8 @@ Before customer handoff, confirm:
 - `docs/` is present for offline operator guidance.
 - `config/lines-of-business.json` is present if customer LOB labels are needed.
 - `scripts/demo/` and `demo-data/generated/` are present if executive demo packs will be generated.
+- `docs/TERMS_AND_CONDITIONS.md` and `docs/EULA.md` are present.
+- `icons/launcher-icon-concept.ico` is present when icon assets are packaged.
 
 ## Support
 
@@ -89,6 +98,7 @@ The portable release is local-first and file-based. The included launcher and bu
 - run aggregation against local CSV inputs only.
 - perform work only after the operator chooses a launcher action.
 - exclude optional screenshot gallery PNG files from the customer package.
+- include existing launcher icon assets without adding new image dependencies.
 
 ## Future MSI Packaging
 

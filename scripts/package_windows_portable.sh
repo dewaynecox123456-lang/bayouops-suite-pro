@@ -54,6 +54,7 @@ require_path "scripts/demo/generate-demo-scenario.mjs"
 require_path "scripts/demo/lob-config.mjs"
 require_path "scripts/demo/render-demo-dashboard.mjs"
 require_path "screenshots/demo/executive-dashboard.html"
+require_path "brand/icons/launcher-icon-concept.ico"
 require_path "release/windows-portable/BayouOps-Launcher.ps1"
 require_path "release/windows-portable/BayouOps-Launcher.bat"
 require_path "release/windows-portable/README.md"
@@ -74,6 +75,8 @@ cp -R "${ROOT_DIR}/windows" "${PACKAGE_DIR}/windows"
 cp -R "${ROOT_DIR}/tools" "${PACKAGE_DIR}/tools"
 cp -R "${ROOT_DIR}/config" "${PACKAGE_DIR}/config"
 rm -f "${PACKAGE_DIR}/config/license.json"
+mkdir -p "${PACKAGE_DIR}/icons"
+copy_required_file "brand/icons/launcher-icon-concept.ico" "${PACKAGE_DIR}/icons/launcher-icon-concept.ico"
 mkdir -p "${PACKAGE_DIR}/scripts/demo"
 copy_required_file "scripts/demo/export-executive-demo-pack.mjs" "${PACKAGE_DIR}/scripts/demo/export-executive-demo-pack.mjs"
 copy_required_file "scripts/demo/generate-demo-scenario.mjs" "${PACKAGE_DIR}/scripts/demo/generate-demo-scenario.mjs"
@@ -97,10 +100,14 @@ required_package_paths=(
     "BayouOps-Launcher.ps1"
     "START_HERE.txt"
     "README.md"
+    "docs/ABOUT_BAYOUOPS.md"
     "docs/CUSTOMER_DELIVERY_CHECKLIST.md"
+    "docs/TERMS_AND_CONDITIONS.md"
+    "docs/EULA.md"
     "docs/SUPPORT_EMAIL_SETUP.md"
     "config/lines-of-business.json"
     "config/license.example.json"
+    "icons/launcher-icon-concept.ico"
     "scripts/demo/export-executive-demo-pack.mjs"
     "scripts/demo/generate-demo-scenario.mjs"
     "scripts/demo/lob-config.mjs"
@@ -125,6 +132,7 @@ forbidden_matches="$(
     find "${PACKAGE_DIR}" \( \
         -name '.git' -o \
         -name 'node_modules' -o \
+        -path "${PACKAGE_DIR}/private*" -o \
         -path "${PACKAGE_DIR}/config/license.json" -o \
         -path "${PACKAGE_DIR}/exports/demo" -o \
         -name '*.tmp' -o \
@@ -151,6 +159,13 @@ if grep -R "Copyright © 2026 Dewayne Cox and Cheri Cox. All Rights Reserved." "
     echo "OK copyright messaging present"
 else
     echo "Missing copyright messaging" >&2
+    exit 1
+fi
+
+if grep -R "provided as-is\|no warranty\|independent validation" "${PACKAGE_DIR}/docs/TERMS_AND_CONDITIONS.md" "${PACKAGE_DIR}/docs/EULA.md" >/dev/null; then
+    echo "OK legal terms messaging present"
+else
+    echo "Missing legal terms messaging" >&2
     exit 1
 fi
 

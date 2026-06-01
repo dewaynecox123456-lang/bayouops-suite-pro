@@ -26,6 +26,8 @@ $LicensePath = Join-Path -Path $ConfigPath -ChildPath 'license.json'
 $DocsPath = Join-Path -Path $PackageRoot -ChildPath 'docs'
 $AboutDocPath = Join-Path -Path $DocsPath -ChildPath 'ABOUT_BAYOUOPS.md'
 $SupportDocPath = Join-Path -Path $DocsPath -ChildPath 'SUPPORT_EMAIL_SETUP.md'
+$TermsDocPath = Join-Path -Path $DocsPath -ChildPath 'TERMS_AND_CONDITIONS.md'
+$EulaDocPath = Join-Path -Path $DocsPath -ChildPath 'EULA.md'
 $ReadinessScript = Join-Path -Path $PackageRoot -ChildPath 'windows/Export-PatchReadiness.ps1'
 $AggregationScript = Join-Path -Path $PackageRoot -ChildPath 'tools/aggregate_operational_reports.py'
 $DemoGenerateScript = Join-Path -Path $PackageRoot -ChildPath 'scripts/demo/generate-demo-scenario.mjs'
@@ -82,6 +84,7 @@ function Write-MenuHeader {
     Write-Host "Package: $PackageRoot"
     Write-Host 'Mode: Read-only, local-only, operator-triggered visibility.'
     Write-Host 'Safety: No endpoint changes, telemetry, agents, services, or background polling.'
+    Write-Host 'Legal: Use of BayouOps Suite Pro requires acceptance of the license terms and conditions.'
     Write-Host "Exports: $ExportsPath"
     Write-Host ''
 }
@@ -115,6 +118,8 @@ function Show-PreflightSummary {
     Write-Host '---------'
     Test-RequiredPath -Path $ExportsPath -Label 'exports folder' | Out-Null
     Test-RequiredPath -Path $DocsPath -Label 'documentation folder' | Out-Null
+    Test-RequiredPath -Path $TermsDocPath -Label 'terms and conditions' | Out-Null
+    Test-RequiredPath -Path $EulaDocPath -Label 'EULA' | Out-Null
     Test-RequiredPath -Path $ReadinessScript -Label 'Windows readiness exporter' | Out-Null
     Test-RequiredPath -Path $AggregationScript -Label 'aggregation engine' | Out-Null
     Test-RequiredPath -Path $DemoGenerateScript -Label 'demo generator' | Out-Null
@@ -130,6 +135,22 @@ function Show-PreflightSummary {
 
     Write-Host ''
     Write-Host 'All work is local and starts only after the operator chooses an action.'
+}
+
+function Confirm-LicenseTerms {
+    Write-Host ''
+    Write-Host 'License Terms Notice'
+    Write-Host '--------------------'
+    Write-Host 'Use of BayouOps Suite Pro requires acceptance of the license terms and conditions.'
+    Write-Host 'Review the Terms / License Agreement from the launcher before running protected workflows.'
+    Write-Host 'BayouOps is provided as-is. Operators are responsible for validating outputs.'
+    Write-Host ''
+
+    $confirmation = Read-Host 'Type ACCEPT to continue, or press Enter to cancel'
+
+    if ($confirmation -ne 'ACCEPT') {
+        throw 'License terms were not accepted. Workflow cancelled.'
+    }
 }
 
 function Get-NodeCommand {
@@ -151,6 +172,7 @@ function Invoke-NodeScript {
         [string]$MissingMessage
     )
 
+    Confirm-LicenseTerms
     Ensure-ExportsFolder
 
     if (-not (Test-Path -Path $ScriptPath)) {
@@ -190,6 +212,7 @@ function Invoke-ExecutiveExportPack {
 }
 
 function Invoke-WindowsReadinessExport {
+    Confirm-LicenseTerms
     Ensure-ExportsFolder
 
     if (-not (Test-Path -Path $ReadinessScript)) {
@@ -214,6 +237,7 @@ function Get-PythonCommand {
 }
 
 function Invoke-AggregationEngine {
+    Confirm-LicenseTerms
     Ensure-ExportsFolder
 
     if (-not (Test-Path -Path $AggregationScript)) {
@@ -241,6 +265,20 @@ function Open-PortablePath {
     Start-Process -FilePath $Path
 }
 
+function Open-TermsAndLicense {
+    if (Test-Path -Path $TermsDocPath) {
+        Open-PortablePath -Path $TermsDocPath
+    }
+    elseif (Test-Path -Path $EulaDocPath) {
+        Open-PortablePath -Path $EulaDocPath
+    }
+    else {
+        Write-Host ''
+        Write-Host 'Terms and license documents were not found.'
+        Write-Host 'Use of BayouOps Suite Pro requires acceptance of the license terms and conditions.'
+    }
+}
+
 while ($true) {
     Write-MenuHeader
     Show-PreflightSummary
@@ -259,7 +297,8 @@ while ($true) {
     Write-Host '7. Open Documentation'
     Write-Host '8. Open About BayouOps'
     Write-Host '9. Open Support Information'
-    Write-Host '10. Exit'
+    Write-Host '10. Open Terms / License Agreement'
+    Write-Host '11. Exit'
     Write-Host ''
 
     $choice = Read-Host 'Select an option'
@@ -319,10 +358,14 @@ while ($true) {
                 Wait-ForOperator
             }
             '10' {
+                Open-TermsAndLicense
+                Wait-ForOperator
+            }
+            '11' {
                 break
             }
             default {
-                Write-Host 'Unknown option. Enter a number from 1 through 10.'
+                Write-Host 'Unknown option. Enter a number from 1 through 11.'
                 Wait-ForOperator
             }
         }

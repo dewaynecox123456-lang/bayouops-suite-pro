@@ -77,6 +77,17 @@ local, and transparent; no online activation or telemetry is used.
 Seller-side offline license generation is documented in
 [`docs/LICENSE_GENERATION.md`](docs/LICENSE_GENERATION.md).
 
+## Terms And Conditions
+
+Use of BayouOps Suite Pro requires acceptance of the license terms and
+conditions before protected workflows run. Review
+[`docs/TERMS_AND_CONDITIONS.md`](docs/TERMS_AND_CONDITIONS.md) and
+[`docs/EULA.md`](docs/EULA.md).
+
+BayouOps is provided as-is and without warranty. Operators are responsible for
+validating outputs before using them for operational, customer-facing, audit, or
+production-critical decisions.
+
 ## Screenshot Gallery
 
 ![Operational Readiness Summary](screenshots/2026-05-30/16-operational-readiness-summary.png)
@@ -144,6 +155,7 @@ operator-triggered actions:
 - Open Documentation
 - Open About BayouOps
 - Open Support Information
+- Open Terms / License Agreement
 
 The launcher does not start background services, polling loops, telemetry, or
 startup persistence.

@@ -15,6 +15,10 @@ or internal operator.
   them.
 - Confirm protected workflows explain that a customer `license.json` file is
   required.
+- Confirm protected launcher workflows require acceptance of license terms and
+  conditions before running.
+- Confirm Terms and EULA docs explain as-is/no-warranty and customer validation
+  responsibility.
 
 ## Support Identity
 
@@ -32,6 +36,8 @@ or internal operator.
 - `START_HERE.txt`
 - `docs/`
 - `docs/SUPPORT_EMAIL_SETUP.md`
+- `docs/TERMS_AND_CONDITIONS.md`
+- `docs/EULA.md`
 - `exports/`
 - `config/lines-of-business.json`
 - `config/license.example.json`
@@ -46,6 +52,7 @@ For the Windows portable package, also confirm:
 - `BayouOps-Launcher.ps1`
 - `windows/Export-PatchReadiness.ps1`
 - `tools/aggregate_operational_reports.py`
+- `icons/launcher-icon-concept.ico`, when packaged
 
 ## Startup And Preflight
 
@@ -87,6 +94,24 @@ defaults and prints a warning.
 - Confirm `config/license.json` is not committed or included in generic release
   packages.
 - Use `config/license.example.json` only as a safe format reference.
+
+## Legal Acceptance
+
+- Confirm `docs/TERMS_AND_CONDITIONS.md` and `docs/EULA.md` are included.
+- Confirm protected workflows require the operator to type `ACCEPT` before
+  running.
+- Confirm documentation states BayouOps is provided as-is, without warranty, and
+  is not intended for production-critical decisions without independent
+  validation.
+- Confirm documentation states no endpoint modifications, telemetry, background
+  services, or hidden polling are included.
+
+## Branding Assets
+
+- Confirm the portable package includes the existing launcher icon at
+  `icons/launcher-icon-concept.ico`.
+- Confirm customer-facing docs use the product name `BayouOps Suite Pro`
+  consistently.
 
 ## Customer Handoff Notes
 
