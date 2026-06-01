@@ -9,8 +9,11 @@ fs.mkdirSync(OUTPUT_DIR, { recursive: true });
 const latestFile = fs
   .readdirSync(GENERATED_DIR)
   .filter(f => f.endsWith(".json"))
-  .sort()
-  .reverse()[0];
+  .map(file => ({
+    file,
+    modifiedAt: fs.statSync(path.join(GENERATED_DIR, file)).mtimeMs
+  }))
+  .sort((a, b) => b.modifiedAt - a.modifiedAt)[0]?.file;
 
 if (!latestFile) {
   console.error("No demo JSON files found.");
@@ -34,6 +37,104 @@ const criticalSystems = dataset
   .filter(x => x.riskState === "Critical")
   .sort((a, b) => a.readinessScore - b.readinessScore)
   .slice(0, 15);
+
+const severityRank = {
+  Critical: 3,
+  Elevated: 2,
+  Informational: 1
+};
+
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function addFinding(findings, server, severity, signal, recommendation) {
+  findings.push({
+    severity,
+    hostname: server.hostname,
+    businessUnit: server.businessUnit,
+    readinessScore: server.readinessScore,
+    signal,
+    recommendation
+  });
+}
+
+function generateOperationalFindings(servers) {
+  const findings = [];
+
+  for (const server of servers) {
+    if (server.readinessScore < 70) {
+      addFinding(
+        findings,
+        server,
+        "Critical",
+        `Readiness score is ${server.readinessScore}%, below the 70% operating threshold.`,
+        "Prioritize owner review, confirm business impact, and schedule corrective maintenance."
+      );
+    }
+
+    if (server.missingPatches > 10) {
+      addFinding(
+        findings,
+        server,
+        server.missingPatches > 20 ? "Critical" : "Elevated",
+        `${server.missingPatches} missing patches detected.`,
+        "Apply missing security updates in the next approved maintenance window."
+      );
+    }
+
+    if (server.rebootPending === true) {
+      addFinding(
+        findings,
+        server,
+        "Informational",
+        "Reboot pending after maintenance activity.",
+        "Coordinate a controlled reboot and confirm post-restart service health."
+      );
+    }
+
+    if (server.lastPatchedDaysAgo > 45) {
+      addFinding(
+        findings,
+        server,
+        server.lastPatchedDaysAgo > 90 ? "Critical" : "Elevated",
+        `Last patched ${server.lastPatchedDaysAgo} days ago.`,
+        "Review patch deferral reason and return the system to the normal patch cadence."
+      );
+    }
+
+    if (server.exposureLevel === "High") {
+      addFinding(
+        findings,
+        server,
+        "Critical",
+        "Exposure level is High.",
+        "Validate internet-facing paths, reduce unnecessary exposure, and verify compensating controls."
+      );
+    }
+  }
+
+  return findings.sort((a, b) => {
+    if (severityRank[b.severity] !== severityRank[a.severity]) {
+      return severityRank[b.severity] - severityRank[a.severity];
+    }
+
+    return a.readinessScore - b.readinessScore;
+  });
+}
+
+const operationalFindings = generateOperationalFindings(dataset);
+const findingCounts = {
+  Critical: operationalFindings.filter(x => x.severity === "Critical").length,
+  Elevated: operationalFindings.filter(x => x.severity === "Elevated").length,
+  Informational: operationalFindings.filter(x => x.severity === "Informational").length
+};
+const topFindings = operationalFindings.slice(0, 12);
 
 const html = `
 <!DOCTYPE html>
@@ -84,6 +185,7 @@ h1 {
 .good { color: #22c55e; }
 .warn { color: #f59e0b; }
 .bad  { color: #ef4444; }
+.info { color: #38bdf8; }
 
 .chart-grid {
     display: grid;
@@ -133,6 +235,90 @@ th, td {
 
 th {
     background: #0f172a;
+}
+
+.findings-section {
+    margin-bottom: 40px;
+}
+
+.findings-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    align-items: flex-end;
+    margin-bottom: 16px;
+}
+
+.findings-header p {
+    color: #94a3b8;
+    line-height: 1.5;
+    margin: 8px 0 0;
+    max-width: 760px;
+}
+
+.findings-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.finding-count {
+    background: #1e293b;
+    border-radius: 16px;
+    border: 1px solid #334155;
+    padding: 18px;
+}
+
+.finding-count-label {
+    color: #94a3b8;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.finding-count-value {
+    font-size: 34px;
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+.severity-badge {
+    border-radius: 999px;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 0.04em;
+    padding: 6px 10px;
+    text-transform: uppercase;
+}
+
+.severity-critical {
+    background: rgba(239, 68, 68, 0.16);
+    border: 1px solid rgba(239, 68, 68, 0.55);
+    color: #fca5a5;
+}
+
+.severity-elevated {
+    background: rgba(245, 158, 11, 0.16);
+    border: 1px solid rgba(245, 158, 11, 0.55);
+    color: #fcd34d;
+}
+
+.severity-informational {
+    background: rgba(56, 189, 248, 0.14);
+    border: 1px solid rgba(56, 189, 248, 0.5);
+    color: #7dd3fc;
+}
+
+.finding-signal {
+    color: #e2e8f0;
+    font-weight: bold;
+}
+
+.finding-remediation {
+    color: #cbd5e1;
+    line-height: 1.45;
 }
 
 .footer {
@@ -208,6 +394,59 @@ and elevated missing security update counts.
 <canvas id="trendChart"></canvas>
 </div>
 
+</div>
+
+<div class="findings-section">
+<div class="findings-header">
+<div>
+<h2>Operational Findings</h2>
+<p>
+Findings are generated from readiness, patch, reboot, stale maintenance,
+and exposure signals in the latest demo dataset.
+</p>
+</div>
+</div>
+
+<div class="findings-summary">
+<div class="finding-count">
+<div class="finding-count-label">Critical Findings</div>
+<div class="finding-count-value bad">${findingCounts.Critical}</div>
+</div>
+
+<div class="finding-count">
+<div class="finding-count-label">Elevated Findings</div>
+<div class="finding-count-value warn">${findingCounts.Elevated}</div>
+</div>
+
+<div class="finding-count">
+<div class="finding-count-label">Informational Findings</div>
+<div class="finding-count-value info">${findingCounts.Informational}</div>
+</div>
+</div>
+
+<table>
+<thead>
+<tr>
+<th>Severity</th>
+<th>Hostname</th>
+<th>Business Unit</th>
+<th>Finding</th>
+<th>Recommended Remediation</th>
+</tr>
+</thead>
+
+<tbody>
+${topFindings.map(finding => `
+<tr>
+<td><span class="severity-badge severity-${finding.severity.toLowerCase()}">${finding.severity}</span></td>
+<td>${escapeHtml(finding.hostname)}</td>
+<td>${escapeHtml(finding.businessUnit)}</td>
+<td class="finding-signal">${escapeHtml(finding.signal)}</td>
+<td class="finding-remediation">${escapeHtml(finding.recommendation)}</td>
+</tr>
+`).join("")}
+</tbody>
+</table>
 </div>
 
 <h2>Highest Risk Operational Systems</h2>
