@@ -25,6 +25,7 @@ function Write-MenuHeader {
     Write-Host '================================================'
     Write-Host ''
     Write-Host "Package: $PackageRoot"
+    Write-Host 'Mode: Read-only visibility. No endpoint changes are made.'
     Write-Host "Exports: $ExportsPath"
     Write-Host ''
 }
@@ -73,7 +74,7 @@ function Invoke-AggregationEngine {
 
     $python = Get-PythonCommand
     if (-not $python) {
-        throw 'Python was not found. Install Python 3 or run the aggregation engine from an environment where python is available.'
+        throw 'Python 3 was not found. This option is for report aggregation only. You can still run option 1 and open exports without Python.'
     }
 
     & $python $AggregationScript
@@ -94,8 +95,8 @@ function Open-PortablePath {
 
 while ($true) {
     Write-MenuHeader
-    Write-Host '1. Run Windows Operational Readiness Export'
-    Write-Host '2. Run Aggregation Engine'
+    Write-Host '1. Run Windows Read-Only Health Export'
+    Write-Host '2. Run Aggregation Engine (requires Python 3)'
     Write-Host '3. Open Exports Folder'
     Write-Host '4. Open Documentation'
     Write-Host '5. Exit'
