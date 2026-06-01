@@ -15,9 +15,29 @@ $ErrorActionPreference = 'Stop'
 
 $PackageRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 $ExportsPath = Join-Path -Path $PackageRoot -ChildPath 'exports'
+$ConfigPath = Join-Path -Path $PackageRoot -ChildPath 'config'
+$LobConfigPath = Join-Path -Path $ConfigPath -ChildPath 'lines-of-business.json'
 $DocsPath = Join-Path -Path $PackageRoot -ChildPath 'docs'
 $ReadinessScript = Join-Path -Path $PackageRoot -ChildPath 'windows/Export-PatchReadiness.ps1'
 $AggregationScript = Join-Path -Path $PackageRoot -ChildPath 'tools/aggregate_operational_reports.py'
+
+function Test-RequiredPath {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Path,
+
+        [Parameter(Mandatory = $true)]
+        [string]$Label
+    )
+
+    if (Test-Path -Path $Path) {
+        Write-Host "OK: $Label"
+        return $true
+    }
+
+    Write-Host "Missing: $Label ($Path)" -ForegroundColor Yellow
+    return $false
+}
 
 function Write-MenuHeader {
     Clear-Host
@@ -25,7 +45,8 @@ function Write-MenuHeader {
     Write-Host '================================================'
     Write-Host ''
     Write-Host "Package: $PackageRoot"
-    Write-Host 'Mode: Read-only visibility. No endpoint changes are made.'
+    Write-Host 'Mode: Read-only, local-only, operator-triggered visibility.'
+    Write-Host 'Safety: No endpoint changes, telemetry, agents, services, or background polling.'
     Write-Host "Exports: $ExportsPath"
     Write-Host ''
 }
@@ -38,7 +59,28 @@ function Wait-ForOperator {
 function Ensure-ExportsFolder {
     if (-not (Test-Path -Path $ExportsPath)) {
         New-Item -Path $ExportsPath -ItemType Directory -Force | Out-Null
+        Write-Host "Created exports folder: $ExportsPath"
     }
+}
+
+function Show-PreflightSummary {
+    Write-Host ''
+    Write-Host 'Preflight'
+    Write-Host '---------'
+    Test-RequiredPath -Path $ExportsPath -Label 'exports folder' | Out-Null
+    Test-RequiredPath -Path $DocsPath -Label 'documentation folder' | Out-Null
+    Test-RequiredPath -Path $ReadinessScript -Label 'Windows readiness exporter' | Out-Null
+    Test-RequiredPath -Path $AggregationScript -Label 'aggregation engine' | Out-Null
+
+    if (Test-Path -Path $ConfigPath) {
+        Test-RequiredPath -Path $LobConfigPath -Label 'Lines of Business config' | Out-Null
+    }
+    else {
+        Write-Host 'Optional: config folder not present. Default demo Lines of Business will be used where applicable.' -ForegroundColor Yellow
+    }
+
+    Write-Host ''
+    Write-Host 'All work is local and starts only after the operator chooses an action.'
 }
 
 function Invoke-WindowsReadinessExport {
@@ -95,6 +137,7 @@ function Open-PortablePath {
 
 while ($true) {
     Write-MenuHeader
+    Show-PreflightSummary
     Write-Host '1. Run Windows Read-Only Health Export'
     Write-Host '2. Run Aggregation Engine (requires Python 3)'
     Write-Host '3. Open Exports Folder'
@@ -117,9 +160,11 @@ while ($true) {
             '3' {
                 Ensure-ExportsFolder
                 Open-PortablePath -Path $ExportsPath
+                Wait-ForOperator
             }
             '4' {
                 Open-PortablePath -Path $DocsPath
+                Wait-ForOperator
             }
             '5' {
                 break

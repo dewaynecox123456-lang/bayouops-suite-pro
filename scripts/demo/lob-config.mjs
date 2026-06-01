@@ -55,7 +55,7 @@ function fallbackConfig(warnings) {
 export function loadLinesOfBusinessConfig() {
   if (!fs.existsSync(LOB_CONFIG_FILE)) {
     return fallbackConfig([
-      `${LOB_CONFIG_FILE} was not found. Using default demo Lines of Business.`
+      `${LOB_CONFIG_FILE} was not found. Using default demo Lines of Business. Create this JSON file to rename, add, or remove customer LOB names.`
     ]);
   }
 
@@ -65,14 +65,14 @@ export function loadLinesOfBusinessConfig() {
     parsed = JSON.parse(fs.readFileSync(LOB_CONFIG_FILE, "utf8"));
   } catch (error) {
     return fallbackConfig([
-      `${LOB_CONFIG_FILE} could not be parsed as JSON. Using default demo Lines of Business.`,
+      `${LOB_CONFIG_FILE} could not be parsed as JSON. Using default demo Lines of Business until the file is corrected.`,
       error.message
     ]);
   }
 
   if (!parsed || Array.isArray(parsed) || typeof parsed !== "object") {
     return fallbackConfig([
-      `${LOB_CONFIG_FILE} must contain a JSON object. Using default demo Lines of Business.`
+      `${LOB_CONFIG_FILE} must contain a JSON object with a linesOfBusiness array. Using default demo Lines of Business.`
     ]);
   }
 
@@ -86,7 +86,7 @@ export function loadLinesOfBusinessConfig() {
 
   if (linesOfBusiness.length === 0) {
     return fallbackConfig([
-      `${LOB_CONFIG_FILE} has no usable Lines of Business. Using default demo Lines of Business.`
+      `${LOB_CONFIG_FILE} has no usable Lines of Business. Add at least one non-empty string to linesOfBusiness. Using default demo Lines of Business.`
     ]);
   }
 

@@ -4,6 +4,10 @@ Lightweight local-first operational readiness and export tooling for Windows and
 
 BayouOps Suite Pro focuses on practical operational visibility without requiring enterprise-scale infrastructure, cloud dependency, or subscription-heavy monitoring platforms.
 
+BayouOps is read-only, operator-controlled, and on demand. It does not modify
+endpoints, deploy agents, collect telemetry, phone home, or run hidden
+background services.
+
 ---
 
 # Why BayouOps Exists
@@ -34,6 +38,7 @@ Generate a local Windows operational readiness export:
 
 ```powershell
 pwsh -NoProfile -File .\windows\Export-PatchReadiness.ps1
+```
 
 ---
 

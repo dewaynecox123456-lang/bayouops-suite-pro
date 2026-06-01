@@ -10,6 +10,10 @@ This package contains:
 
 BayouOps Suite Pro is a local-first operational readiness and export tooling project intended for evaluation, testing, and workflow review.
 
+It is read-only, operator-triggered, and local-only. It does not modify
+endpoints, deploy agents, collect telemetry, phone home, or run hidden
+background services.
+
 Current preview focus:
 
 - operational visibility

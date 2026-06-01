@@ -41,6 +41,18 @@ BayouOps is not:
 - a patch deployment system
 - remote remediation tooling
 
+## Delivery Safety Profile
+
+BayouOps is designed for customer delivery as a local, portable, on-demand
+visibility and reporting workflow:
+
+- read-only collectors and local file processing
+- no endpoint modifications, deployment, reboot, or remediation actions
+- no telemetry, cloud sync, authentication service, or background daemon
+- operator-triggered execution only
+- generated reports written to local export folders
+- low-resource behavior because scripts run only when launched
+
 ## Screenshot Gallery
 
 ![Operational Readiness Summary](screenshots/2026-05-30/16-operational-readiness-summary.png)
@@ -62,6 +74,9 @@ BayouOps keeps the workflow intentionally narrow and auditable:
 
 No deployment, reboot, remediation, registry modification, Windows Update
 triggering, or remote execution behavior is included.
+
+For customer handoff checks, see
+[`docs/CUSTOMER_DELIVERY_CHECKLIST.md`](docs/CUSTOMER_DELIVERY_CHECKLIST.md).
 
 ## Lines Of Business Configuration
 

@@ -3,14 +3,19 @@ BAYOUOPS QUICK START
 
 1. Extract the ZIP file first.
 2. Open the BayouOps folder.
-3. Double-click BayouOps.exe
-4. Click "Load Demo Environment"
-5. Review dashboards and reports.
+3. Double-click BayouOps-Launcher.bat on Windows, or open the docs for a manual workflow.
+4. Choose an operator-triggered action from the launcher menu.
+5. Review generated exports and reports.
 
 Exports are saved under:
 ./exports/
 
-Logs are saved under:
-./logs/
+Executive demo packs, when generated from the source repo, are saved under:
+./exports/demo/
 
-BayouOps is read-only software and does not modify endpoints.
+Lines of Business can be edited locally in:
+./config/lines-of-business.json
+
+BayouOps is read-only, local-first, and operator-controlled.
+It does not modify endpoints, deploy agents, start background services,
+phone home, or collect telemetry.

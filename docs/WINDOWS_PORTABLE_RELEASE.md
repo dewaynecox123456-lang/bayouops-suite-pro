@@ -1,6 +1,12 @@
 # Windows Portable Release
 
-BayouOps Suite Pro can be staged as a local Windows portable package under `release/windows-portable/`. The package is intended for ZIP distribution or later MSI wrapping, without requiring installation or administrative privileges by default.
+BayouOps Suite Pro can be staged as a local Windows portable package under
+`release/windows-portable/`. The package is intended for ZIP distribution or
+later MSI wrapping, without requiring installation or administrative privileges
+by default.
+
+The portable package is operator-triggered and local-only. It does not install
+agents, start services, schedule tasks, collect telemetry, or phone home.
 
 ## Included Contents
 
@@ -11,6 +17,7 @@ BayouOps Suite Pro can be staged as a local Windows portable package under `rele
 - `tools/`: local aggregation engine.
 - `screenshots/demo/`: demo screenshots, when present in the source repo.
 - `exports/`: empty output folder for generated reports.
+- `config/`: local customer-editable configuration, when present.
 - `BayouOps-Launcher.ps1`: PowerShell menu launcher.
 - `BayouOps-Launcher.bat`: double-click launcher for the PowerShell menu.
 
@@ -26,6 +33,16 @@ BayouOps Suite Pro can be staged as a local Windows portable package under `rele
    - Exit
 
 The readiness export runs without admin elevation by default. Some Windows inventory fields may be partial if local policy blocks read access.
+
+## Preflight
+
+Before customer handoff, confirm:
+
+- `exports/` exists and is writable by the operator.
+- `windows/Export-PatchReadiness.ps1` is present.
+- `tools/aggregate_operational_reports.py` is present if aggregation will be used.
+- `docs/` is present for offline operator guidance.
+- `config/lines-of-business.json` is present if customer LOB labels are needed.
 
 ## Expected Outputs
 
@@ -46,6 +63,7 @@ The portable release is local-first and file-based. The included launcher and bu
 - write generated output only under the package `exports/` folder;
 - perform read-only collection for the Windows readiness export;
 - run aggregation against local CSV inputs only.
+- perform work only after the operator chooses a launcher action.
 
 ## Future MSI Packaging
 

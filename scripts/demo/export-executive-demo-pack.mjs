@@ -10,6 +10,7 @@ function fail(message) {
   console.error("");
   console.error("BayouOps executive demo export failed.");
   console.error(`Error: ${message}`);
+  console.error("This export is local-only and requires an existing rendered dashboard plus a generated demo JSON dataset.");
   console.error("");
   process.exit(1);
 }
@@ -20,7 +21,7 @@ function formatTimestamp(date) {
 
 function findLatestDataset() {
   if (!fs.existsSync(GENERATED_DIR)) {
-    fail(`Generated dataset directory is missing: ${GENERATED_DIR}`);
+    fail(`Generated dataset directory is missing: ${GENERATED_DIR}. Run node scripts/demo/generate-demo-scenario.mjs first.`);
   }
 
   const latest = fs
