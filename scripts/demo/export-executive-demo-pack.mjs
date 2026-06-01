@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { LOB_CONFIG_FILE } from "./lob-config.mjs";
 
 const DASHBOARD_FILE = "./screenshots/demo/executive-dashboard.html";
 const GENERATED_DIR = "./demo-data/generated";
@@ -57,9 +58,16 @@ const dashboardExport = path.join(exportDir, "executive-dashboard.html");
 const datasetExport = path.join(exportDir, latestDataset.file);
 const summaryExport = path.join(exportDir, "SUMMARY.md");
 const metadataExport = path.join(exportDir, "metadata.json");
+const lobConfigExport = path.join(exportDir, path.basename(LOB_CONFIG_FILE));
 
 fs.copyFileSync(DASHBOARD_FILE, dashboardExport);
 fs.copyFileSync(latestDataset.fullPath, datasetExport);
+
+const hasLobConfig = fs.existsSync(LOB_CONFIG_FILE);
+
+if (hasLobConfig) {
+  fs.copyFileSync(LOB_CONFIG_FILE, lobConfigExport);
+}
 
 const includedFiles = [
   path.basename(dashboardExport),
@@ -67,6 +75,14 @@ const includedFiles = [
   path.basename(summaryExport),
   path.basename(metadataExport)
 ];
+
+if (hasLobConfig) {
+  includedFiles.push(path.basename(lobConfigExport));
+}
+
+const lobConfigSummaryLine = hasLobConfig
+  ? `- ${path.basename(lobConfigExport)}\n`
+  : "";
 
 const summary = `# BayouOps Executive Demo Export
 
@@ -80,6 +96,7 @@ This local export pack contains the current executive dashboard HTML and the lat
 - ${latestDataset.file}
 - SUMMARY.md
 - metadata.json
+${lobConfigSummaryLine}
 
 ## Open Locally
 
@@ -92,7 +109,8 @@ const metadata = {
   exportPath: exportDir,
   sourceFiles: {
     dashboard: DASHBOARD_FILE,
-    dataset: latestDataset.fullPath
+    dataset: latestDataset.fullPath,
+    linesOfBusinessConfig: hasLobConfig ? LOB_CONFIG_FILE : null
   },
   includedFiles
 };
@@ -108,6 +126,9 @@ console.log(` Export Path       : ${exportDir}`);
 console.log(` Dashboard         : ${dashboardExport}`);
 console.log(` Dataset           : ${datasetExport}`);
 console.log(` Metadata          : ${metadataExport}`);
+if (hasLobConfig) {
+  console.log(` LOB Config        : ${lobConfigExport}`);
+}
 console.log(" Next Suggested Action: Open executive-dashboard.html from the export folder and share or archive the folder.");
 console.log("========================================");
 console.log("");

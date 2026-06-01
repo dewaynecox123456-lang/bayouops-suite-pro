@@ -63,6 +63,22 @@ BayouOps keeps the workflow intentionally narrow and auditable:
 No deployment, reboot, remediation, registry modification, Windows Update
 triggering, or remote execution behavior is included.
 
+## Lines Of Business Configuration
+
+Customer-facing Lines of Business are configured locally in
+[`config/lines-of-business.json`](config/lines-of-business.json).
+
+Operators can edit the `linesOfBusiness` array to rename, add, or remove
+department, region, site, or business-unit names without changing code. Demo
+generation uses those names when creating new local demo records.
+
+The optional `aliases` object maps older demo or imported names to updated
+customer-facing names during dashboard rendering. For example, `"HR": "Human
+Resources"` keeps older demo records readable after renaming the LOB.
+
+If the config file is missing, empty, or malformed, BayouOps falls back to safe
+default demo LOB names and prints a warning.
+
 ## Executive Demo Export
 
 Generate the current local executive dashboard, then package it with the latest
@@ -74,7 +90,8 @@ node scripts/demo/export-executive-demo-pack.mjs
 ```
 
 Exports are written under `exports/demo/` and include the dashboard HTML, latest
-generated demo JSON dataset, `SUMMARY.md`, and `metadata.json`.
+generated demo JSON dataset, `SUMMARY.md`, `metadata.json`, and the local LOB
+config when present.
 
 ---
 

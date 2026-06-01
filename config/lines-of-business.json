@@ -1,0 +1,14 @@
+{
+  "linesOfBusiness": [
+    "Finance",
+    "Operations",
+    "Human Resources",
+    "Security",
+    "Infrastructure",
+    "Retail",
+    "Customer Support"
+  ],
+  "aliases": {
+    "HR": "Human Resources"
+  }
+}

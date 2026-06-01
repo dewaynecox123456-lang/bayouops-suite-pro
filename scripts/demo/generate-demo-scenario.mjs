@@ -1,7 +1,14 @@
 import fs from "fs";
 import path from "path";
+import {
+  loadLinesOfBusinessConfig,
+  printLobConfigWarnings
+} from "./lob-config.mjs";
 
 const OUTPUT_DIR = "./demo-data/generated";
+const lobConfig = loadLinesOfBusinessConfig();
+
+printLobConfigWarnings(lobConfig);
 
 const serverRoles = [
   "WEB",
@@ -12,15 +19,6 @@ const serverRoles = [
   "NOC",
   "API",
   "EDGE"
-];
-
-const businessUnits = [
-  "Finance",
-  "Operations",
-  "HR",
-  "Security",
-  "Retail",
-  "Infrastructure"
 ];
 
 const riskStates = [
@@ -47,7 +45,7 @@ function createServer(index) {
 
   return {
     hostname: `BAYOU-${rand(serverRoles)}-${String(index).padStart(3, "0")}`,
-    businessUnit: rand(businessUnits),
+    businessUnit: rand(lobConfig.linesOfBusiness),
     role: rand(serverRoles),
     os: "Windows Server 2022",
     readinessScore: score,
@@ -95,6 +93,8 @@ console.log("========================================");
 console.log(" BayouOps Demo Scenario Generated");
 console.log("========================================");
 console.log(` Servers Generated : ${dataset.length}`);
+console.log(` LOB Config        : ${lobConfig.configPath}`);
+console.log(` LOB Names         : ${lobConfig.linesOfBusiness.join(", ")}`);
 console.log(` Output File       : ${outputFile}`);
 console.log("========================================");
 console.log("");

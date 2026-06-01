@@ -1,8 +1,16 @@
 import fs from "fs";
 import path from "path";
+import {
+  loadLinesOfBusinessConfig,
+  mapLineOfBusiness,
+  printLobConfigWarnings
+} from "./lob-config.mjs";
 
 const GENERATED_DIR = "./demo-data/generated";
 const OUTPUT_DIR = "./screenshots/demo";
+const lobConfig = loadLinesOfBusinessConfig();
+
+printLobConfigWarnings(lobConfig);
 
 fs.mkdirSync(OUTPUT_DIR, { recursive: true });
 
@@ -22,7 +30,10 @@ if (!latestFile) {
 
 const dataset = JSON.parse(
   fs.readFileSync(path.join(GENERATED_DIR, latestFile), "utf8")
-);
+).map(server => ({
+  ...server,
+  businessUnit: mapLineOfBusiness(server.businessUnit, lobConfig)
+}));
 
 const total = dataset.length;
 const healthy = dataset.filter(x => x.riskState === "Healthy").length;
