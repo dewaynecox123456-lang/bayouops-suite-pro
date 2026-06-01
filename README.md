@@ -64,6 +64,19 @@ ready. Support email forwarding must be verified before public customer launch;
 setup guidance is available in
 [`docs/SUPPORT_EMAIL_SETUP.md`](docs/SUPPORT_EMAIL_SETUP.md).
 
+## License File
+
+A license file is required for protected workflows. Contact
+[support@bayoufinds.com](mailto:support@bayoufinds.com) if you need a license
+file.
+
+BayouFinds issues customer `license.json` files manually. Customers place the
+file at `config/license.json`. License validation is designed to remain offline,
+local, and transparent; no online activation or telemetry is used.
+
+Seller-side offline license generation is documented in
+[`docs/LICENSE_GENERATION.md`](docs/LICENSE_GENERATION.md).
+
 ## Screenshot Gallery
 
 ![Operational Readiness Summary](screenshots/2026-05-30/16-operational-readiness-summary.png)

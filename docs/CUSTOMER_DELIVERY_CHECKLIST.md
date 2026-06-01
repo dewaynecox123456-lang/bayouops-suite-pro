@@ -13,6 +13,8 @@ or internal operator.
   agent deployment, or auto-start behavior has been added.
 - Confirm generated reports remain local unless the operator chooses to share
   them.
+- Confirm protected workflows explain that a customer `license.json` file is
+  required.
 
 ## Support Identity
 
@@ -32,6 +34,7 @@ or internal operator.
 - `docs/SUPPORT_EMAIL_SETUP.md`
 - `exports/`
 - `config/lines-of-business.json`
+- `config/license.example.json`
 - `scripts/demo/render-demo-dashboard.mjs`
 - `scripts/demo/export-executive-demo-pack.mjs`
 - `screenshots/demo/executive-dashboard.html` after dashboard rendering
@@ -75,6 +78,15 @@ customer's preferred names.
 
 If the file is missing, empty, or malformed, BayouOps falls back to safe demo
 defaults and prints a warning.
+
+## License File
+
+- Confirm the customer has been told to contact `support@bayoufinds.com` if a
+  license file is needed.
+- Confirm customer-specific licenses are installed as `config/license.json`.
+- Confirm `config/license.json` is not committed or included in generic release
+  packages.
+- Use `config/license.example.json` only as a safe format reference.
 
 ## Customer Handoff Notes
 

@@ -1,0 +1,12 @@
+{
+  "product": "BayouOps Suite Pro",
+  "licensedTo": "Example Customer",
+  "customerEmail": "customer@example.com",
+  "licenseKey": "BAYOUOPS-DEMO-0000-0000-0000",
+  "edition": "Professional",
+  "issuedOn": "2026-06-01",
+  "expiresOn": "2027-06-01",
+  "supportEmail": "support@bayoufinds.com",
+  "issuedBy": "BayouFinds / Dewayne Cox",
+  "notes": "Example license only. Replace with a customer-specific license.json issued by BayouFinds."
+}

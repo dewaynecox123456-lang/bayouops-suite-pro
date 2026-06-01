@@ -16,6 +16,12 @@ Executive demo packs, when generated from the source repo, are saved under:
 Lines of Business can be edited locally in:
 ./config/lines-of-business.json
 
+A license file is required for protected workflows.
+Place customer license files at:
+./config/license.json
+
+Contact support@bayoufinds.com if you need a license file.
+
 Support:
 Email: support@bayoufinds.com
 Phone: Coming soon

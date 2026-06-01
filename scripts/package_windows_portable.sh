@@ -50,6 +50,7 @@ cp -R "${ROOT_DIR}/docs" "${PACKAGE_DIR}/docs"
 cp -R "${ROOT_DIR}/windows" "${PACKAGE_DIR}/windows"
 cp -R "${ROOT_DIR}/tools" "${PACKAGE_DIR}/tools"
 copy_if_present "config" "${PACKAGE_DIR}/config"
+rm -f "${PACKAGE_DIR}/config/license.json"
 copy_if_present "screenshots/demo" "${PACKAGE_DIR}/screenshots/demo"
 mkdir -p "${PACKAGE_DIR}/exports"
 

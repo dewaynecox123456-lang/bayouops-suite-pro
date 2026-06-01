@@ -18,3 +18,7 @@ videos/**/final/
 
 # Local generated executive/demo export bundles
 exports/demo/
+
+# Seller/private license output and customer-installed licenses
+private/
+config/license.json
