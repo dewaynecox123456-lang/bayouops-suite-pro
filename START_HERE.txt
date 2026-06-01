@@ -16,6 +16,16 @@ Executive demo packs, when generated from the source repo, are saved under:
 Lines of Business can be edited locally in:
 ./config/lines-of-business.json
 
+Support:
+Email: support@bayoufinds.com
+Phone: Coming soon
+Website: https://bayoufinds.com
+
+Before public customer launch, verify that support@bayoufinds.com forwards to
+the intended support inbox.
+
 BayouOps is read-only, local-first, and operator-controlled.
 It does not modify endpoints, deploy agents, start background services,
 phone home, or collect telemetry.
+
+Copyright © 2026 Dewayne Cox and Cheri Cox. All Rights Reserved.

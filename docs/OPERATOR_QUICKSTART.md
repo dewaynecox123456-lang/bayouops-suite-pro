@@ -53,8 +53,22 @@ Edit `config/lines-of-business.json` to rename, add, or remove customer-facing
 Lines of Business. The optional `aliases` object maps older names to updated
 customer terms during dashboard rendering.
 
+## Support
+
+- Email: [support@bayoufinds.com](mailto:support@bayoufinds.com)
+- Phone: Coming soon
+- Website: https://bayoufinds.com
+
+Support email forwarding must be verified before public customer launch. Keep
+support phone as `Coming soon` until a dedicated business or Google Voice number
+is ready.
+
 ## Notes
 
 This is not an RMM, EDR, vulnerability scanner, or replacement for enterprise monitoring.
 
 It is designed as a lightweight operational visibility layer with local exports.
+
+---
+
+Copyright © 2026 Dewayne Cox and Cheri Cox. All Rights Reserved.

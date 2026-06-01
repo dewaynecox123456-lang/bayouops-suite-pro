@@ -14,6 +14,13 @@ It is read-only, operator-triggered, and local-only. It does not modify
 endpoints, deploy agents, collect telemetry, phone home, or run hidden
 background services.
 
+Support:
+- Email: support@bayoufinds.com
+- Phone: Coming soon
+- Website: https://bayoufinds.com
+
+Verify support email forwarding before public customer launch.
+
 Current preview focus:
 
 - operational visibility
@@ -22,3 +29,5 @@ Current preview focus:
 - operator-readable reporting
 
 This preview is not currently positioned as a managed service or enterprise monitoring platform.
+
+Copyright © 2026 Dewayne Cox and Cheri Cox. All Rights Reserved.

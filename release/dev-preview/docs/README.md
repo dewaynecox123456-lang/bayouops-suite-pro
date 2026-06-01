@@ -8,6 +8,14 @@ BayouOps is read-only, operator-controlled, and on demand. It does not modify
 endpoints, deploy agents, collect telemetry, phone home, or run hidden
 background services.
 
+Support:
+
+- Email: [support@bayoufinds.com](mailto:support@bayoufinds.com)
+- Phone: Coming soon
+- Website: https://bayoufinds.com
+
+Support email forwarding must be verified before public customer launch.
+
 ---
 
 # Why BayouOps Exists
@@ -55,3 +63,7 @@ pwsh -NoProfile -File .\windows\Export-PatchReadiness.ps1
 ## Operational Visibility
 
 ![Operational Visibility](screenshots/demo/03-operational-visibility.png)
+
+---
+
+Copyright © 2026 Dewayne Cox and Cheri Cox. All Rights Reserved.

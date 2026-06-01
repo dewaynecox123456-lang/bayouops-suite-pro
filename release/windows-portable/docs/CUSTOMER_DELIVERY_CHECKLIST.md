@@ -14,11 +14,22 @@ or internal operator.
 - Confirm generated reports remain local unless the operator chooses to share
   them.
 
+## Support Identity
+
+- Confirm support email is listed as `support@bayoufinds.com`.
+- Confirm support phone remains `Coming soon` until a dedicated business or
+  Google Voice number is ready.
+- Confirm website is listed as `https://bayoufinds.com`.
+- Verify support email forwarding before public customer launch.
+- Send and receive a test message from an external mailbox before publishing
+  support contact details.
+
 ## Required Files And Folders
 
 - `README.md`
 - `START_HERE.txt`
 - `docs/`
+- `docs/SUPPORT_EMAIL_SETUP.md`
 - `exports/`
 - `config/lines-of-business.json`
 - `scripts/demo/render-demo-dashboard.mjs`
@@ -72,3 +83,7 @@ defaults and prints a warning.
   environment.
 - Do not promise PDF, ZIP packaging, hosted portals, automated collection, or
   managed service behavior unless those items are approved separately.
+
+---
+
+Copyright © 2026 Dewayne Cox and Cheri Cox. All Rights Reserved.

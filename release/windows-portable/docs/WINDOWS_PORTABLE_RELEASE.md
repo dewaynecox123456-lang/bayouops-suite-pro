@@ -44,6 +44,16 @@ Before customer handoff, confirm:
 - `docs/` is present for offline operator guidance.
 - `config/lines-of-business.json` is present if customer LOB labels are needed.
 
+## Support
+
+- Email: [support@bayoufinds.com](mailto:support@bayoufinds.com)
+- Phone: Coming soon
+- Website: https://bayoufinds.com
+
+Verify support email forwarding before public customer launch. Keep support
+phone as `Coming soon` until a dedicated business or Google Voice number is
+ready.
+
 ## Expected Outputs
 
 Generated files are written to `exports/` inside the portable package:
@@ -68,3 +78,7 @@ The portable release is local-first and file-based. The included launcher and bu
 ## Future MSI Packaging
 
 This package is a clean portable foundation only. A later MSI pass can wrap the same staged contents, add shortcuts, define install and uninstall behavior, and set signing or publisher metadata. MSI packaging is intentionally out of scope for this pass.
+
+---
+
+Copyright © 2026 Dewayne Cox and Cheri Cox. All Rights Reserved.

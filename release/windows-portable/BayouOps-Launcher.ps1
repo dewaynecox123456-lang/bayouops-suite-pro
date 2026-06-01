@@ -44,6 +44,7 @@ function Write-MenuHeader {
     Write-Host 'BayouOps Suite Pro - Windows Portable Launcher'
     Write-Host '================================================'
     Write-Host ''
+    Write-Host 'Copyright © 2026 Dewayne Cox and Cheri Cox. All Rights Reserved.'
     Write-Host "Package: $PackageRoot"
     Write-Host 'Mode: Read-only, local-only, operator-triggered visibility.'
     Write-Host 'Safety: No endpoint changes, telemetry, agents, services, or background polling.'

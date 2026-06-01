@@ -102,6 +102,16 @@ ${lobConfigSummaryLine}
 ## Open Locally
 
 Open executive-dashboard.html in a browser to review or share the static executive dashboard.
+
+## Support
+
+- Email: support@bayoufinds.com
+- Phone: Coming soon
+- Website: https://bayoufinds.com
+
+Support email forwarding must be verified before public customer launch.
+
+Copyright © 2026 Dewayne Cox and Cheri Cox. All Rights Reserved.
 `;
 
 const metadata = {

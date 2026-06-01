@@ -8,6 +8,9 @@ BayouOps is visibility and reporting focused. It is not positioned as an RMM, ag
 
 - Netlify site: https://bayouops-suite-pro.netlify.app
 - GitHub repo: https://github.com/dewaynecox123456-lang/bayouops-suite-pro
+- Website: https://bayoufinds.com
+- Support email: [support@bayoufinds.com](mailto:support@bayoufinds.com)
+- Support phone: Coming soon
 
 ---
 
@@ -52,6 +55,14 @@ visibility and reporting workflow:
 - operator-triggered execution only
 - generated reports written to local export folders
 - low-resource behavior because scripts run only when launched
+
+## Support
+
+For customer support, use [support@bayoufinds.com](mailto:support@bayoufinds.com).
+Support phone is `Coming soon` until a dedicated business support number is
+ready. Support email forwarding must be verified before public customer launch;
+setup guidance is available in
+[`docs/SUPPORT_EMAIL_SETUP.md`](docs/SUPPORT_EMAIL_SETUP.md).
 
 ## Screenshot Gallery
 
@@ -224,4 +235,8 @@ Polished demo scripts, walkthrough notes, buyer-story framing, video planning as
 
 The current homepage demo player uses the bundled final MP4 at
 [`videos/2026-05-29/final/BayouOps_Operational_Readiness_Demo_FINAL_v1.mp4`](videos/2026-05-29/final/BayouOps_Operational_Readiness_Demo_FINAL_v1.mp4).
+
+---
+
+Copyright © 2026 Dewayne Cox and Cheri Cox. All Rights Reserved.
 No `videos/2026-05-30/final/` directory is present in this checkout.
