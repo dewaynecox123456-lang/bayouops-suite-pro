@@ -183,6 +183,45 @@ th {
     line-height: 1.45;
 }
 
+.timeline-section {
+    margin-bottom: 40px;
+}
+
+.timeline-grid {
+    display: grid;
+    gap: 14px;
+}
+
+.timeline-entry {
+    align-items: center;
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 16px;
+    display: grid;
+    gap: 16px;
+    grid-template-columns: 130px 140px 1fr 1.25fr;
+    padding: 16px 18px;
+}
+
+.timeline-date {
+    color: #94a3b8;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.timeline-summary {
+    color: #e2e8f0;
+    font-weight: bold;
+    line-height: 1.4;
+}
+
+.timeline-impact {
+    color: #cbd5e1;
+    line-height: 1.45;
+}
+
 .footer {
     margin-top: 40px;
     opacity: 0.5;
@@ -256,6 +295,71 @@ and elevated missing security update counts.
 <canvas id="trendChart"></canvas>
 </div>
 
+</div>
+
+<div class="timeline-section">
+<div class="findings-header">
+<div>
+<h2>Operational Timeline</h2>
+<p>
+Simulated operational history generated from the latest readiness, patch,
+reboot, and exposure signals to show how risk posture is changing over time.
+</p>
+</div>
+</div>
+
+<div class="timeline-grid">
+
+<div class="timeline-entry">
+<div class="timeline-date">May 25, 2026</div>
+<div><span class="severity-badge severity-critical">Critical</span></div>
+<div class="timeline-summary">31 critical systems exceeded stale patch thresholds.</div>
+<div class="timeline-impact">Maintenance deferral increased operational exposure and prioritized owner review.</div>
+</div>
+
+<div class="timeline-entry">
+<div class="timeline-date">May 26, 2026</div>
+<div><span class="severity-badge severity-critical">Critical</span></div>
+<div class="timeline-summary">15 systems exceeded the 20 missing patch threshold.</div>
+<div class="timeline-impact">Security update backlog created a concentrated remediation queue for operations.</div>
+</div>
+
+<div class="timeline-entry">
+<div class="timeline-date">May 27, 2026</div>
+<div><span class="severity-badge severity-elevated">Elevated</span></div>
+<div class="timeline-summary">44 high exposure systems were identified for reduction.</div>
+<div class="timeline-impact">Network-facing risk was isolated into a smaller set of targeted follow-up actions.</div>
+</div>
+
+<div class="timeline-entry">
+<div class="timeline-date">May 28, 2026</div>
+<div><span class="severity-badge severity-informational">Informational</span></div>
+<div class="timeline-summary">39 systems entered reboot remediation tracking.</div>
+<div class="timeline-impact">Pending maintenance completions were converted into a controlled restart checklist.</div>
+</div>
+
+<div class="timeline-entry">
+<div class="timeline-date">May 29, 2026</div>
+<div><span class="severity-badge severity-elevated">Elevated</span></div>
+<div class="timeline-summary">Readiness trend recalculated at 75% across 120 systems.</div>
+<div class="timeline-impact">Executive reporting shows readiness pressure requiring focused remediation sequencing.</div>
+</div>
+
+<div class="timeline-entry">
+<div class="timeline-date">May 30, 2026</div>
+<div><span class="severity-badge severity-informational">Informational</span></div>
+<div class="timeline-summary">40 systems reached low-exposure recovery posture.</div>
+<div class="timeline-impact">Operational recovery milestones improved confidence in patch and exposure controls.</div>
+</div>
+
+<div class="timeline-entry">
+<div class="timeline-date">May 31, 2026</div>
+<div><span class="severity-badge severity-informational">Informational</span></div>
+<div class="timeline-summary">40 systems are currently reporting healthy readiness state.</div>
+<div class="timeline-impact">Healthy inventory provides a baseline for tracking week-over-week exposure reduction.</div>
+</div>
+
+</div>
 </div>
 
 <div class="findings-section">
@@ -555,7 +659,7 @@ and exposure signals in the latest demo dataset.
 
 <div class="footer">
 © 2026 BayouFinds.com — BayouOps Suite Pro<br>
-Last Generated: 5/31/2026, 11:07:01 PM
+Last Generated: 5/31/2026, 11:22:13 PM
 </div>
 
 <script>

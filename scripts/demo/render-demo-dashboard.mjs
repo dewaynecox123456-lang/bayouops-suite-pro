@@ -128,6 +128,123 @@ function generateOperationalFindings(servers) {
   });
 }
 
+function formatTimelineDate(date) {
+  return new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric"
+  }).format(date);
+}
+
+function timelineDate(daysAgo) {
+  const date = new Date();
+  date.setDate(date.getDate() - daysAgo);
+  return formatTimelineDate(date);
+}
+
+function addTimelineEvent(events, daysAgo, severity, summary, impact) {
+  events.push({
+    date: timelineDate(daysAgo),
+    severity,
+    summary,
+    impact
+  });
+}
+
+function generateOperationalTimeline(servers) {
+  const events = [];
+  const highPatchSystems = servers.filter(server => server.missingPatches > 20);
+  const staleCriticalSystems = servers.filter(
+    server => server.riskState === "Critical" && server.lastPatchedDaysAgo > 90
+  );
+  const rebootSystems = servers.filter(server => server.rebootPending === true);
+  const highExposureSystems = servers.filter(server => server.exposureLevel === "High");
+  const healthySystems = servers.filter(server => server.riskState === "Healthy");
+  const recoveredCandidates = servers.filter(
+    server =>
+      server.riskState === "Healthy" &&
+      server.readinessScore >= 90 &&
+      server.missingPatches <= 2 &&
+      server.exposureLevel === "Low"
+  );
+  const averageScore = Math.round(
+    servers.reduce((totalScore, server) => totalScore + server.readinessScore, 0) /
+      servers.length
+  );
+
+  if (staleCriticalSystems.length > 0) {
+    addTimelineEvent(
+      events,
+      6,
+      "Critical",
+      `${staleCriticalSystems.length} critical systems exceeded stale patch thresholds.`,
+      "Maintenance deferral increased operational exposure and prioritized owner review."
+    );
+  }
+
+  if (highPatchSystems.length > 0) {
+    addTimelineEvent(
+      events,
+      5,
+      "Critical",
+      `${highPatchSystems.length} systems exceeded the 20 missing patch threshold.`,
+      "Security update backlog created a concentrated remediation queue for operations."
+    );
+  }
+
+  if (highExposureSystems.length > 0) {
+    addTimelineEvent(
+      events,
+      4,
+      "Elevated",
+      `${highExposureSystems.length} high exposure systems were identified for reduction.`,
+      "Network-facing risk was isolated into a smaller set of targeted follow-up actions."
+    );
+  }
+
+  if (rebootSystems.length > 0) {
+    addTimelineEvent(
+      events,
+      3,
+      "Informational",
+      `${rebootSystems.length} systems entered reboot remediation tracking.`,
+      "Pending maintenance completions were converted into a controlled restart checklist."
+    );
+  }
+
+  addTimelineEvent(
+    events,
+    2,
+    averageScore >= 80 ? "Informational" : "Elevated",
+    `Readiness trend recalculated at ${averageScore}% across ${servers.length} systems.`,
+    averageScore >= 80
+      ? "Executive reporting shows stable readiness with remaining risk concentrated in known systems."
+      : "Executive reporting shows readiness pressure requiring focused remediation sequencing."
+  );
+
+  if (recoveredCandidates.length > 0) {
+    addTimelineEvent(
+      events,
+      1,
+      "Informational",
+      `${recoveredCandidates.length} systems reached low-exposure recovery posture.`,
+      "Operational recovery milestones improved confidence in patch and exposure controls."
+    );
+  }
+
+  if (healthySystems.length > 0) {
+    addTimelineEvent(
+      events,
+      0,
+      "Informational",
+      `${healthySystems.length} systems are currently reporting healthy readiness state.`,
+      "Healthy inventory provides a baseline for tracking week-over-week exposure reduction."
+    );
+  }
+
+  return events.slice(0, 7);
+}
+
 const operationalFindings = generateOperationalFindings(dataset);
 const findingCounts = {
   Critical: operationalFindings.filter(x => x.severity === "Critical").length,
@@ -135,6 +252,7 @@ const findingCounts = {
   Informational: operationalFindings.filter(x => x.severity === "Informational").length
 };
 const topFindings = operationalFindings.slice(0, 12);
+const operationalTimeline = generateOperationalTimeline(dataset);
 
 const html = `
 <!DOCTYPE html>
@@ -321,6 +439,45 @@ th {
     line-height: 1.45;
 }
 
+.timeline-section {
+    margin-bottom: 40px;
+}
+
+.timeline-grid {
+    display: grid;
+    gap: 14px;
+}
+
+.timeline-entry {
+    align-items: center;
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 16px;
+    display: grid;
+    gap: 16px;
+    grid-template-columns: 130px 140px 1fr 1.25fr;
+    padding: 16px 18px;
+}
+
+.timeline-date {
+    color: #94a3b8;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.timeline-summary {
+    color: #e2e8f0;
+    font-weight: bold;
+    line-height: 1.4;
+}
+
+.timeline-impact {
+    color: #cbd5e1;
+    line-height: 1.45;
+}
+
 .footer {
     margin-top: 40px;
     opacity: 0.5;
@@ -394,6 +551,29 @@ and elevated missing security update counts.
 <canvas id="trendChart"></canvas>
 </div>
 
+</div>
+
+<div class="timeline-section">
+<div class="findings-header">
+<div>
+<h2>Operational Timeline</h2>
+<p>
+Simulated operational history generated from the latest readiness, patch,
+reboot, and exposure signals to show how risk posture is changing over time.
+</p>
+</div>
+</div>
+
+<div class="timeline-grid">
+${operationalTimeline.map(event => `
+<div class="timeline-entry">
+<div class="timeline-date">${escapeHtml(event.date)}</div>
+<div><span class="severity-badge severity-${event.severity.toLowerCase()}">${event.severity}</span></div>
+<div class="timeline-summary">${escapeHtml(event.summary)}</div>
+<div class="timeline-impact">${escapeHtml(event.impact)}</div>
+</div>
+`).join("")}
+</div>
 </div>
 
 <div class="findings-section">
