@@ -24,6 +24,7 @@ $ConfigPath = Join-Path -Path $PackageRoot -ChildPath 'config'
 $LobConfigPath = Join-Path -Path $ConfigPath -ChildPath 'lines-of-business.json'
 $LicensePath = Join-Path -Path $ConfigPath -ChildPath 'license.json'
 $DocsPath = Join-Path -Path $PackageRoot -ChildPath 'docs'
+$AboutDocPath = Join-Path -Path $DocsPath -ChildPath 'ABOUT_BAYOUOPS.md'
 $SupportDocPath = Join-Path -Path $DocsPath -ChildPath 'SUPPORT_EMAIL_SETUP.md'
 $ReadinessScript = Join-Path -Path $PackageRoot -ChildPath 'windows/Export-PatchReadiness.ps1'
 $AggregationScript = Join-Path -Path $PackageRoot -ChildPath 'tools/aggregate_operational_reports.py'
@@ -256,8 +257,9 @@ while ($true) {
     Write-MenuSection -Title 'Review And Support'
     Write-Host '6. Open Exports Folder'
     Write-Host '7. Open Documentation'
-    Write-Host '8. Open Support Information'
-    Write-Host '9. Exit'
+    Write-Host '8. Open About BayouOps'
+    Write-Host '9. Open Support Information'
+    Write-Host '10. Exit'
     Write-Host ''
 
     $choice = Read-Host 'Select an option'
@@ -294,6 +296,17 @@ while ($true) {
                 Wait-ForOperator
             }
             '8' {
+                if (Test-Path -Path $AboutDocPath) {
+                    Open-PortablePath -Path $AboutDocPath
+                }
+                else {
+                    Write-Host ''
+                    Write-Host "$ProductName is a local-first, read-only operational visibility and reporting toolkit."
+                    Write-Host "Support email: $SupportEmail"
+                }
+                Wait-ForOperator
+            }
+            '9' {
                 if (Test-Path -Path $SupportDocPath) {
                     Open-PortablePath -Path $SupportDocPath
                 }
@@ -305,11 +318,11 @@ while ($true) {
                 }
                 Wait-ForOperator
             }
-            '9' {
+            '10' {
                 break
             }
             default {
-                Write-Host 'Unknown option. Enter a number from 1 through 9.'
+                Write-Host 'Unknown option. Enter a number from 1 through 10.'
                 Wait-ForOperator
             }
         }

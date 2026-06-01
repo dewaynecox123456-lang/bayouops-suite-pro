@@ -142,6 +142,7 @@ operator-triggered actions:
 - Render Executive Dashboard
 - Generate Executive Export Pack
 - Open Documentation
+- Open About BayouOps
 - Open Support Information
 
 The launcher does not start background services, polling loops, telemetry, or

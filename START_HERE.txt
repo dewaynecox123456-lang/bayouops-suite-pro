@@ -9,6 +9,7 @@ BAYOUOPS QUICK START
    - Render Executive Dashboard
    - Generate Executive Export Pack
    - Open Documentation
+   - Open About BayouOps
    - Open Support Information
 5. Review generated exports and reports locally.
 
