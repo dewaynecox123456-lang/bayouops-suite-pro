@@ -34,6 +34,14 @@ conditions before protected workflows run. Review:
 ./docs/TERMS_AND_CONDITIONS.md
 ./docs/EULA.md
 
+Dev Tester and future Payhip delivery prep docs:
+./docs/DEV_TESTER_GUIDE.md
+./docs/TESTER_FEEDBACK_TEMPLATE.md
+./docs/KNOWN_LIMITATIONS.md
+./docs/TESTER_OUTREACH_KIT.md
+./docs/TESTER_MEDIA_ASSETS.md
+./docs/PAYHIP_DELIVERY_PREP.md
+
 Support:
 Email: support@bayoufinds.com
 Phone: Coming soon

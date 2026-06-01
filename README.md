@@ -88,6 +88,18 @@ BayouOps is provided as-is and without warranty. Operators are responsible for
 validating outputs before using them for operational, customer-facing, audit, or
 production-critical decisions.
 
+## Dev Tester And Payhip Prep
+
+Controlled tester outreach and future Payhip delivery planning are documented
+under `docs/`:
+
+- [`docs/DEV_TESTER_GUIDE.md`](docs/DEV_TESTER_GUIDE.md)
+- [`docs/TESTER_FEEDBACK_TEMPLATE.md`](docs/TESTER_FEEDBACK_TEMPLATE.md)
+- [`docs/KNOWN_LIMITATIONS.md`](docs/KNOWN_LIMITATIONS.md)
+- [`docs/TESTER_OUTREACH_KIT.md`](docs/TESTER_OUTREACH_KIT.md)
+- [`docs/TESTER_MEDIA_ASSETS.md`](docs/TESTER_MEDIA_ASSETS.md)
+- [`docs/PAYHIP_DELIVERY_PREP.md`](docs/PAYHIP_DELIVERY_PREP.md)
+
 ## Screenshot Gallery
 
 ![Operational Readiness Summary](screenshots/2026-05-30/16-operational-readiness-summary.png)
