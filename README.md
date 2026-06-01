@@ -132,6 +132,21 @@ Exports are written under `exports/demo/` and include the dashboard HTML, latest
 generated demo JSON dataset, `SUMMARY.md`, `metadata.json`, and the local LOB
 config when present.
 
+## Portable Launcher Flow
+
+The Windows portable launcher uses a script-based menu with visible product
+metadata, support email, license status, local preflight checks, and clear
+operator-triggered actions:
+
+- Generate Demo Environment
+- Render Executive Dashboard
+- Generate Executive Export Pack
+- Open Documentation
+- Open Support Information
+
+The launcher does not start background services, polling loops, telemetry, or
+startup persistence.
+
 ---
 
 # Why BayouOps Exists

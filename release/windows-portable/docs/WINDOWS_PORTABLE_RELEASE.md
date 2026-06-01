@@ -28,13 +28,20 @@ agents, start services, schedule tasks, collect telemetry, or phone home.
 1. Open `release/windows-portable/` on a Windows host.
 2. Double-click `BayouOps-Launcher.bat`, or run `BayouOps-Launcher.ps1` from PowerShell.
 3. Choose one of the launcher options:
-   - Run Windows Operational Readiness Export
+   - Generate Demo Environment
+   - Render Executive Dashboard
+   - Generate Executive Export Pack
+   - Run Windows Read-Only Health Export
    - Run Aggregation Engine
    - Open Exports Folder
    - Open Documentation
+   - Open Support Information
    - Exit
 
-The readiness export runs without admin elevation by default. Some Windows inventory fields may be partial if local policy blocks read access.
+The launcher displays product name, version, edition, support email, license
+status, package path, export path, and local preflight checks. The readiness
+export runs without admin elevation by default. Some Windows inventory fields
+may be partial if local policy blocks read access.
 
 ## Preflight
 

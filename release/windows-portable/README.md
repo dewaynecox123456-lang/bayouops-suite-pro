@@ -54,7 +54,9 @@ Or use the portable launcher:
 .\BayouOps-Launcher.ps1
 ```
 
-Generated reports are written to `exports/` inside the portable folder.
+The launcher shows product metadata, support contact information, license
+status, local preflight checks, and operator-triggered actions. Generated
+reports are written to `exports/` inside the portable folder.
 
 ---
 
@@ -71,6 +73,13 @@ node .\scripts\demo\export-executive-demo-pack.mjs
 The generated pack is written under `exports/demo/`. Optional screenshot gallery
 PNGs are intentionally excluded from the portable customer package to keep it
 lightweight.
+
+Launcher workflow:
+
+1. Generate Demo Environment
+2. Render Executive Dashboard
+3. Generate Executive Export Pack
+4. Open Documentation or Support Information as needed
 
 ---
 

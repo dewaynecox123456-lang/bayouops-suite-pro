@@ -13,13 +13,23 @@ param()
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
+$ProductName = 'BayouOps Suite Pro'
+$ProductVersion = 'v0.3 Developer Preview'
+$ProductEdition = 'Professional'
+$SupportEmail = 'support@bayoufinds.com'
+
 $PackageRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 $ExportsPath = Join-Path -Path $PackageRoot -ChildPath 'exports'
 $ConfigPath = Join-Path -Path $PackageRoot -ChildPath 'config'
 $LobConfigPath = Join-Path -Path $ConfigPath -ChildPath 'lines-of-business.json'
+$LicensePath = Join-Path -Path $ConfigPath -ChildPath 'license.json'
 $DocsPath = Join-Path -Path $PackageRoot -ChildPath 'docs'
+$SupportDocPath = Join-Path -Path $DocsPath -ChildPath 'SUPPORT_EMAIL_SETUP.md'
 $ReadinessScript = Join-Path -Path $PackageRoot -ChildPath 'windows/Export-PatchReadiness.ps1'
 $AggregationScript = Join-Path -Path $PackageRoot -ChildPath 'tools/aggregate_operational_reports.py'
+$DemoGenerateScript = Join-Path -Path $PackageRoot -ChildPath 'scripts/demo/generate-demo-scenario.mjs'
+$DashboardRenderScript = Join-Path -Path $PackageRoot -ChildPath 'scripts/demo/render-demo-dashboard.mjs'
+$ExecutiveExportScript = Join-Path -Path $PackageRoot -ChildPath 'scripts/demo/export-executive-demo-pack.mjs'
 
 function Test-RequiredPath {
     param(
@@ -39,17 +49,51 @@ function Test-RequiredPath {
     return $false
 }
 
+function Get-LicenseStatus {
+    if (-not (Test-Path -Path $LicensePath)) {
+        return 'Not installed - protected workflows require config/license.json'
+    }
+
+    try {
+        $license = Get-Content -Path $LicensePath -Raw | ConvertFrom-Json
+        $licensedTo = if ($license.licensedTo) { $license.licensedTo } else { 'Unknown customer' }
+        $edition = if ($license.edition) { $license.edition } else { 'Unspecified edition' }
+        $expiresOn = if ($license.expiresOn) { $license.expiresOn } else { 'No expiration listed' }
+
+        return "Installed - $licensedTo / $edition / expires $expiresOn"
+    }
+    catch {
+        return 'Present but unreadable - review config/license.json'
+    }
+}
+
 function Write-MenuHeader {
     Clear-Host
-    Write-Host 'BayouOps Suite Pro - Windows Portable Launcher'
-    Write-Host '================================================'
+    Write-Host "$ProductName - Windows Portable Launcher"
+    Write-Host '======================================================'
     Write-Host ''
+    Write-Host "Version : $ProductVersion"
+    Write-Host "Edition : $ProductEdition"
+    Write-Host "Support : $SupportEmail"
+    Write-Host "License : $(Get-LicenseStatus)"
     Write-Host 'Copyright © 2026 Dewayne Cox and Cheri Cox. All Rights Reserved.'
+    Write-Host ''
     Write-Host "Package: $PackageRoot"
     Write-Host 'Mode: Read-only, local-only, operator-triggered visibility.'
     Write-Host 'Safety: No endpoint changes, telemetry, agents, services, or background polling.'
     Write-Host "Exports: $ExportsPath"
     Write-Host ''
+}
+
+function Write-MenuSection {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Title
+    )
+
+    Write-Host ''
+    Write-Host $Title
+    Write-Host ('-' * $Title.Length)
 }
 
 function Wait-ForOperator {
@@ -72,6 +116,9 @@ function Show-PreflightSummary {
     Test-RequiredPath -Path $DocsPath -Label 'documentation folder' | Out-Null
     Test-RequiredPath -Path $ReadinessScript -Label 'Windows readiness exporter' | Out-Null
     Test-RequiredPath -Path $AggregationScript -Label 'aggregation engine' | Out-Null
+    Test-RequiredPath -Path $DemoGenerateScript -Label 'demo generator' | Out-Null
+    Test-RequiredPath -Path $DashboardRenderScript -Label 'executive dashboard renderer' | Out-Null
+    Test-RequiredPath -Path $ExecutiveExportScript -Label 'executive export pack generator' | Out-Null
 
     if (Test-Path -Path $ConfigPath) {
         Test-RequiredPath -Path $LobConfigPath -Label 'Lines of Business config' | Out-Null
@@ -82,6 +129,63 @@ function Show-PreflightSummary {
 
     Write-Host ''
     Write-Host 'All work is local and starts only after the operator chooses an action.'
+}
+
+function Get-NodeCommand {
+    $command = Get-Command -Name 'node' -ErrorAction SilentlyContinue
+
+    if ($null -ne $command) {
+        return $command.Source
+    }
+
+    return $null
+}
+
+function Invoke-NodeScript {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$ScriptPath,
+
+        [Parameter(Mandatory = $true)]
+        [string]$MissingMessage
+    )
+
+    Ensure-ExportsFolder
+
+    if (-not (Test-Path -Path $ScriptPath)) {
+        throw $MissingMessage
+    }
+
+    $node = Get-NodeCommand
+    if (-not $node) {
+        throw 'Node.js was not found. Demo generation and executive export packaging require Node.js and run locally only.'
+    }
+
+    Push-Location -Path $PackageRoot
+    try {
+        & $node $ScriptPath
+    }
+    finally {
+        Pop-Location
+    }
+}
+
+function Invoke-DemoGeneration {
+    Invoke-NodeScript -ScriptPath $DemoGenerateScript -MissingMessage "Missing demo generator: $DemoGenerateScript"
+    Write-Host ''
+    Write-Host 'Next step: choose Render Executive Dashboard.'
+}
+
+function Invoke-DashboardRender {
+    Invoke-NodeScript -ScriptPath $DashboardRenderScript -MissingMessage "Missing executive dashboard renderer: $DashboardRenderScript"
+    Write-Host ''
+    Write-Host 'Next step: choose Generate Executive Export Pack.'
+}
+
+function Invoke-ExecutiveExportPack {
+    Invoke-NodeScript -ScriptPath $ExecutiveExportScript -MissingMessage "Missing executive export pack generator: $ExecutiveExportScript"
+    Write-Host ''
+    Write-Host "Next step: open exports under $ExportsPath."
 }
 
 function Invoke-WindowsReadinessExport {
@@ -139,11 +243,21 @@ function Open-PortablePath {
 while ($true) {
     Write-MenuHeader
     Show-PreflightSummary
-    Write-Host '1. Run Windows Read-Only Health Export'
-    Write-Host '2. Run Aggregation Engine (requires Python 3)'
-    Write-Host '3. Open Exports Folder'
-    Write-Host '4. Open Documentation'
-    Write-Host '5. Exit'
+
+    Write-MenuSection -Title 'Demo And Executive Reporting'
+    Write-Host '1. Generate Demo Environment'
+    Write-Host '2. Render Executive Dashboard'
+    Write-Host '3. Generate Executive Export Pack'
+
+    Write-MenuSection -Title 'Operational Exports'
+    Write-Host '4. Run Windows Read-Only Health Export'
+    Write-Host '5. Run Aggregation Engine (requires Python 3)'
+
+    Write-MenuSection -Title 'Review And Support'
+    Write-Host '6. Open Exports Folder'
+    Write-Host '7. Open Documentation'
+    Write-Host '8. Open Support Information'
+    Write-Host '9. Exit'
     Write-Host ''
 
     $choice = Read-Host 'Select an option'
@@ -151,27 +265,51 @@ while ($true) {
     try {
         switch ($choice) {
             '1' {
-                Invoke-WindowsReadinessExport
+                Invoke-DemoGeneration
                 Wait-ForOperator
             }
             '2' {
-                Invoke-AggregationEngine
+                Invoke-DashboardRender
                 Wait-ForOperator
             }
             '3' {
+                Invoke-ExecutiveExportPack
+                Wait-ForOperator
+            }
+            '4' {
+                Invoke-WindowsReadinessExport
+                Wait-ForOperator
+            }
+            '5' {
+                Invoke-AggregationEngine
+                Wait-ForOperator
+            }
+            '6' {
                 Ensure-ExportsFolder
                 Open-PortablePath -Path $ExportsPath
                 Wait-ForOperator
             }
-            '4' {
+            '7' {
                 Open-PortablePath -Path $DocsPath
                 Wait-ForOperator
             }
-            '5' {
+            '8' {
+                if (Test-Path -Path $SupportDocPath) {
+                    Open-PortablePath -Path $SupportDocPath
+                }
+                else {
+                    Write-Host ''
+                    Write-Host "Support email: $SupportEmail"
+                    Write-Host 'Support phone: Coming soon'
+                    Write-Host 'Website: https://bayoufinds.com'
+                }
+                Wait-ForOperator
+            }
+            '9' {
                 break
             }
             default {
-                Write-Host 'Unknown option. Enter 1, 2, 3, 4, or 5.'
+                Write-Host 'Unknown option. Enter a number from 1 through 9.'
                 Wait-ForOperator
             }
         }

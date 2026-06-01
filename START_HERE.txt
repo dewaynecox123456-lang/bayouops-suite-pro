@@ -4,8 +4,13 @@ BAYOUOPS QUICK START
 1. Extract the ZIP file first.
 2. Open the BayouOps folder.
 3. Double-click BayouOps-Launcher.bat on Windows, or open the docs for a manual workflow.
-4. Choose an operator-triggered action from the launcher menu.
-5. Review generated exports and reports.
+4. Choose an operator-triggered action from the launcher menu:
+   - Generate Demo Environment
+   - Render Executive Dashboard
+   - Generate Executive Export Pack
+   - Open Documentation
+   - Open Support Information
+5. Review generated exports and reports locally.
 
 Exports are saved under:
 ./exports/
