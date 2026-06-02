@@ -22,6 +22,7 @@ Built by operations people for operations people.
 
 - Netlify site: https://bayouops-suite-pro.netlify.app
 - [Operational Philosophy](docs/PHILOSOPHY.md)
+- [Codex Guardrails](docs/CODEX_GUARDRAILS.md)
 - GitHub repo: https://github.com/dewaynecox123456-lang/bayouops-suite-pro
 - Website: https://bayoufinds.com
 - Support email: [support@bayoufinds.com](mailto:support@bayoufinds.com)

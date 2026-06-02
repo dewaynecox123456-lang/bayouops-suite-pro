@@ -1,5 +1,7 @@
 # BayouOps Suite Pro — Agent Context
 
+For detailed future Codex and agent guardrails, read [docs/CODEX_GUARDRAILS.md](docs/CODEX_GUARDRAILS.md) before making project changes.
+
 ## Primary Author
 
 Dewayne Cox
