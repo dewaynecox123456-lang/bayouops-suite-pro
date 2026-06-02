@@ -1,4 +1,5 @@
 import fs from "fs";
+import { COPYRIGHT_SHORT } from "./signature-constants.mjs";
 
 const targetFile = "./scripts/demo/render-demo-dashboard.mjs";
 
@@ -44,10 +45,10 @@ radial-gradient(circle at top left,
 
   {
     find: `<div class="footer">
-© 2026 BayouFinds.com — BayouOps Suite Pro
+${COPYRIGHT_SHORT}
 </div>`,
     replace: `<div class="footer">
-© 2026 BayouFinds.com — BayouOps Suite Pro<br>
+${COPYRIGHT_SHORT}<br>
 Last Generated: \${new Date().toLocaleString()}
 </div>`
   },

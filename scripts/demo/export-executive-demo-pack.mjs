@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { LOB_CONFIG_FILE } from "./lob-config.mjs";
+import { COPYRIGHT_FULL } from "./signature-constants.mjs";
 
 const DASHBOARD_FILE = "./screenshots/demo/executive-dashboard.html";
 const GENERATED_DIR = "./demo-data/generated";
@@ -111,7 +112,7 @@ Open executive-dashboard.html in a browser to review or share the static executi
 
 Support email forwarding must be verified before public customer launch.
 
-Copyright © 2026 Dewayne Cox and Cheri Cox. All Rights Reserved.
+${COPYRIGHT_FULL}
 `;
 
 const metadata = {

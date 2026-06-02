@@ -225,7 +225,7 @@ ${criticalSystems.map(server => `
 </table>
 
 <div class="footer">
-© 2026 BayouFinds.com — BayouOps Suite Pro
+© 2026 BayouFinds.com — Dewayne Cox & Cheri Cox. All Rights Reserved.
 </div>
 
 <script>
