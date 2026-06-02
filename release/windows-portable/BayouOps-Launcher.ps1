@@ -79,7 +79,7 @@ function Write-MenuHeader {
     Write-Host "Edition : $ProductEdition"
     Write-Host "Support : $SupportEmail"
     Write-Host "License : $(Get-LicenseStatus)"
-    Write-Host 'Copyright © 2026 Dewayne Cox and Cheri Cox. All Rights Reserved.'
+    Write-Host '© 2026 BayouFinds.com — Dewayne Cox & Cheri Cox. All Rights Reserved.'
     Write-Host ''
     Write-Host "Package: $PackageRoot"
     Write-Host 'Mode: Read-only, local-only, operator-triggered visibility.'

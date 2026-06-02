@@ -66,4 +66,4 @@ pwsh -NoProfile -File .\windows\Export-PatchReadiness.ps1
 
 ---
 
-Copyright © 2026 Dewayne Cox and Cheri Cox. All Rights Reserved.
+© 2026 BayouFinds.com — Dewayne Cox & Cheri Cox. All Rights Reserved.

@@ -41,4 +41,4 @@ license file, contact support@bayoufinds.com.
 
 Support Phone: Coming soon
 
-Copyright © 2026 Dewayne Cox and Cheri Cox. All Rights Reserved.
+© 2026 BayouFinds.com — Dewayne Cox & Cheri Cox. All Rights Reserved.

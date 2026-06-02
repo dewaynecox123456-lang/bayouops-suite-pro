@@ -54,4 +54,4 @@ BayouOps is read-only, local-first, and operator-controlled.
 It does not modify endpoints, deploy agents, start background services,
 phone home, or collect telemetry.
 
-Copyright © 2026 Dewayne Cox and Cheri Cox. All Rights Reserved.
+© 2026 BayouFinds.com — Dewayne Cox & Cheri Cox. All Rights Reserved.

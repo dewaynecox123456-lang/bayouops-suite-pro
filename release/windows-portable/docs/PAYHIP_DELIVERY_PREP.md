@@ -126,4 +126,4 @@ acceptance of the included Terms and EULA.
 7. Update Payhip description, screenshots, and support notes.
 8. Send update notice to testers/customers if appropriate.
 
-Copyright © 2026 Dewayne Cox and Cheri Cox. All Rights Reserved.
+© 2026 BayouFinds.com — Dewayne Cox & Cheri Cox. All Rights Reserved.

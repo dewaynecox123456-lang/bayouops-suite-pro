@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>BayouOps Demo - Executive Summary</title>
+<style>
+body{margin:0;background:#f6f7f9;color:#172033;font-family:Arial,sans-serif}
+main{max-width:1160px;margin:0 auto;padding:36px}
+.top{display:flex;justify-content:space-between;gap:24px;align-items:start}
+.pill{background:#b76100;color:#fff;border-radius:999px;padding:8px 16px;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin:28px 0}
+.card{background:#fff;border:1px solid #d9e0ea;border-radius:6px;padding:16px}
+.label{color:#607089;font-size:13px}.value{font-size:32px;font-weight:700;margin-top:8px}
+.summary{background:#fff;border:1px solid #d9e0ea;border-radius:6px;padding:22px;margin-bottom:24px;line-height:1.55}
+table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #d9e0ea;border-radius:6px;overflow:hidden}
+th,td{padding:11px 12px;border-bottom:1px solid #e6ebf2;text-align:left;font-size:13px}
+th{background:#edf2f7;color:#344054}
+footer{color:#607089;font-size:12px;margin-top:24px}
+</style>
+</head>
+<body>
+<main>
+<section class="top">
+<div><h1>BayouOps Suite Pro</h1><p>Enterprise Demo Scenario - Executive Summary</p></div>
+<div class="pill">Elevated Risk</div>
+</section>
+<section class="grid">
+<div class="card"><div class="label">Operational Score</div><div class="value">81%</div></div>
+<div class="card"><div class="label">Compliance</div><div class="value">86%</div></div>
+<div class="card"><div class="label">Patch Coverage</div><div class="value">83%</div></div>
+<div class="card"><div class="label">Stale Systems</div><div class="value">14</div></div>
+<div class="card"><div class="label">SSL Findings</div><div class="value">5</div></div>
+</section>
+<section class="summary">
+<h2>Executive Summary</h2>
+<p>Enterprise readiness is stable overall, with risk concentrated in a small number of legacy and internet-facing systems.</p>
+<p><strong>IT admin relevance:</strong> Gives operations a concise queue for patching, reboot coordination, lifecycle review, and certificate cleanup.</p>
+<p><strong>Manager/compliance relevance:</strong> Frames operational health as score, trend, business impact, and next action for leadership review.</p>
+</section>
+<table>
+<thead><tr><th>Host</th><th>Service</th><th>Business Unit</th><th>OS</th><th>Score</th><th>Missing Patches</th><th>Reboot Age</th><th>SSL Risk</th></tr></thead>
+<tbody><tr>
+        <td>BAY-FIN-SQL-014</td>
+        <td>SQL Server 2019</td>
+        <td>Finance Operations</td>
+        <td>Windows Server 2019</td>
+        <td>85%</td>
+        <td>2</td>
+        <td>34 days</td>
+        <td>Expires &lt; 14 days</td>
+      </tr>
+<tr>
+        <td>BAY-REV-API-022</td>
+        <td>Revenue API</td>
+        <td>Revenue Systems</td>
+        <td>Ubuntu 22.04 LTS</td>
+        <td>86%</td>
+        <td>4</td>
+        <td>36 days</td>
+        <td>Legacy TLS</td>
+      </tr>
+<tr>
+        <td>BAY-CS-WEB-007</td>
+        <td>Support Portal</td>
+        <td>Customer Support</td>
+        <td>Windows Server 2022</td>
+        <td>89%</td>
+        <td>6</td>
+        <td>38 days</td>
+        <td>Name mismatch</td>
+      </tr>
+<tr>
+        <td>BAY-FLD-RDS-003</td>
+        <td>Remote Desktop Gateway</td>
+        <td>Field Services</td>
+        <td>Windows Server 2016</td>
+        <td>73%</td>
+        <td>8</td>
+        <td>40 days</td>
+        <td>Expires &lt; 14 days</td>
+      </tr>
+<tr>
+        <td>BAY-MFG-HMI-011</td>
+        <td>Plant Floor Gateway</td>
+        <td>Manufacturing IT</td>
+        <td>Windows Server 2012 R2</td>
+        <td>58%</td>
+        <td>2</td>
+        <td>42 days</td>
+        <td>Legacy TLS</td>
+      </tr>
+<tr>
+        <td>BAY-SEC-EDGE-005</td>
+        <td>VPN Edge</td>
+        <td>Corporate Security</td>
+        <td>Ubuntu 20.04 LTS</td>
+        <td>77%</td>
+        <td>4</td>
+        <td>44 days</td>
+        <td>None</td>
+      </tr>
+<tr>
+        <td>BAY-DATA-ETL-018</td>
+        <td>ETL Worker</td>
+        <td>Data Platform</td>
+        <td>Red Hat Enterprise Linux 8</td>
+        <td>83%</td>
+        <td>6</td>
+        <td>46 days</td>
+        <td>None</td>
+      </tr>
+<tr>
+        <td>BAY-CORP-FILE-029</td>
+        <td>File Services</td>
+        <td>Corporate Security</td>
+        <td>Windows Server 2019</td>
+        <td>80%</td>
+        <td>8</td>
+        <td>48 days</td>
+        <td>None</td>
+      </tr>
+<tr>
+        <td>BAY-REV-WEB-031</td>
+        <td>Revenue Web</td>
+        <td>Revenue Systems</td>
+        <td>Windows Server 2022</td>
+        <td>87%</td>
+        <td>2</td>
+        <td>50 days</td>
+        <td>None</td>
+      </tr>
+<tr>
+        <td>BAY-FIN-APP-044</td>
+        <td>ERP Application</td>
+        <td>Finance Operations</td>
+        <td>Windows Server 2016</td>
+        <td>75%</td>
+        <td>4</td>
+        <td>52 days</td>
+        <td>None</td>
+      </tr>
+<tr>
+        <td>BAY-DATA-DB-010</td>
+        <td>Analytics Database</td>
+        <td>Data Platform</td>
+        <td>Ubuntu 18.04 LTS</td>
+        <td>62%</td>
+        <td>6</td>
+        <td>54 days</td>
+        <td>None</td>
+      </tr>
+<tr>
+        <td>BAY-CS-MAIL-002</td>
+        <td>Case Mail Relay</td>
+        <td>Customer Support</td>
+        <td>Windows Server 2012 R2</td>
+        <td>57%</td>
+        <td>8</td>
+        <td>56 days</td>
+        <td>None</td>
+      </tr></tbody>
+</table>
+<footer>© 2026 BayouFinds.com — Dewayne Cox & Cheri Cox. All Rights Reserved.</footer>
+</main>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760">
+  <rect width="1200" height="760" fill="#f6f7f9"/>
+  <text x="48" y="58" fill="#172033" font-family="Arial, sans-serif" font-size="31" font-weight="700">BayouOps Suite Pro</text>
+  <text x="48" y="88" fill="#607089" font-family="Arial, sans-serif" font-size="15">Enterprise Demo Scenario - After Remediation</text>
+  <rect x="936" y="42" width="154" height="34" rx="17" fill="#16833a"/>
+  <text x="1013" y="64" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="13" font-weight="700">Improved Risk</text>
+  <g font-family="Arial, sans-serif">
+    
+  <rect x="48" y="126" width="176" height="92" rx="6" fill="#ffffff" stroke="#d9e0ea"/>
+  <text x="64" y="154" fill="#607089" font-size="13">Operational Score</text>
+  <text x="64" y="193" fill="#16833a" font-size="32" font-weight="700">91%</text>
+    
+  <rect x="244" y="126" width="176" height="92" rx="6" fill="#ffffff" stroke="#d9e0ea"/>
+  <text x="260" y="154" fill="#607089" font-size="13">Compliance</text>
+  <text x="260" y="193" fill="#155eef" font-size="32" font-weight="700">95%</text>
+    
+  <rect x="440" y="126" width="176" height="92" rx="6" fill="#ffffff" stroke="#d9e0ea"/>
+  <text x="456" y="154" fill="#607089" font-size="13">Patch Coverage</text>
+  <text x="456" y="193" fill="#16833a" font-size="32" font-weight="700">94%</text>
+    
+  <rect x="636" y="126" width="176" height="92" rx="6" fill="#ffffff" stroke="#d9e0ea"/>
+  <text x="652" y="154" fill="#607089" font-size="13">Stale Systems</text>
+  <text x="652" y="193" fill="#b76100" font-size="32" font-weight="700">4</text>
+    
+  <rect x="832" y="126" width="176" height="92" rx="6" fill="#ffffff" stroke="#d9e0ea"/>
+  <text x="848" y="154" fill="#607089" font-size="13">SSL Findings</text>
+  <text x="848" y="193" fill="#b76100" font-size="32" font-weight="700">2</text>
+    <rect x="48" y="250" width="512" height="152" rx="6" fill="#ffffff" stroke="#d9e0ea"/>
+    <text x="72" y="286" fill="#172033" font-size="18" font-weight="700">Executive Summary</text>
+    <text x="72" y="315" fill="#344054" font-size="14"><tspan x="72" dy="0">Maintenance actions reduced stale inventory, closed most</tspan><tspan x="72" dy="19">certificate issues, and returned systems to an improved operating</tspan><tspan x="72" dy="19">posture.</tspan></text>
+    <text x="72" y="384" fill="#607089" font-size="13">Estate size: 248 systems | Oldest reboot age: 9 days | Unsupported OS: 1</text>
+    <rect x="596" y="250" width="464" height="152" rx="6" fill="#ffffff" stroke="#d9e0ea"/>
+    <text x="620" y="286" fill="#172033" font-size="18" font-weight="700">Operational Scoring</text>
+    
+  <text x="620" y="314" fill="#172033" font-size="14" font-weight="600">Patch coverage</text>
+  <rect x="620" y="322" width="372" height="14" rx="7" fill="#e8edf5"/>
+  <rect x="620" y="322" width="350" height="14" rx="7" fill="#16833a"/>
+  <text x="1006" y="334" fill="#172033" font-size="13">94%</text>
+    
+  <text x="620" y="350" fill="#172033" font-size="14" font-weight="600">Compliance evidence</text>
+  <rect x="620" y="358" width="372" height="14" rx="7" fill="#e8edf5"/>
+  <rect x="620" y="358" width="353" height="14" rx="7" fill="#155eef"/>
+  <text x="1006" y="370" fill="#172033" font-size="13">95%</text>
+    
+  <text x="620" y="386" fill="#172033" font-size="14" font-weight="600">Readiness score</text>
+  <rect x="620" y="394" width="372" height="14" rx="7" fill="#e8edf5"/>
+  <rect x="620" y="394" width="339" height="14" rx="7" fill="#16833a"/>
+  <text x="1006" y="406" fill="#172033" font-size="13">91%</text>
+    <text x="48" y="462" fill="#172033" font-size="18" font-weight="700">Representative Systems</text>
+    <rect x="48" y="480" width="1040" height="314" rx="6" fill="#ffffff" stroke="#d9e0ea"/>
+    <text x="58" y="486" fill="#607089" font-size="11"></text>
+    
+  <text x="58" y="506" fill="#172033" font-size="13" font-weight="700">BAY-FIN-SQL-014</text>
+  <text x="218" y="506" fill="#607089" font-size="12">Finance Operations</text>
+  <text x="392" y="506" fill="#607089" font-size="12">Windows Server 2019</text>
+  <text x="594" y="506" fill="#16833a" font-size="12" font-weight="700">Compliant</text>
+  <text x="714" y="506" fill="#172033" font-size="12">0</text>
+  <text x="806" y="506" fill="#172033" font-size="12">1d</text>
+  <text x="904" y="506" fill="#b42318" font-size="12">Expires &lt; 14 days</text>
+  <text x="58" y="552" fill="#172033" font-size="13" font-weight="700">BAY-REV-API-022</text>
+  <text x="218" y="552" fill="#607089" font-size="12">Revenue Systems</text>
+  <text x="392" y="552" fill="#607089" font-size="12">Ubuntu 22.04 LTS</text>
+  <text x="594" y="552" fill="#16833a" font-size="12" font-weight="700">Compliant</text>
+  <text x="714" y="552" fill="#172033" font-size="12">1</text>
+  <text x="806" y="552" fill="#172033" font-size="12">2d</text>
+  <text x="904" y="552" fill="#b42318" font-size="12">Legacy TLS</text>
+  <text x="58" y="598" fill="#172033" font-size="13" font-weight="700">BAY-CS-WEB-007</text>
+  <text x="218" y="598" fill="#607089" font-size="12">Customer Support</text>
+  <text x="392" y="598" fill="#607089" font-size="12">Windows Server 2022</text>
+  <text x="594" y="598" fill="#16833a" font-size="12" font-weight="700">Compliant</text>
+  <text x="714" y="598" fill="#172033" font-size="12">3</text>
+  <text x="806" y="598" fill="#172033" font-size="12">4d</text>
+  <text x="904" y="598" fill="#16833a" font-size="12">None</text>
+  <text x="58" y="644" fill="#172033" font-size="13" font-weight="700">BAY-FLD-RDS-003</text>
+  <text x="218" y="644" fill="#607089" font-size="12">Field Services</text>
+  <text x="392" y="644" fill="#607089" font-size="12">Windows Server 2016</text>
+  <text x="594" y="644" fill="#b76100" font-size="12" font-weight="700">Watch</text>
+  <text x="714" y="644" fill="#172033" font-size="12">5</text>
+  <text x="806" y="644" fill="#172033" font-size="12">6d</text>
+  <text x="904" y="644" fill="#16833a" font-size="12">None</text>
+  <text x="58" y="690" fill="#172033" font-size="13" font-weight="700">BAY-MFG-HMI-011</text>
+  <text x="218" y="690" fill="#607089" font-size="12">Manufacturing IT</text>
+  <text x="392" y="690" fill="#607089" font-size="12">Windows Server 2012 R2</text>
+  <text x="594" y="690" fill="#b42318" font-size="12" font-weight="700">Exception</text>
+  <text x="714" y="690" fill="#172033" font-size="12">0</text>
+  <text x="806" y="690" fill="#172033" font-size="12">8d</text>
+  <text x="904" y="690" fill="#16833a" font-size="12">None</text>
+  <text x="58" y="736" fill="#172033" font-size="13" font-weight="700">BAY-SEC-EDGE-005</text>
+  <text x="218" y="736" fill="#607089" font-size="12">Corporate Security</text>
+  <text x="392" y="736" fill="#607089" font-size="12">Ubuntu 20.04 LTS</text>
+  <text x="594" y="736" fill="#16833a" font-size="12" font-weight="700">Compliant</text>
+  <text x="714" y="736" fill="#172033" font-size="12">1</text>
+  <text x="806" y="736" fill="#172033" font-size="12">10d</text>
+  <text x="904" y="736" fill="#16833a" font-size="12">None</text>
+    <text x="48" y="742" fill="#607089" font-size="12">© 2026 BayouFinds.com — Dewayne Cox & Cheri Cox. All Rights Reserved.</text>
+  </g>
+</svg>

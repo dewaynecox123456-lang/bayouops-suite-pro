@@ -30,4 +30,4 @@ Current preview focus:
 
 This preview is not currently positioned as a managed service or enterprise monitoring platform.
 
-Copyright © 2026 Dewayne Cox and Cheri Cox. All Rights Reserved.
+© 2026 BayouFinds.com — Dewayne Cox & Cheri Cox. All Rights Reserved.

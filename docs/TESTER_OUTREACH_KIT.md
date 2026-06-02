@@ -115,4 +115,4 @@ production-critical reliance yet.
 If you want one of the first 3 tester keys, message me with your OS, admin
 background, and what kind of environment you can test in.
 
-Copyright © 2026 Dewayne Cox and Cheri Cox. All Rights Reserved.
+© 2026 BayouFinds.com — Dewayne Cox & Cheri Cox. All Rights Reserved.

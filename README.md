@@ -291,5 +291,5 @@ The current homepage demo player uses the bundled final MP4 at
 
 ---
 
-Copyright © 2026 Dewayne Cox and Cheri Cox. All Rights Reserved.
+© 2026 BayouFinds.com — Dewayne Cox & Cheri Cox. All Rights Reserved.
 No `videos/2026-05-30/final/` directory is present in this checkout.

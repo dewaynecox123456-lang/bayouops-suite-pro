@@ -5,6 +5,7 @@ import {
   mapLineOfBusiness,
   printLobConfigWarnings
 } from "./lob-config.mjs";
+import { COPYRIGHT_SHORT } from "./signature-constants.mjs";
 
 const GENERATED_DIR = "./demo-data/generated";
 const OUTPUT_DIR = "./screenshots/demo";
@@ -669,7 +670,7 @@ ${criticalSystems.map(server => `
 </table>
 
 <div class="footer">
-© 2026 BayouFinds.com — BayouOps Suite Pro<br>
+${COPYRIGHT_SHORT}<br>
 Last Generated: ${new Date().toLocaleString()}
 </div>
 

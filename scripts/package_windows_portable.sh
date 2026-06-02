@@ -155,7 +155,7 @@ else
     exit 1
 fi
 
-if grep -R "Copyright © 2026 Dewayne Cox and Cheri Cox. All Rights Reserved." "${PACKAGE_DIR}/README.md" "${PACKAGE_DIR}/START_HERE.txt" "${PACKAGE_DIR}/docs" >/dev/null; then
+if grep -R "© 2026 BayouFinds.com — Dewayne Cox & Cheri Cox. All Rights Reserved." "${PACKAGE_DIR}/README.md" "${PACKAGE_DIR}/START_HERE.txt" "${PACKAGE_DIR}/docs" >/dev/null; then
     echo "OK copyright messaging present"
 else
     echo "Missing copyright messaging" >&2

@@ -39,4 +39,4 @@ Attach screenshots only if they do not expose sensitive data.
 This Dev Tester build is not for production-critical reliance yet. What would
 you need before trusting it for customer or operational handoff work?
 
-Copyright © 2026 Dewayne Cox and Cheri Cox. All Rights Reserved.
+© 2026 BayouFinds.com — Dewayne Cox & Cheri Cox. All Rights Reserved.

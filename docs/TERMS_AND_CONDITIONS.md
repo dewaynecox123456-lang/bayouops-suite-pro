@@ -47,4 +47,4 @@ config/license.json
 
 Contact support@bayoufinds.com if you need a license file.
 
-Copyright © 2026 Dewayne Cox and Cheri Cox. All Rights Reserved.
+© 2026 BayouFinds.com — Dewayne Cox & Cheri Cox. All Rights Reserved.

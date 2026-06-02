@@ -38,4 +38,4 @@ Contact support@bayoufinds.com if you need a license file.
 - Phone: Coming soon
 - Website: https://bayoufinds.com
 
-Copyright © 2026 Dewayne Cox and Cheri Cox. All Rights Reserved.
+© 2026 BayouFinds.com — Dewayne Cox & Cheri Cox. All Rights Reserved.
