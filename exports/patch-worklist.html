@@ -11,7 +11,10 @@
       --muted: #5e6a78;
       --line: #d9e0e8;
       --panel: #f7f9fb;
+      --panel-strong: #eef4f3;
       --accent: #12645a;
+      --risk: #9f2f24;
+      --warn: #85620d;
     }
     body {
       margin: 0;
@@ -21,19 +24,31 @@
       line-height: 1.45;
     }
     main {
-      max-width: 1180px;
+      max-width: 1220px;
       margin: 0 auto;
-      padding: 32px 24px 40px;
+      padding: 34px 24px 42px;
+    }
+    header {
+      border-bottom: 3px solid var(--accent);
+      padding-bottom: 18px;
     }
     h1 {
       margin: 0 0 6px;
-      font-size: 30px;
+      font-size: 32px;
       letter-spacing: 0;
     }
     h2 {
-      margin-top: 28px;
+      margin: 0 0 10px;
       font-size: 20px;
       letter-spacing: 0;
+    }
+    h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+      letter-spacing: 0;
+    }
+    section {
+      margin-top: 26px;
     }
     .subtle {
       color: var(--muted);
@@ -46,11 +61,31 @@
       background: var(--panel);
       font-weight: 700;
     }
+    .snapshot {
+      display: grid;
+      grid-template-columns: minmax(220px, 0.9fr) minmax(280px, 1.5fr);
+      gap: 14px;
+      margin-top: 22px;
+    }
+    .summary-panel {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 16px;
+      background: var(--panel-strong);
+    }
+    .risk-label {
+      display: inline-block;
+      margin-top: 6px;
+      padding: 4px 9px;
+      border-radius: 4px;
+      background: #ffffff;
+      color: var(--risk);
+      font-weight: 700;
+    }
     .metrics {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
       gap: 10px;
-      margin-top: 20px;
     }
     .metric {
       border: 1px solid var(--line);
@@ -61,6 +96,24 @@
     .metric strong {
       display: block;
       font-size: 26px;
+    }
+    .two-column {
+      display: grid;
+      grid-template-columns: minmax(260px, 1fr) minmax(260px, 1fr);
+      gap: 16px;
+    }
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 14px 16px;
+      background: #ffffff;
+    }
+    .panel ul {
+      margin: 8px 0 0;
+      padding-left: 20px;
+    }
+    .panel li {
+      margin: 7px 0;
     }
     table {
       width: 100%;
@@ -80,42 +133,87 @@
       font-size: 12px;
       text-transform: uppercase;
     }
+    .compact-table td:first-child {
+      font-weight: 700;
+    }
     footer {
       margin-top: 28px;
       color: var(--muted);
       font-size: 12px;
     }
+    @media (max-width: 760px) {
+      .snapshot,
+      .two-column {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
   <main>
-    <h1>BayouOps Patch Worklist</h1>
-    <p class="subtle">Generated 2026-06-03T01:05:35.126Z</p>
-    <div class="notice">Operational Advisory Only - Human Approval Required. This report does not patch, reboot, execute commands, or modify endpoints.</div>
+    <header>
+      <h1>BayouOps Patch Worklist</h1>
+      <p class="subtle">Generated 2026-06-03T01:22:18.458Z</p>
+      <div class="notice">Operational Advisory Only — Human Approval Required. This report is read-only and does not patch systems, reboot systems, remotely execute commands, or modify endpoints.</div>
+    </header>
 
-    <section class="metrics" aria-label="Patch worklist metrics">
-      <div class="metric"><strong>136</strong><span>Total systems reviewed</span></div>
-      <div class="metric"><strong>48</strong><span>P1 review first</span></div>
-      <div class="metric"><strong>10</strong><span>P2 schedule soon</span></div>
-      <div class="metric"><strong>4</strong><span>Unsupported OS signals</span></div>
-      <div class="metric"><strong>40</strong><span>Pending reboot signals</span></div>
+    <section class="snapshot" aria-label="Environment risk snapshot">
+      <div class="summary-panel">
+        <h2>Environment Risk Snapshot</h2>
+        <p class="subtle">Current advisory posture based on local demo and collector evidence.</p>
+        <span class="risk-label">Elevated patch coordination risk</span>
+      </div>
+      <div class="metrics">
+        <div class="metric"><strong>136</strong><span>Total systems reviewed</span></div>
+        <div class="metric"><strong>48</strong><span>Immediate review required</span></div>
+        <div class="metric"><strong>10</strong><span>Schedule soon</span></div>
+        <div class="metric"><strong>60</strong><span>Stale patch signals</span></div>
+        <div class="metric"><strong>40</strong><span>Pending reboot signals</span></div>
+        <div class="metric"><strong>4</strong><span>Unsupported OS signals</span></div>
+      </div>
     </section>
 
-    <h2>Top Advisory Worklist Items</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Priority</th>
-          <th>Score</th>
-          <th>Host</th>
-          <th>Business Unit</th>
-          <th>OS</th>
-          <th>Patch Group</th>
-          <th>Why</th>
-          <th>Suggested Operator Action</th>
-        </tr>
-      </thead>
-      <tbody>
+    <section class="two-column" aria-label="Operator coordination notes">
+      <div class="panel">
+        <h2>Recommended Coordination Notes</h2>
+        <ul>
+          <li>48 systems should be reviewed first with business owners before any patch window is approved.</li>
+          <li>40 systems show pending reboot signals and may need restart coordination before patch status is trusted.</li>
+          <li>4 systems show unsupported OS signals and should be handled as lifecycle or exception-management items.</li>
+          <li>60 systems are 45+ days from last patch evidence and should be checked against current maintenance cadence.</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h2>Operational Risk Indicators</h2>
+        <table class="compact-table">
+          <tbody>
+            <tr><td>Critical risk state</td><td>44</td></tr>
+            <tr><td>Readiness below 70</td><td>54</td></tr>
+            <tr><td>Stale 45+ days</td><td>60</td></tr>
+            <tr><td>Pending reboot</td><td>40</td></tr>
+            <tr><td>Unsupported OS</td><td>4</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>Immediate Review Required</h2>
+      <p class="subtle">Highest advisory priority systems for owner review and maintenance coordination. These are not automated actions.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Priority</th>
+            <th>Score</th>
+            <th>Host</th>
+            <th>Business Unit</th>
+            <th>OS</th>
+            <th>Patch Group</th>
+            <th>Why</th>
+            <th>Suggested Operator Action</th>
+          </tr>
+        </thead>
+        <tbody>
         <tr>
           <td>P1 - Review First</td>
           <td>100</td>
@@ -236,6 +334,172 @@
           <td>Stale patch age 103d; Pending reboot; 27 missing patches; Low readiness 41; Risk state Critical</td>
           <td>Review with owner and schedule approved maintenance window.</td>
         </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="two-column" aria-label="Patch groups and next actions">
+      <div class="panel">
+        <h2>Advisory Patch Groups</h2>
+        <table class="compact-table">
+          <tbody>
+          <tr>
+            <td>Routine Patch Cadence</td>
+            <td>54</td>
+          </tr>
+          <tr>
+            <td>Stale Systems</td>
+            <td>38</td>
+          </tr>
+          <tr>
+            <td>Pending Reboot Review</td>
+            <td>22</td>
+          </tr>
+          <tr>
+            <td>Reboot + Stale Patch Review</td>
+            <td>18</td>
+          </tr>
+          <tr>
+            <td>Unsupported OS Review</td>
+            <td>4</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="panel">
+        <h2>Suggested Next Actions</h2>
+        <ul>
+          <li>Review P1 systems with service owners and confirm business impact before scheduling maintenance.</li>
+          <li>Validate pending reboot systems before using patch compliance status for executive reporting.</li>
+          <li>Separate unsupported OS items from normal patch work and track them through exception or lifecycle planning.</li>
+          <li>Use the CSV worklist for operator triage, assignment, and maintenance-window discussion.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+    <h2>Top Advisory Worklist Items</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Priority</th>
+          <th>Score</th>
+          <th>Host</th>
+          <th>Business Unit</th>
+          <th>OS</th>
+          <th>Patch Group</th>
+          <th>Why</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>P1 - Review First</td>
+          <td>100</td>
+          <td>BAYOU-FILE-115</td>
+          <td>Retail</td>
+          <td>Windows Server 2022</td>
+          <td>Reboot + Stale Patch Review</td>
+          <td>Stale patch age 179d; Pending reboot; 12 missing patches; Low readiness 36; Risk state Critical</td>
+        </tr>
+        <tr>
+          <td>P1 - Review First</td>
+          <td>100</td>
+          <td>BAYOU-NOC-003</td>
+          <td>Security</td>
+          <td>Windows Server 2022</td>
+          <td>Reboot + Stale Patch Review</td>
+          <td>Stale patch age 173d; Pending reboot; 19 missing patches; Low readiness 36; Risk state Critical</td>
+        </tr>
+        <tr>
+          <td>P1 - Review First</td>
+          <td>100</td>
+          <td>BAYOU-SQL-051</td>
+          <td>Operations</td>
+          <td>Windows Server 2022</td>
+          <td>Reboot + Stale Patch Review</td>
+          <td>Stale patch age 167d; Pending reboot; 12 missing patches; Low readiness 43; Risk state Critical</td>
+        </tr>
+        <tr>
+          <td>P1 - Review First</td>
+          <td>100</td>
+          <td>BAYOU-APP-043</td>
+          <td>Operations</td>
+          <td>Windows Server 2022</td>
+          <td>Reboot + Stale Patch Review</td>
+          <td>Stale patch age 149d; Pending reboot; 27 missing patches; Low readiness 66; Risk state Critical</td>
+        </tr>
+        <tr>
+          <td>P1 - Review First</td>
+          <td>100</td>
+          <td>BAYOU-DC-041</td>
+          <td>Security</td>
+          <td>Windows Server 2022</td>
+          <td>Reboot + Stale Patch Review</td>
+          <td>Stale patch age 137d; Pending reboot; 17 missing patches; Low readiness 36; Risk state Critical</td>
+        </tr>
+        <tr>
+          <td>P1 - Review First</td>
+          <td>100</td>
+          <td>BAYOU-API-096</td>
+          <td>Finance</td>
+          <td>Windows Server 2022</td>
+          <td>Reboot + Stale Patch Review</td>
+          <td>Stale patch age 131d; Pending reboot; 13 missing patches; Low readiness 69; Risk state Critical</td>
+        </tr>
+        <tr>
+          <td>P1 - Review First</td>
+          <td>100</td>
+          <td>BAYOU-APP-081</td>
+          <td>Operations</td>
+          <td>Windows Server 2022</td>
+          <td>Reboot + Stale Patch Review</td>
+          <td>Stale patch age 127d; Pending reboot; 19 missing patches; Low readiness 60; Risk state Critical</td>
+        </tr>
+        <tr>
+          <td>P1 - Review First</td>
+          <td>100</td>
+          <td>BAYOU-API-014</td>
+          <td>Retail</td>
+          <td>Windows Server 2022</td>
+          <td>Reboot + Stale Patch Review</td>
+          <td>Stale patch age 119d; Pending reboot; 17 missing patches; Low readiness 51; Risk state Critical</td>
+        </tr>
+        <tr>
+          <td>P1 - Review First</td>
+          <td>100</td>
+          <td>BAYOU-EDGE-082</td>
+          <td>Infrastructure</td>
+          <td>Windows Server 2022</td>
+          <td>Reboot + Stale Patch Review</td>
+          <td>Stale patch age 114d; Pending reboot; 15 missing patches; Low readiness 59; Risk state Critical</td>
+        </tr>
+        <tr>
+          <td>P1 - Review First</td>
+          <td>100</td>
+          <td>BAYOU-API-113</td>
+          <td>HR</td>
+          <td>Windows Server 2022</td>
+          <td>Reboot + Stale Patch Review</td>
+          <td>Stale patch age 103d; Pending reboot; 13 missing patches; Low readiness 41; Risk state Critical</td>
+        </tr>
+        <tr>
+          <td>P1 - Review First</td>
+          <td>100</td>
+          <td>BAYOU-APP-100</td>
+          <td>Infrastructure</td>
+          <td>Windows Server 2022</td>
+          <td>Reboot + Stale Patch Review</td>
+          <td>Stale patch age 103d; Pending reboot; 30 missing patches; Low readiness 41; Risk state Critical</td>
+        </tr>
+        <tr>
+          <td>P1 - Review First</td>
+          <td>100</td>
+          <td>BAYOU-APP-120</td>
+          <td>Retail</td>
+          <td>Windows Server 2022</td>
+          <td>Reboot + Stale Patch Review</td>
+          <td>Stale patch age 103d; Pending reboot; 27 missing patches; Low readiness 41; Risk state Critical</td>
+        </tr>
         <tr>
           <td>P1 - Review First</td>
           <td>100</td>
@@ -244,7 +508,6 @@
           <td>Windows Server 2012 R2</td>
           <td>Unsupported OS Review</td>
           <td>Unsupported OS review needed; Stale patch age 101d; 12 missing patches; Low readiness 42</td>
-          <td>Confirm support status, business owner, and maintenance path before patch planning.</td>
         </tr>
         <tr>
           <td>P1 - Review First</td>
@@ -254,7 +517,6 @@
           <td>Ubuntu 18.04 LTS</td>
           <td>Unsupported OS Review</td>
           <td>Unsupported OS review needed; Stale patch age 98d; 10 missing patches; Low readiness 48</td>
-          <td>Confirm support status, business owner, and maintenance path before patch planning.</td>
         </tr>
         <tr>
           <td>P1 - Review First</td>
@@ -264,7 +526,6 @@
           <td>Windows Server 2022</td>
           <td>Reboot + Stale Patch Review</td>
           <td>Stale patch age 93d; Pending reboot; 28 missing patches; Low readiness 41; Risk state Critical</td>
-          <td>Review with owner and schedule approved maintenance window.</td>
         </tr>
         <tr>
           <td>P1 - Review First</td>
@@ -274,7 +535,6 @@
           <td>Windows Server 2022</td>
           <td>Reboot + Stale Patch Review</td>
           <td>Patch age 86d; Pending reboot; 22 missing patches; Low readiness 68; Risk state Critical</td>
-          <td>Review with owner and schedule approved maintenance window.</td>
         </tr>
         <tr>
           <td>P1 - Review First</td>
@@ -284,7 +544,6 @@
           <td>Windows Server 2022</td>
           <td>Reboot + Stale Patch Review</td>
           <td>Patch age 71d; Pending reboot; 24 missing patches; Low readiness 54; Risk state Critical</td>
-          <td>Review with owner and schedule approved maintenance window.</td>
         </tr>
         <tr>
           <td>P1 - Review First</td>
@@ -294,7 +553,6 @@
           <td>Windows Server 2022</td>
           <td>Reboot + Stale Patch Review</td>
           <td>Patch age 69d; Pending reboot; 29 missing patches; Low readiness 47; Risk state Critical</td>
-          <td>Review with owner and schedule approved maintenance window.</td>
         </tr>
         <tr>
           <td>P1 - Review First</td>
@@ -304,7 +562,6 @@
           <td>Windows Server 2022</td>
           <td>Reboot + Stale Patch Review</td>
           <td>Patch age 55d; Pending reboot; 10 missing patches; Low readiness 57; Risk state Critical</td>
-          <td>Review with owner and schedule approved maintenance window.</td>
         </tr>
         <tr>
           <td>P1 - Review First</td>
@@ -314,7 +571,6 @@
           <td>Windows Server 2022</td>
           <td>Stale Systems</td>
           <td>Stale patch age 175d; 29 missing patches; Low readiness 54; Risk state Critical</td>
-          <td>Review with owner and schedule approved maintenance window.</td>
         </tr>
         <tr>
           <td>P1 - Review First</td>
@@ -324,7 +580,6 @@
           <td>Windows Server 2022</td>
           <td>Stale Systems</td>
           <td>Stale patch age 172d; 12 missing patches; Low readiness 57; Risk state Critical</td>
-          <td>Review with owner and schedule approved maintenance window.</td>
         </tr>
         <tr>
           <td>P1 - Review First</td>
@@ -334,7 +589,6 @@
           <td>Windows Server 2022</td>
           <td>Stale Systems</td>
           <td>Stale patch age 163d; 29 missing patches; Low readiness 50; Risk state Critical</td>
-          <td>Review with owner and schedule approved maintenance window.</td>
         </tr>
         <tr>
           <td>P1 - Review First</td>
@@ -344,7 +598,6 @@
           <td>Windows Server 2022</td>
           <td>Stale Systems</td>
           <td>Stale patch age 145d; 13 missing patches; Low readiness 69; Risk state Critical</td>
-          <td>Review with owner and schedule approved maintenance window.</td>
         </tr>
         <tr>
           <td>P1 - Review First</td>
@@ -354,7 +607,6 @@
           <td>Windows Server 2022</td>
           <td>Stale Systems</td>
           <td>Stale patch age 141d; 13 missing patches; Low readiness 62; Risk state Critical</td>
-          <td>Review with owner and schedule approved maintenance window.</td>
         </tr>
         <tr>
           <td>P1 - Review First</td>
@@ -364,7 +616,6 @@
           <td>Windows Server 2022</td>
           <td>Stale Systems</td>
           <td>Stale patch age 139d; 19 missing patches; Low readiness 66; Risk state Critical</td>
-          <td>Review with owner and schedule approved maintenance window.</td>
         </tr>
         <tr>
           <td>P1 - Review First</td>
@@ -374,7 +625,6 @@
           <td>Windows Server 2022</td>
           <td>Stale Systems</td>
           <td>Stale patch age 131d; 30 missing patches; Low readiness 44; Risk state Critical</td>
-          <td>Review with owner and schedule approved maintenance window.</td>
         </tr>
         <tr>
           <td>P1 - Review First</td>
@@ -384,7 +634,6 @@
           <td>Windows Server 2022</td>
           <td>Stale Systems</td>
           <td>Stale patch age 128d; 19 missing patches; Low readiness 57; Risk state Critical</td>
-          <td>Review with owner and schedule approved maintenance window.</td>
         </tr>
         <tr>
           <td>P1 - Review First</td>
@@ -394,7 +643,6 @@
           <td>Windows Server 2022</td>
           <td>Stale Systems</td>
           <td>Stale patch age 125d; 13 missing patches; Low readiness 42; Risk state Critical</td>
-          <td>Review with owner and schedule approved maintenance window.</td>
         </tr>
         <tr>
           <td>P1 - Review First</td>
@@ -404,7 +652,6 @@
           <td>Windows Server 2022</td>
           <td>Stale Systems</td>
           <td>Stale patch age 123d; 12 missing patches; Low readiness 58; Risk state Critical</td>
-          <td>Review with owner and schedule approved maintenance window.</td>
         </tr>
         <tr>
           <td>P1 - Review First</td>
@@ -414,7 +661,6 @@
           <td>Windows Server 2022</td>
           <td>Stale Systems</td>
           <td>Stale patch age 122d; 17 missing patches; Low readiness 42; Risk state Critical</td>
-          <td>Review with owner and schedule approved maintenance window.</td>
         </tr>
         <tr>
           <td>P1 - Review First</td>
@@ -424,7 +670,6 @@
           <td>Windows Server 2022</td>
           <td>Stale Systems</td>
           <td>Stale patch age 121d; 10 missing patches; Low readiness 48; Risk state Critical</td>
-          <td>Review with owner and schedule approved maintenance window.</td>
         </tr>
         <tr>
           <td>P1 - Review First</td>
@@ -434,7 +679,6 @@
           <td>Windows Server 2022</td>
           <td>Stale Systems</td>
           <td>Stale patch age 118d; 19 missing patches; Low readiness 58; Risk state Critical</td>
-          <td>Review with owner and schedule approved maintenance window.</td>
         </tr>
         <tr>
           <td>P1 - Review First</td>
@@ -444,7 +688,6 @@
           <td>Windows Server 2022</td>
           <td>Stale Systems</td>
           <td>Stale patch age 117d; 15 missing patches; Low readiness 62; Risk state Critical</td>
-          <td>Review with owner and schedule approved maintenance window.</td>
         </tr>
         <tr>
           <td>P1 - Review First</td>
@@ -454,7 +697,6 @@
           <td>Windows Server 2022</td>
           <td>Stale Systems</td>
           <td>Stale patch age 115d; 10 missing patches; Low readiness 47; Risk state Critical</td>
-          <td>Review with owner and schedule approved maintenance window.</td>
         </tr>
         <tr>
           <td>P1 - Review First</td>
@@ -464,7 +706,6 @@
           <td>Windows Server 2022</td>
           <td>Stale Systems</td>
           <td>Stale patch age 106d; 30 missing patches; Low readiness 44; Risk state Critical</td>
-          <td>Review with owner and schedule approved maintenance window.</td>
         </tr>
         <tr>
           <td>P1 - Review First</td>
@@ -474,7 +715,6 @@
           <td>Windows Server 2022</td>
           <td>Stale Systems</td>
           <td>Stale patch age 106d; 29 missing patches; Low readiness 63; Risk state Critical</td>
-          <td>Review with owner and schedule approved maintenance window.</td>
         </tr>
         <tr>
           <td>P1 - Review First</td>
@@ -484,7 +724,6 @@
           <td>Windows Server 2022</td>
           <td>Stale Systems</td>
           <td>Stale patch age 96d; 29 missing patches; Low readiness 60; Risk state Critical</td>
-          <td>Review with owner and schedule approved maintenance window.</td>
         </tr>
         <tr>
           <td>P1 - Review First</td>
@@ -494,7 +733,6 @@
           <td>Microsoft Windows Server 2012 R2 Standard</td>
           <td>Unsupported OS Review</td>
           <td>Unsupported OS review needed; Stale patch age 105d; Low readiness 48</td>
-          <td>Confirm support status, business owner, and maintenance path before patch planning.</td>
         </tr>
         <tr>
           <td>P1 - Review First</td>
@@ -504,7 +742,6 @@
           <td>Windows Server 2012 R2</td>
           <td>Unsupported OS Review</td>
           <td>Unsupported OS review needed; Patch age 80d; 6 missing patches; Low readiness 44</td>
-          <td>Confirm support status, business owner, and maintenance path before patch planning.</td>
         </tr>
         <tr>
           <td>P1 - Review First</td>
@@ -514,119 +751,21 @@
           <td>Windows Server 2022</td>
           <td>Stale Systems</td>
           <td>Patch age 89d; 10 missing patches; Low readiness 63; Risk state Critical</td>
-          <td>Review with owner and schedule approved maintenance window.</td>
-        </tr>
-        <tr>
-          <td>P1 - Review First</td>
-          <td>80</td>
-          <td>BAYOU-DC-031</td>
-          <td>HR</td>
-          <td>Windows Server 2022</td>
-          <td>Stale Systems</td>
-          <td>Patch age 85d; 11 missing patches; Low readiness 51; Risk state Critical</td>
-          <td>Review with owner and schedule approved maintenance window.</td>
-        </tr>
-        <tr>
-          <td>P1 - Review First</td>
-          <td>80</td>
-          <td>BAYOU-API-049</td>
-          <td>Finance</td>
-          <td>Windows Server 2022</td>
-          <td>Stale Systems</td>
-          <td>Patch age 80d; 17 missing patches; Low readiness 47; Risk state Critical</td>
-          <td>Review with owner and schedule approved maintenance window.</td>
-        </tr>
-        <tr>
-          <td>P1 - Review First</td>
-          <td>80</td>
-          <td>BAYOU-FILE-050</td>
-          <td>Operations</td>
-          <td>Windows Server 2022</td>
-          <td>Stale Systems</td>
-          <td>Patch age 77d; 30 missing patches; Low readiness 52; Risk state Critical</td>
-          <td>Review with owner and schedule approved maintenance window.</td>
-        </tr>
-        <tr>
-          <td>P1 - Review First</td>
-          <td>80</td>
-          <td>BAYOU-NOC-117</td>
-          <td>Finance</td>
-          <td>Windows Server 2022</td>
-          <td>Stale Systems</td>
-          <td>Patch age 69d; 19 missing patches; Low readiness 62; Risk state Critical</td>
-          <td>Review with owner and schedule approved maintenance window.</td>
-        </tr>
-        <tr>
-          <td>P1 - Review First</td>
-          <td>80</td>
-          <td>BAYOU-SQL-111</td>
-          <td>Retail</td>
-          <td>Windows Server 2022</td>
-          <td>Stale Systems</td>
-          <td>Patch age 67d; 15 missing patches; Low readiness 65; Risk state Critical</td>
-          <td>Review with owner and schedule approved maintenance window.</td>
-        </tr>
-        <tr>
-          <td>P1 - Review First</td>
-          <td>80</td>
-          <td>BAYOU-APP-089</td>
-          <td>HR</td>
-          <td>Windows Server 2022</td>
-          <td>Stale Systems</td>
-          <td>Patch age 65d; 27 missing patches; Low readiness 54; Risk state Critical</td>
-          <td>Review with owner and schedule approved maintenance window.</td>
-        </tr>
-        <tr>
-          <td>P1 - Review First</td>
-          <td>80</td>
-          <td>BAYOU-DC-098</td>
-          <td>Retail</td>
-          <td>Windows Server 2022</td>
-          <td>Stale Systems</td>
-          <td>Patch age 63d; 13 missing patches; Low readiness 53; Risk state Critical</td>
-          <td>Review with owner and schedule approved maintenance window.</td>
-        </tr>
-        <tr>
-          <td>P1 - Review First</td>
-          <td>80</td>
-          <td>BAYOU-SQL-062</td>
-          <td>Infrastructure</td>
-          <td>Windows Server 2022</td>
-          <td>Stale Systems</td>
-          <td>Patch age 62d; 17 missing patches; Low readiness 48; Risk state Critical</td>
-          <td>Review with owner and schedule approved maintenance window.</td>
-        </tr>
-        <tr>
-          <td>P2 - Schedule Soon</td>
-          <td>70</td>
-          <td>BAY-FIN-APP-044</td>
-          <td>Finance Operations</td>
-          <td>Windows Server 2016</td>
-          <td>Stale Systems</td>
-          <td>Stale patch age 95d; 8 missing patches; Low readiness 60; Risk state Watch</td>
-          <td>Add to upcoming approved patch window after owner review.</td>
-        </tr>
-        <tr>
-          <td>P2 - Schedule Soon</td>
-          <td>70</td>
-          <td>BAY-DATA-ETL-018</td>
-          <td>Data Platform</td>
-          <td>Red Hat Enterprise Linux 8</td>
-          <td>Stale Systems</td>
-          <td>Patch age 86d; 10 missing patches; Low readiness 68; Risk state Watch</td>
-          <td>Add to upcoming approved patch window after owner review.</td>
         </tr>
       </tbody>
     </table>
+    </section>
 
-    <h2>Source Files</h2>
-    <ul>
-      <li>demo-data/generated/bayouops-demo-1780279545689.json</li>
-      <li>./demo-data/generated/enterprise-demo-pack/enterprise-demo-scenarios.json</li>
-      <li>./samples/patch-inventory.sample.json</li>
-      <li>./samples/patch-inventory.sample.csv</li>
-      <li>./exports/patch-readiness-report.csv</li>
-    </ul>
+    <section class="panel">
+      <h2>Source Files</h2>
+      <ul>
+        <li>demo-data/generated/bayouops-demo-1780279545689.json</li>
+        <li>./demo-data/generated/enterprise-demo-pack/enterprise-demo-scenarios.json</li>
+        <li>./samples/patch-inventory.sample.json</li>
+        <li>./samples/patch-inventory.sample.csv</li>
+        <li>./exports/patch-readiness-report.csv</li>
+      </ul>
+    </section>
 
     <footer>© 2026 BayouFinds.com — Dewayne Cox &amp; Cheri Cox. All Rights Reserved.</footer>
   </main>

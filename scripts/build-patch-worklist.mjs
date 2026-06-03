@@ -390,6 +390,55 @@ function countBy(records, field) {
   }, {});
 }
 
+function buildReportContext(records) {
+  const priorityCounts = countBy(records, "priority");
+  const groupCounts = countBy(records, "patchGroup");
+  const p1Count = priorityCounts["P1 - Review First"] ?? 0;
+  const p2Count = priorityCounts["P2 - Schedule Soon"] ?? 0;
+  const unsupportedCount = records.filter(record => record.unsupportedOs).length;
+  const pendingRebootCount = records.filter(record => record.rebootPending).length;
+  const staleCount = records.filter(record => record.lastPatchedDaysAgo >= 45).length;
+  const criticalRiskCount = records.filter(record => String(record.riskState).toLowerCase() === "critical").length;
+  const lowReadinessCount = records.filter(record => record.readinessScore > 0 && record.readinessScore < 70).length;
+  const immediateReview = records.filter(record => record.priority === "P1 - Review First");
+  const nearTermReview = records.filter(record => record.priority === "P2 - Schedule Soon");
+
+  const overallRisk = p1Count > 0 || unsupportedCount > 0 ? "Elevated"
+    : p2Count > 0 || staleCount > 0 || pendingRebootCount > 0 ? "Moderate"
+    : "Managed";
+
+  const coordinationNotes = [
+    `${p1Count} systems should be reviewed first with business owners before any patch window is approved.`,
+    `${pendingRebootCount} systems show pending reboot signals and may need restart coordination before patch status is trusted.`,
+    `${unsupportedCount} systems show unsupported OS signals and should be handled as lifecycle or exception-management items.`,
+    `${staleCount} systems are 45+ days from last patch evidence and should be checked against current maintenance cadence.`
+  ];
+
+  const nextActions = [
+    "Review P1 systems with service owners and confirm business impact before scheduling maintenance.",
+    "Validate pending reboot systems before using patch compliance status for executive reporting.",
+    "Separate unsupported OS items from normal patch work and track them through exception or lifecycle planning.",
+    "Use the CSV worklist for operator triage, assignment, and maintenance-window discussion."
+  ];
+
+  return {
+    priorityCounts,
+    groupCounts,
+    p1Count,
+    p2Count,
+    unsupportedCount,
+    pendingRebootCount,
+    staleCount,
+    criticalRiskCount,
+    lowReadinessCount,
+    immediateReview,
+    nearTermReview,
+    overallRisk,
+    coordinationNotes,
+    nextActions
+  };
+}
+
 function renderCsv(records) {
   const columns = [
     "Priority",
@@ -438,8 +487,17 @@ function renderCsv(records) {
 }
 
 function renderHtml(records, generatedAt, sourceFiles) {
-  const priorityCounts = countBy(records, "priority");
-  const topRows = records.slice(0, 50).map(record => `
+  const context = buildReportContext(records);
+  const groupRows = Object.entries(context.groupCounts)
+    .sort((a, b) => b[1] - a[1])
+    .map(([group, count]) => `
+          <tr>
+            <td>${escapeHtml(group)}</td>
+            <td>${escapeHtml(count)}</td>
+          </tr>`)
+    .join("");
+
+  const immediateRows = context.immediateReview.slice(0, 12).map(record => `
         <tr>
           <td>${escapeHtml(record.priority)}</td>
           <td>${escapeHtml(record.advisoryScore)}</td>
@@ -449,6 +507,17 @@ function renderHtml(records, generatedAt, sourceFiles) {
           <td>${escapeHtml(record.patchGroup)}</td>
           <td>${escapeHtml(record.advisoryFactors)}</td>
           <td>${escapeHtml(record.suggestedAction)}</td>
+        </tr>`).join("");
+
+  const topRows = records.slice(0, 40).map(record => `
+        <tr>
+          <td>${escapeHtml(record.priority)}</td>
+          <td>${escapeHtml(record.advisoryScore)}</td>
+          <td>${escapeHtml(record.hostname)}</td>
+          <td>${escapeHtml(record.businessUnit)}</td>
+          <td>${escapeHtml(record.os)}</td>
+          <td>${escapeHtml(record.patchGroup)}</td>
+          <td>${escapeHtml(record.advisoryFactors)}</td>
         </tr>`).join("");
 
   return `<!doctype html>
@@ -464,7 +533,10 @@ function renderHtml(records, generatedAt, sourceFiles) {
       --muted: #5e6a78;
       --line: #d9e0e8;
       --panel: #f7f9fb;
+      --panel-strong: #eef4f3;
       --accent: #12645a;
+      --risk: #9f2f24;
+      --warn: #85620d;
     }
     body {
       margin: 0;
@@ -474,19 +546,31 @@ function renderHtml(records, generatedAt, sourceFiles) {
       line-height: 1.45;
     }
     main {
-      max-width: 1180px;
+      max-width: 1220px;
       margin: 0 auto;
-      padding: 32px 24px 40px;
+      padding: 34px 24px 42px;
+    }
+    header {
+      border-bottom: 3px solid var(--accent);
+      padding-bottom: 18px;
     }
     h1 {
       margin: 0 0 6px;
-      font-size: 30px;
+      font-size: 32px;
       letter-spacing: 0;
     }
     h2 {
-      margin-top: 28px;
+      margin: 0 0 10px;
       font-size: 20px;
       letter-spacing: 0;
+    }
+    h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+      letter-spacing: 0;
+    }
+    section {
+      margin-top: 26px;
     }
     .subtle {
       color: var(--muted);
@@ -499,11 +583,31 @@ function renderHtml(records, generatedAt, sourceFiles) {
       background: var(--panel);
       font-weight: 700;
     }
+    .snapshot {
+      display: grid;
+      grid-template-columns: minmax(220px, 0.9fr) minmax(280px, 1.5fr);
+      gap: 14px;
+      margin-top: 22px;
+    }
+    .summary-panel {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 16px;
+      background: var(--panel-strong);
+    }
+    .risk-label {
+      display: inline-block;
+      margin-top: 6px;
+      padding: 4px 9px;
+      border-radius: 4px;
+      background: #ffffff;
+      color: var(--risk);
+      font-weight: 700;
+    }
     .metrics {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
       gap: 10px;
-      margin-top: 20px;
     }
     .metric {
       border: 1px solid var(--line);
@@ -514,6 +618,24 @@ function renderHtml(records, generatedAt, sourceFiles) {
     .metric strong {
       display: block;
       font-size: 26px;
+    }
+    .two-column {
+      display: grid;
+      grid-template-columns: minmax(260px, 1fr) minmax(260px, 1fr);
+      gap: 16px;
+    }
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 14px 16px;
+      background: #ffffff;
+    }
+    .panel ul {
+      margin: 8px 0 0;
+      padding-left: 20px;
+    }
+    .panel li {
+      margin: 7px 0;
     }
     table {
       width: 100%;
@@ -533,27 +655,105 @@ function renderHtml(records, generatedAt, sourceFiles) {
       font-size: 12px;
       text-transform: uppercase;
     }
+    .compact-table td:first-child {
+      font-weight: 700;
+    }
     footer {
       margin-top: 28px;
       color: var(--muted);
       font-size: 12px;
     }
+    @media (max-width: 760px) {
+      .snapshot,
+      .two-column {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
   <main>
-    <h1>BayouOps Patch Worklist</h1>
-    <p class="subtle">Generated ${escapeHtml(generatedAt.toISOString())}</p>
-    <div class="notice">Operational Advisory Only - Human Approval Required. This report does not patch, reboot, execute commands, or modify endpoints.</div>
+    <header>
+      <h1>BayouOps Patch Worklist</h1>
+      <p class="subtle">Generated ${escapeHtml(generatedAt.toISOString())}</p>
+      <div class="notice">Operational Advisory Only — Human Approval Required. This report is read-only and does not patch systems, reboot systems, remotely execute commands, or modify endpoints.</div>
+    </header>
 
-    <section class="metrics" aria-label="Patch worklist metrics">
-      <div class="metric"><strong>${records.length}</strong><span>Total systems reviewed</span></div>
-      <div class="metric"><strong>${priorityCounts["P1 - Review First"] ?? 0}</strong><span>P1 review first</span></div>
-      <div class="metric"><strong>${priorityCounts["P2 - Schedule Soon"] ?? 0}</strong><span>P2 schedule soon</span></div>
-      <div class="metric"><strong>${records.filter(record => record.unsupportedOs).length}</strong><span>Unsupported OS signals</span></div>
-      <div class="metric"><strong>${records.filter(record => record.rebootPending).length}</strong><span>Pending reboot signals</span></div>
+    <section class="snapshot" aria-label="Environment risk snapshot">
+      <div class="summary-panel">
+        <h2>Environment Risk Snapshot</h2>
+        <p class="subtle">Current advisory posture based on local demo and collector evidence.</p>
+        <span class="risk-label">${escapeHtml(context.overallRisk)} patch coordination risk</span>
+      </div>
+      <div class="metrics">
+        <div class="metric"><strong>${records.length}</strong><span>Total systems reviewed</span></div>
+        <div class="metric"><strong>${context.p1Count}</strong><span>Immediate review required</span></div>
+        <div class="metric"><strong>${context.p2Count}</strong><span>Schedule soon</span></div>
+        <div class="metric"><strong>${context.staleCount}</strong><span>Stale patch signals</span></div>
+        <div class="metric"><strong>${context.pendingRebootCount}</strong><span>Pending reboot signals</span></div>
+        <div class="metric"><strong>${context.unsupportedCount}</strong><span>Unsupported OS signals</span></div>
+      </div>
     </section>
 
+    <section class="two-column" aria-label="Operator coordination notes">
+      <div class="panel">
+        <h2>Recommended Coordination Notes</h2>
+        <ul>
+          ${context.coordinationNotes.map(note => `<li>${escapeHtml(note)}</li>`).join("\n          ")}
+        </ul>
+      </div>
+      <div class="panel">
+        <h2>Operational Risk Indicators</h2>
+        <table class="compact-table">
+          <tbody>
+            <tr><td>Critical risk state</td><td>${escapeHtml(context.criticalRiskCount)}</td></tr>
+            <tr><td>Readiness below 70</td><td>${escapeHtml(context.lowReadinessCount)}</td></tr>
+            <tr><td>Stale 45+ days</td><td>${escapeHtml(context.staleCount)}</td></tr>
+            <tr><td>Pending reboot</td><td>${escapeHtml(context.pendingRebootCount)}</td></tr>
+            <tr><td>Unsupported OS</td><td>${escapeHtml(context.unsupportedCount)}</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>Immediate Review Required</h2>
+      <p class="subtle">Highest advisory priority systems for owner review and maintenance coordination. These are not automated actions.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Priority</th>
+            <th>Score</th>
+            <th>Host</th>
+            <th>Business Unit</th>
+            <th>OS</th>
+            <th>Patch Group</th>
+            <th>Why</th>
+            <th>Suggested Operator Action</th>
+          </tr>
+        </thead>
+        <tbody>${immediateRows}
+        </tbody>
+      </table>
+    </section>
+
+    <section class="two-column" aria-label="Patch groups and next actions">
+      <div class="panel">
+        <h2>Advisory Patch Groups</h2>
+        <table class="compact-table">
+          <tbody>${groupRows}
+          </tbody>
+        </table>
+      </div>
+      <div class="panel">
+        <h2>Suggested Next Actions</h2>
+        <ul>
+          ${context.nextActions.map(action => `<li>${escapeHtml(action)}</li>`).join("\n          ")}
+        </ul>
+      </div>
+    </section>
+
+    <section>
     <h2>Top Advisory Worklist Items</h2>
     <table>
       <thead>
@@ -565,17 +765,19 @@ function renderHtml(records, generatedAt, sourceFiles) {
           <th>OS</th>
           <th>Patch Group</th>
           <th>Why</th>
-          <th>Suggested Operator Action</th>
         </tr>
       </thead>
       <tbody>${topRows}
       </tbody>
     </table>
+    </section>
 
-    <h2>Source Files</h2>
-    <ul>
-      ${sourceFiles.map(file => `<li>${escapeHtml(file)}</li>`).join("\n      ")}
-    </ul>
+    <section class="panel">
+      <h2>Source Files</h2>
+      <ul>
+        ${sourceFiles.map(file => `<li>${escapeHtml(file)}</li>`).join("\n        ")}
+      </ul>
+    </section>
 
     <footer>${escapeHtml(COPYRIGHT_FULL)}</footer>
   </main>
@@ -585,47 +787,64 @@ function renderHtml(records, generatedAt, sourceFiles) {
 }
 
 function renderSummary(records, generatedAt, sourceFiles) {
-  const priorityCounts = countBy(records, "priority");
-  const groupCounts = countBy(records, "patchGroup");
-  const topTen = records.slice(0, 10).map(record => (
-    `| ${record.priority} | ${record.advisoryScore} | ${record.hostname} | ${record.businessUnit} | ${record.patchGroup} | ${record.advisoryFactors} |`
+  const context = buildReportContext(records);
+  const immediateReview = context.immediateReview.slice(0, 10).map(record => (
+    `| ${record.priority} | ${record.advisoryScore} | ${record.hostname} | ${record.businessUnit} | ${record.patchGroup} | ${record.suggestedAction} |`
   )).join("\n");
 
-  const groups = Object.entries(groupCounts)
+  const groups = Object.entries(context.groupCounts)
     .sort((a, b) => b[1] - a[1])
     .map(([group, count]) => `- ${group}: ${count}`)
     .join("\n");
 
+  const coordinationNotes = context.coordinationNotes.map(note => `- ${note}`).join("\n");
+  const nextActions = context.nextActions.map(action => `- ${action}`).join("\n");
   const sources = sourceFiles.map(file => `- ${file}`).join("\n");
 
   return `# BayouOps Patch Worklist Summary
 
 Generated: ${generatedAt.toISOString()}
 
-Operational Advisory Only - Human Approval Required.
+Operational Advisory Only — Human Approval Required.
 
 This export is read-only. It does not patch systems, reboot systems, remotely execute commands, modify endpoints, add credentials, add agents, or introduce control-plane automation.
 
-## Summary
+## Environment Risk Snapshot
 
 - Total systems reviewed: ${records.length}
-- P1 - Review First: ${priorityCounts["P1 - Review First"] ?? 0}
-- P2 - Schedule Soon: ${priorityCounts["P2 - Schedule Soon"] ?? 0}
-- P3 - Track: ${priorityCounts["P3 - Track"] ?? 0}
-- P4 - Monitor: ${priorityCounts["P4 - Monitor"] ?? 0}
-- Unsupported OS signals: ${records.filter(record => record.unsupportedOs).length}
-- Pending reboot signals: ${records.filter(record => record.rebootPending).length}
-- Stale systems 45+ days since patch signal: ${records.filter(record => record.lastPatchedDaysAgo >= 45).length}
+- Overall advisory posture: ${context.overallRisk} patch coordination risk
+- Immediate review required: ${context.p1Count}
+- Schedule soon: ${context.p2Count}
+- Track: ${context.priorityCounts["P3 - Track"] ?? 0}
+- Monitor: ${context.priorityCounts["P4 - Monitor"] ?? 0}
+
+## Immediate Review Required
+
+These systems should be reviewed with service owners before maintenance is approved. This is an advisory worklist only.
+
+| Priority | Score | Hostname | Business Unit | Recommended Patch Group | Suggested Operator Action |
+| --- | ---: | --- | --- | --- | --- |
+${immediateReview}
+
+## Recommended Coordination Notes
+
+${coordinationNotes}
+
+## Operational Risk Indicators
+
+- Critical risk state signals: ${context.criticalRiskCount}
+- Readiness below 70: ${context.lowReadinessCount}
+- Unsupported OS signals: ${context.unsupportedCount}
+- Pending reboot signals: ${context.pendingRebootCount}
+- Stale systems 45+ days since patch signal: ${context.staleCount}
 
 ## Advisory Patch Groups
 
 ${groups}
 
-## Top 10 Review Items
+## Suggested Next Actions
 
-| Priority | Score | Hostname | Business Unit | Recommended Patch Group | Advisory Factors |
-| --- | ---: | --- | --- | --- | --- |
-${topTen}
+${nextActions}
 
 ## Source Files
 
