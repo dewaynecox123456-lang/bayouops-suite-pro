@@ -15,6 +15,9 @@ const INPUT_FILES = [
 const OUTPUT_CSV = path.join(EXPORT_DIR, "patch-worklist.csv");
 const OUTPUT_HTML = path.join(EXPORT_DIR, "patch-worklist.html");
 const OUTPUT_SUMMARY = path.join(EXPORT_DIR, "patch-worklist-summary.md");
+const MAINTENANCE_READINESS_CSV = path.join(EXPORT_DIR, "maintenance-readiness.csv");
+const MAINTENANCE_READINESS_SUMMARY = path.join(EXPORT_DIR, "maintenance-readiness-summary.md");
+const AUDIT_EVIDENCE_MANIFEST = path.join(EXPORT_DIR, "audit-evidence-manifest.json");
 
 function fail(message) {
   console.error("");
@@ -486,6 +489,280 @@ function renderCsv(records) {
   ].join("\n") + "\n";
 }
 
+function maintenanceReadinessStatus(record) {
+  if (record.unsupportedOs) return "Exception Review Required";
+  if (record.priority === "P1 - Review First") return "Owner Review Required";
+  if (record.rebootPending) return "Reboot Coordination Required";
+  if (record.lastPatchedDaysAgo >= 45) return "Stale Evidence Review";
+  if (record.priority === "P2 - Schedule Soon") return "Schedule Candidate";
+  return "Monitor";
+}
+
+function maintenanceControlArea(record) {
+  if (record.unsupportedOs) return "Unsupported OS Exception";
+  if (record.rebootPending) return "Pending Reboot Review";
+  if (record.lastPatchedDaysAgo >= 45) return "Patch Evidence Freshness";
+  if (record.missingPatches > 0) return "Patch Readiness";
+  if (record.readinessScore > 0 && record.readinessScore < 85) return "Readiness Review";
+  return "Routine Patch Cadence";
+}
+
+function maintenanceExceptionStatus(record) {
+  if (record.unsupportedOs) return "Exception review needed";
+  if (record.lastPatchedDaysAgo >= 90) return "Potential exception candidate";
+  if (record.priority === "P1 - Review First") return "Owner review needed";
+  return "No exception signal";
+}
+
+function maintenanceApprovalState(record) {
+  if (record.unsupportedOs) return "Not ready - lifecycle or exception review";
+  if (record.rebootPending) return "Not ready - reboot coordination needed";
+  if (record.priority === "P1 - Review First") return "Not ready - owner review needed";
+  if (record.priority === "P2 - Schedule Soon") return "Ready for approved scheduling discussion";
+  return "Monitor through normal cadence";
+}
+
+function maintenanceReviewNotes(record) {
+  const notes = [];
+
+  if (record.unsupportedOs) {
+    notes.push("Confirm lifecycle support, exception owner, and maintenance path.");
+  }
+
+  if (record.rebootPending) {
+    notes.push("Validate reboot state before relying on patch evidence.");
+  }
+
+  if (record.lastPatchedDaysAgo >= 45) {
+    notes.push("Review stale patch evidence against current maintenance cadence.");
+  }
+
+  if (record.missingPatches > 0) {
+    notes.push(`Review ${record.missingPatches} missing patch signal${record.missingPatches === 1 ? "" : "s"}.`);
+  }
+
+  if (record.readinessScore > 0 && record.readinessScore < 85) {
+    notes.push(`Readiness score ${record.readinessScore} should be reviewed before approval.`);
+  }
+
+  if (notes.length === 0) {
+    notes.push("No elevated audit readiness signal from existing evidence.");
+  }
+
+  return notes.join(" ");
+}
+
+function maintenanceRows(records) {
+  return records.map(record => ({
+    evidenceStatus: maintenanceReadinessStatus(record),
+    controlArea: maintenanceControlArea(record),
+    exceptionStatus: maintenanceExceptionStatus(record),
+    approvalState: maintenanceApprovalState(record),
+    hostname: record.hostname,
+    businessUnit: record.businessUnit,
+    owner: record.owner,
+    service: record.service,
+    os: record.os,
+    priority: record.priority,
+    advisoryScore: record.advisoryScore,
+    readinessScore: record.readinessScore,
+    riskState: record.riskState,
+    missingPatches: record.missingPatches,
+    lastPatchedDaysAgo: record.lastPatchedDaysAgo,
+    rebootPending: record.rebootPending,
+    unsupportedOs: record.unsupportedOs,
+    recommendedPatchGroup: record.patchGroup,
+    suggestedOperatorAction: record.suggestedAction,
+    advisoryFactors: record.advisoryFactors,
+    reviewNotes: maintenanceReviewNotes(record),
+    source: record.sourceName
+  }));
+}
+
+function renderMaintenanceReadinessCsv(records) {
+  const columns = [
+    "EvidenceStatus",
+    "ControlArea",
+    "ExceptionStatus",
+    "ApprovalState",
+    "Hostname",
+    "BusinessUnit",
+    "Owner",
+    "Service",
+    "OS",
+    "Priority",
+    "AdvisoryScore",
+    "ReadinessScore",
+    "RiskState",
+    "MissingPatches",
+    "LastPatchedDaysAgo",
+    "RebootPending",
+    "UnsupportedOS",
+    "RecommendedPatchGroup",
+    "SuggestedOperatorAction",
+    "AdvisoryFactors",
+    "ReviewNotes",
+    "Source"
+  ];
+
+  const rows = maintenanceRows(records).map(record => [
+    record.evidenceStatus,
+    record.controlArea,
+    record.exceptionStatus,
+    record.approvalState,
+    record.hostname,
+    record.businessUnit,
+    record.owner,
+    record.service,
+    record.os,
+    record.priority,
+    record.advisoryScore,
+    record.readinessScore,
+    record.riskState,
+    record.missingPatches,
+    record.lastPatchedDaysAgo,
+    record.rebootPending,
+    record.unsupportedOs,
+    record.recommendedPatchGroup,
+    record.suggestedOperatorAction,
+    record.advisoryFactors,
+    record.reviewNotes,
+    record.source
+  ]);
+
+  return [
+    columns.map(escapeCsv).join(","),
+    ...rows.map(row => row.map(escapeCsv).join(","))
+  ].join("\n") + "\n";
+}
+
+function renderMaintenanceReadinessSummary(records, generatedAt, sourceFiles) {
+  const context = buildReportContext(records);
+  const rows = maintenanceRows(records);
+  const evidenceCounts = countBy(rows, "evidenceStatus");
+  const controlCounts = countBy(rows, "controlArea");
+  const approvalCounts = countBy(rows, "approvalState");
+  const exceptionReviewCount = rows.filter(row => row.exceptionStatus !== "No exception signal").length;
+
+  const topItems = rows.slice(0, 12).map(row => (
+    `| ${row.evidenceStatus} | ${row.hostname} | ${row.businessUnit} | ${row.controlArea} | ${row.approvalState} | ${row.reviewNotes} |`
+  )).join("\n");
+
+  const evidenceLines = Object.entries(evidenceCounts)
+    .sort((a, b) => b[1] - a[1])
+    .map(([status, count]) => `- ${status}: ${count}`)
+    .join("\n");
+
+  const controlLines = Object.entries(controlCounts)
+    .sort((a, b) => b[1] - a[1])
+    .map(([area, count]) => `- ${area}: ${count}`)
+    .join("\n");
+
+  const approvalLines = Object.entries(approvalCounts)
+    .sort((a, b) => b[1] - a[1])
+    .map(([state, count]) => `- ${state}: ${count}`)
+    .join("\n");
+
+  const sources = sourceFiles.map(file => `- ${file}`).join("\n");
+
+  return `# BayouOps Maintenance Readiness Summary
+
+Generated: ${generatedAt.toISOString()}
+
+Operational Advisory Only - Human Approval Required.
+
+This export is read-only. It uses the existing BayouOps patch worklist evidence to organize maintenance readiness, audit review, and exception signals. It does not patch systems, reboot systems, remotely execute commands, modify endpoints, add credentials, add agents, or approve maintenance.
+
+## Readiness Snapshot
+
+- Total systems reviewed: ${records.length}
+- Overall advisory posture: ${context.overallRisk} patch coordination risk
+- Immediate owner review required: ${context.p1Count}
+- Schedule candidates: ${context.p2Count}
+- Exception or owner review signals: ${exceptionReviewCount}
+- Pending reboot signals: ${context.pendingRebootCount}
+- Unsupported OS signals: ${context.unsupportedCount}
+- Stale systems 45+ days since patch signal: ${context.staleCount}
+
+## Evidence Status Counts
+
+${evidenceLines}
+
+## Control Area Counts
+
+${controlLines}
+
+## Approval State Counts
+
+${approvalLines}
+
+## Top Maintenance Readiness Items
+
+| Evidence Status | Hostname | Business Unit | Control Area | Approval State | Review Notes |
+| --- | --- | --- | --- | --- | --- |
+${topItems}
+
+## Suggested Audit Review Actions
+
+- Review systems marked Exception Review Required with the service owner before normal patch planning.
+- Validate pending reboot systems before using patch evidence in leadership, CAB, SOX, or audit reporting.
+- Separate unsupported OS items from routine maintenance and track them through lifecycle or exception review.
+- Use the CSV export as the working evidence register for operator triage and human approval discussions.
+
+## Source Files
+
+${sources}
+
+${COPYRIGHT_FULL}
+`;
+}
+
+function buildAuditEvidenceManifest(records, generatedAt, sourceFiles) {
+  const context = buildReportContext(records);
+  const rows = maintenanceRows(records);
+
+  return {
+    reportName: "BayouOps Audit Evidence Manifest",
+    generatedAt: generatedAt.toISOString(),
+    advisoryOnly: true,
+    positioning: "Read-only maintenance readiness and audit evidence generated from existing BayouOps worklist data. Human approval is required for all maintenance decisions.",
+    safetyBoundaries: [
+      "No patch deployment",
+      "No reboot",
+      "No remote execution",
+      "No endpoint modification",
+      "No credential collection",
+      "No agent installation",
+      "No maintenance approval automation"
+    ],
+    sourceFiles,
+    generatedFiles: [
+      OUTPUT_CSV,
+      OUTPUT_HTML,
+      OUTPUT_SUMMARY,
+      MAINTENANCE_READINESS_CSV,
+      MAINTENANCE_READINESS_SUMMARY,
+      AUDIT_EVIDENCE_MANIFEST
+    ],
+    summary: {
+      systemsReviewed: records.length,
+      overallRisk: context.overallRisk,
+      p1ReviewFirst: context.p1Count,
+      p2ScheduleSoon: context.p2Count,
+      staleSystems45Days: context.staleCount,
+      pendingRebootSignals: context.pendingRebootCount,
+      unsupportedOsSignals: context.unsupportedCount,
+      criticalRiskStateSignals: context.criticalRiskCount,
+      lowReadinessSignals: context.lowReadinessCount,
+      exceptionOrOwnerReviewSignals: rows.filter(row => row.exceptionStatus !== "No exception signal").length
+    },
+    evidenceStatusCounts: countBy(rows, "evidenceStatus"),
+    controlAreaCounts: countBy(rows, "controlArea"),
+    approvalStateCounts: countBy(rows, "approvalState"),
+    sourceRecordCounts: countBy(records, "sourceName")
+  };
+}
+
 function renderHtml(records, generatedAt, sourceFiles) {
   const context = buildReportContext(records);
   const groupRows = Object.entries(context.groupCounts)
@@ -872,6 +1149,9 @@ fs.mkdirSync(EXPORT_DIR, { recursive: true });
 fs.writeFileSync(OUTPUT_CSV, renderCsv(dedupedWorklist));
 fs.writeFileSync(OUTPUT_HTML, renderHtml(dedupedWorklist, generatedAt, sourceFiles));
 fs.writeFileSync(OUTPUT_SUMMARY, renderSummary(dedupedWorklist, generatedAt, sourceFiles));
+fs.writeFileSync(MAINTENANCE_READINESS_CSV, renderMaintenanceReadinessCsv(dedupedWorklist));
+fs.writeFileSync(MAINTENANCE_READINESS_SUMMARY, renderMaintenanceReadinessSummary(dedupedWorklist, generatedAt, sourceFiles));
+fs.writeFileSync(AUDIT_EVIDENCE_MANIFEST, JSON.stringify(buildAuditEvidenceManifest(dedupedWorklist, generatedAt, sourceFiles), null, 2) + "\n");
 
 console.log("");
 console.log("========================================");
@@ -884,6 +1164,9 @@ console.log(` P2 Schedule Soon : ${dedupedWorklist.filter(record => record.prior
 console.log(` CSV Export       : ${OUTPUT_CSV}`);
 console.log(` HTML Export      : ${OUTPUT_HTML}`);
 console.log(` Summary Export   : ${OUTPUT_SUMMARY}`);
+console.log(` Readiness CSV    : ${MAINTENANCE_READINESS_CSV}`);
+console.log(` Readiness Summary: ${MAINTENANCE_READINESS_SUMMARY}`);
+console.log(` Audit Manifest   : ${AUDIT_EVIDENCE_MANIFEST}`);
 console.log(" Advisory Only    : Human approval required; no endpoint actions performed.");
 console.log("========================================");
 console.log("");

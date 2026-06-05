@@ -221,6 +221,50 @@ Generate a local Windows operational readiness export:
 pwsh -NoProfile -File .\windows\Export-PatchReadiness.ps1
 ```
 
+## Maintenance Readiness and Audit Evidence Exports
+
+BayouOps can generate maintenance readiness and audit evidence exports from the
+existing patch worklist data. These exports are designed for IT managers,
+Windows administrators, CAB reviewers, compliance teams, and SOX/audit
+stakeholders who need clear pre-maintenance evidence without turning BayouOps
+into an automation or remediation platform.
+
+Generate the exports with:
+
+```bash
+node scripts/build-patch-worklist.mjs
+```
+
+The command creates the standard patch worklist outputs and these additional
+files under [`exports/`](exports/):
+
+- [`exports/maintenance-readiness.csv`](exports/maintenance-readiness.csv) —
+  a working evidence register for operator triage. It includes hostname,
+  business unit, owner, service, OS, advisory priority, readiness score,
+  reboot status, unsupported OS status, recommended patch group, approval state,
+  exception status, and review notes.
+- [`exports/maintenance-readiness-summary.md`](exports/maintenance-readiness-summary.md) —
+  a manager-readable summary for patch weekend preparation. It shows the overall
+  readiness posture, owner-review counts, reboot-coordination items, stale
+  patch evidence, unsupported OS items, approval-state counts, and the top
+  systems that need review before maintenance.
+- [`exports/audit-evidence-manifest.json`](exports/audit-evidence-manifest.json) —
+  a machine-readable evidence manifest. It records when the evidence was
+  generated, which source files were used, which export files were produced,
+  summary counts, evidence status counts, approval-state counts, and the
+  read-only safety boundaries.
+
+Before patch weekend, an IT manager can use these exports to separate systems
+that are ready for scheduling from systems that still need owner review, reboot
+coordination, lifecycle exception handling, or stale-evidence validation. The
+Markdown summary supports leadership, CAB, and compliance discussions. The CSV
+supports operator assignment and follow-up tracking. The JSON manifest supports
+audit traceability by documenting the evidence source and generation details.
+
+These exports are advisory only. They do not approve maintenance, deploy
+patches, reboot systems, remotely execute commands, modify endpoints, install
+agents, or replace human change-control approval.
+
 ---
 
 # Platform Preview
