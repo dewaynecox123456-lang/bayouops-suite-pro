@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="390" height="1280" viewBox="0 0 390 1280">
+  <rect width="390" height="1280" fill="#f5f7fa"/>
+  <rect x="0" y="0" width="390" height="178" fill="#17212f"/>
+  <text x="16" y="34" fill="#1fb6a6" font-family="Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="1.5">BAYOUOPS SUITE PRO</text>
+  <text x="16" y="68" fill="#ffffff" font-family="Arial, sans-serif" font-size="27" font-weight="700">Maintenance</text>
+  <text x="16" y="100" fill="#ffffff" font-family="Arial, sans-serif" font-size="27" font-weight="700">Readiness Dashboard</text>
+  <text x="16" y="126" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="12">Read-only patch weekend evidence</text>
+  <rect x="16" y="142" width="180" height="36" rx="7" fill="#9f2f24"/>
+  <text x="106" y="165" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="14" font-weight="700">Not Fully Ready</text>
+  <g font-family="Arial, sans-serif">
+    
+      <rect x="16" y="202" width="165" height="88" rx="8" fill="#ffffff" stroke="#d9e0e8"/>
+      <text x="29" y="242" fill="#17212f" font-size="30" font-weight="700">136</text>
+      <text x="29" y="268" fill="#64748b" font-size="11" font-weight="700">Systems Reviewed</text>
+      <rect x="197" y="202" width="165" height="88" rx="8" fill="#ffffff" stroke="#d9e0e8"/>
+      <text x="210" y="242" fill="#12645a" font-size="30" font-weight="700">48</text>
+      <text x="210" y="268" fill="#64748b" font-size="11" font-weight="700">Readiness Score</text>
+      <rect x="16" y="306" width="165" height="88" rx="8" fill="#ffffff" stroke="#d9e0e8"/>
+      <text x="29" y="346" fill="#12645a" font-size="30" font-weight="700">48%</text>
+      <text x="29" y="372" fill="#64748b" font-size="11" font-weight="700">Readiness Percentage</text>
+      <rect x="197" y="306" width="165" height="88" rx="8" fill="#ffffff" stroke="#d9e0e8"/>
+      <text x="210" y="346" fill="#12645a" font-size="30" font-weight="700">65</text>
+      <text x="210" y="372" fill="#64748b" font-size="11" font-weight="700">Ready for Maintenance</text>
+      <rect x="16" y="410" width="165" height="88" rx="8" fill="#ffffff" stroke="#d9e0e8"/>
+      <text x="29" y="450" fill="#9a650f" font-size="30" font-weight="700">40</text>
+      <text x="29" y="476" fill="#64748b" font-size="11" font-weight="700">Reboot Coordination</text>
+      <rect x="197" y="410" width="165" height="88" rx="8" fill="#ffffff" stroke="#d9e0e8"/>
+      <text x="210" y="450" fill="#9a650f" font-size="30" font-weight="700">27</text>
+      <text x="210" y="476" fill="#64748b" font-size="11" font-weight="700">Owner Review</text>
+      <rect x="16" y="514" width="165" height="88" rx="8" fill="#ffffff" stroke="#d9e0e8"/>
+      <text x="29" y="554" fill="#9f2f24" font-size="30" font-weight="700">4</text>
+      <text x="29" y="580" fill="#64748b" font-size="11" font-weight="700">Lifecycle Review</text>
+      <rect x="197" y="514" width="165" height="88" rx="8" fill="#ffffff" stroke="#d9e0e8"/>
+      <text x="210" y="554" fill="#9f2f24" font-size="20" font-weight="700">Not Fully Ready</text>
+      <text x="210" y="580" fill="#64748b" font-size="11" font-weight="700">Overall Status</text>
+    <rect x="16" y="630" width="358" height="224" rx="8" fill="#ffffff" stroke="#d9e0e8"/>
+    <text x="28" y="656" fill="#17212f" font-size="18" font-weight="700">Readiness Categories</text>
+    <path d="M 88 735 L 88.00 689.00 A 46 46 0 0 1 94.36 780.56 Z" fill="#12645a"/><path d="M 88 735 L 94.36 780.56 A 46 46 0 0 1 42.44 728.64 Z" fill="#9a650f"/><path d="M 88 735 L 42.44 728.64 A 46 46 0 0 1 79.55 689.78 Z" fill="#256f91"/><path d="M 88 735 L 79.55 689.78 A 46 46 0 0 1 88.00 689.00 Z" fill="#9f2f24"/>
+    <circle cx="88" cy="735" r="26" fill="#ffffff"/>
+    <text x="88" y="733" text-anchor="middle" fill="#17212f" font-size="19" font-weight="800">48%</text>
+    <text x="88" y="749" text-anchor="middle" fill="#64748b" font-size="9" font-weight="700">ready</text>
+    <text x="158" y="716" fill="#12645a" font-size="12" font-weight="700">Ready 65</text>
+    <text x="158" y="740" fill="#9a650f" font-size="12" font-weight="700">Reboot 40</text>
+    <text x="158" y="764" fill="#256f91" font-size="12" font-weight="700">Owner 27</text>
+    <text x="158" y="788" fill="#9f2f24" font-size="12" font-weight="700">Lifecycle 4</text>
+    <rect x="16" y="870" width="358" height="84" rx="8" fill="#ffffff" stroke="#d9e0e8"/>
+    <text x="28" y="902" fill="#17212f" font-size="18" font-weight="700">Readiness Trend</text>
+    <text x="28" y="928" fill="#64748b" font-size="11">71 blockers | 65 ready | score 48</text>
+    <rect x="16" y="970" width="358" height="262" rx="8" fill="#ffffff" stroke="#d9e0e8"/>
+    <text x="28" y="1002" fill="#17212f" font-size="18" font-weight="700">Top Review Items</text>
+    
+      <text x="28" y="1038" fill="#17212f" font-size="13" font-weight="700">BAYOU-FILE-115</text>
+      <text x="28" y="1058" fill="#475569" font-size="11">Retail | Pending Reboot Review</text>
+      <text x="28" y="1076" fill="#9f2f24" font-size="11" font-weight="700">Not ready - reboot coordination needed</text>
+      <text x="28" y="1092" fill="#17212f" font-size="13" font-weight="700">BAYOU-NOC-003</text>
+      <text x="28" y="1112" fill="#475569" font-size="11">Security | Pending Reboot Review</text>
+      <text x="28" y="1130" fill="#9f2f24" font-size="11" font-weight="700">Not ready - reboot coordination needed</text>
+      <text x="28" y="1146" fill="#17212f" font-size="13" font-weight="700">BAYOU-SQL-051</text>
+      <text x="28" y="1166" fill="#475569" font-size="11">Operations | Pending Reboot Review</text>
+      <text x="28" y="1184" fill="#9f2f24" font-size="11" font-weight="700">Not ready - reboot coordination needed</text>
+    <text x="16" y="1250" fill="#64748b" font-size="10">Operational Advisory Only - Human Approval Required.</text>
+    <text x="16" y="1268" fill="#64748b" font-size="9">© 2026 BayouFinds.com — Dewayne Cox &amp; Cheri Cox. All Rights Reserved.</text>
+  </g>
+</svg>

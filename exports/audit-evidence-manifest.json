@@ -1,0 +1,80 @@
+{
+  "reportName": "BayouOps Audit Evidence Manifest",
+  "generatedAt": "2026-06-06T15:03:42.015Z",
+  "advisoryOnly": true,
+  "positioning": "Read-only maintenance readiness and audit evidence generated from existing BayouOps worklist data. Human approval is required for all maintenance decisions.",
+  "safetyBoundaries": [
+    "No patch deployment",
+    "No reboot",
+    "No remote execution",
+    "No endpoint modification",
+    "No credential collection",
+    "No agent installation",
+    "No maintenance approval automation"
+  ],
+  "sourceFiles": [
+    "demo-data/generated/bayouops-demo-1780279545689.json",
+    "./demo-data/generated/enterprise-demo-pack/enterprise-demo-scenarios.json",
+    "./samples/patch-inventory.sample.json",
+    "./samples/patch-inventory.sample.csv",
+    "./exports/patch-readiness-report.csv"
+  ],
+  "generatedFiles": [
+    "exports/patch-worklist.csv",
+    "exports/patch-worklist.html",
+    "exports/patch-worklist-summary.md",
+    "exports/maintenance-readiness.csv",
+    "exports/maintenance-readiness-summary.md",
+    "exports/maintenance-readiness-dashboard.html",
+    "exports/audit-evidence-manifest.json",
+    "screenshots/2026-06-05/maintenance-readiness-dashboard.svg",
+    "screenshots/2026-06-05/maintenance-readiness-dashboard.png",
+    "screenshots/2026-06-05/maintenance-readiness-dashboard-mobile.svg",
+    "screenshots/2026-06-05/maintenance-readiness-dashboard-mobile.png"
+  ],
+  "summary": {
+    "systemsReviewed": 136,
+    "overallRisk": "Elevated",
+    "maintenanceOverallStatus": "Not Fully Ready",
+    "readinessScore": 48,
+    "readinessPercent": 48,
+    "readyForMaintenance": 65,
+    "maintenanceBlockers": 71,
+    "p1ReviewFirst": 48,
+    "p2ScheduleSoon": 10,
+    "staleSystems45Days": 60,
+    "pendingRebootSignals": 40,
+    "unsupportedOsSignals": 4,
+    "criticalRiskStateSignals": 44,
+    "lowReadinessSignals": 54,
+    "exceptionOrOwnerReviewSignals": 50
+  },
+  "evidenceStatusCounts": {
+    "Owner Review Required": 44,
+    "Exception Review Required": 4,
+    "Stale Evidence Review": 11,
+    "Reboot Coordination Required": 23,
+    "Monitor": 54
+  },
+  "controlAreaCounts": {
+    "Pending Reboot Review": 40,
+    "Unsupported OS Exception": 4,
+    "Patch Evidence Freshness": 38,
+    "Patch Readiness": 46,
+    "Routine Patch Cadence": 8
+  },
+  "approvalStateCounts": {
+    "Not ready - reboot coordination needed": 40,
+    "Not ready - lifecycle or exception review": 4,
+    "Not ready - owner review needed": 27,
+    "Ready for approved scheduling discussion": 7,
+    "Monitor through normal cadence": 58
+  },
+  "sourceRecordCounts": {
+    "bayouops-demo-1780279545689.json": 120,
+    "Critical Risk Environment; Before Remediation; Executive Summary; Medium Risk Environment; Export / Reporting View; After Remediation; Healthy Environment": 11,
+    "patch-inventory.sample.json; patch-inventory.sample.csv": 3,
+    "Critical Risk Environment; Before Remediation; Medium Risk Environment; Executive Summary; Export / Reporting View; After Remediation; Healthy Environment": 1,
+    "patch-readiness-report.csv": 1
+  }
+}

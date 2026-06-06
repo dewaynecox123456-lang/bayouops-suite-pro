@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900">
+  <rect width="1200" height="900" fill="#f5f7fa"/>
+  <rect x="0" y="0" width="1200" height="126" fill="#17212f"/>
+  <text x="48" y="38" fill="#1fb6a6" font-family="Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="2">BAYOUOPS SUITE PRO</text>
+  <text x="48" y="72" fill="#ffffff" font-family="Arial, sans-serif" font-size="34" font-weight="700">Maintenance Readiness Dashboard</text>
+  <text x="48" y="100" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="15">Read-only evidence for patch weekend preparation - generated 2026-06-06T15:03:42.015Z</text>
+  <rect x="930" y="34" width="220" height="48" rx="8" fill="#9f2f24"/>
+  <text x="1040" y="64" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="16" font-weight="700">Not Fully Ready</text>
+  <g font-family="Arial, sans-serif">
+    
+      <rect x="48" y="164" width="250" height="96" rx="8" fill="#ffffff" stroke="#d9e0e8"/>
+      <text x="70" y="210" fill="#17212f" font-size="44" font-weight="700">136</text>
+      <text x="70" y="242" fill="#64748b" font-size="15" font-weight="700">Systems Reviewed</text>
+      <rect x="330" y="164" width="250" height="96" rx="8" fill="#ffffff" stroke="#d9e0e8"/>
+      <text x="352" y="210" fill="#12645a" font-size="44" font-weight="700">48</text>
+      <text x="352" y="242" fill="#64748b" font-size="15" font-weight="700">Readiness Score</text>
+      <rect x="612" y="164" width="250" height="96" rx="8" fill="#ffffff" stroke="#d9e0e8"/>
+      <text x="634" y="210" fill="#12645a" font-size="44" font-weight="700">48%</text>
+      <text x="634" y="242" fill="#64748b" font-size="15" font-weight="700">Readiness Percentage</text>
+      <rect x="894" y="164" width="250" height="96" rx="8" fill="#ffffff" stroke="#d9e0e8"/>
+      <text x="916" y="210" fill="#12645a" font-size="44" font-weight="700">65</text>
+      <text x="916" y="242" fill="#64748b" font-size="15" font-weight="700">Ready for Maintenance</text>
+      <rect x="48" y="286" width="250" height="96" rx="8" fill="#ffffff" stroke="#d9e0e8"/>
+      <text x="70" y="332" fill="#9a650f" font-size="44" font-weight="700">40</text>
+      <text x="70" y="364" fill="#64748b" font-size="15" font-weight="700">Reboot Coordination Required</text>
+      <rect x="330" y="286" width="250" height="96" rx="8" fill="#ffffff" stroke="#d9e0e8"/>
+      <text x="352" y="332" fill="#9a650f" font-size="44" font-weight="700">27</text>
+      <text x="352" y="364" fill="#64748b" font-size="15" font-weight="700">Owner Review Required</text>
+      <rect x="612" y="286" width="250" height="96" rx="8" fill="#ffffff" stroke="#d9e0e8"/>
+      <text x="634" y="332" fill="#9f2f24" font-size="44" font-weight="700">4</text>
+      <text x="634" y="364" fill="#64748b" font-size="15" font-weight="700">Lifecycle Review Required</text>
+      <rect x="894" y="286" width="250" height="96" rx="8" fill="#ffffff" stroke="#d9e0e8"/>
+      <text x="916" y="332" fill="#9f2f24" font-size="28" font-weight="700">Not Fully Ready</text>
+      <text x="916" y="364" fill="#64748b" font-size="15" font-weight="700">Overall Status</text>
+    <rect x="48" y="420" width="360" height="190" rx="8" fill="#ffffff" stroke="#d9e0e8"/>
+    <text x="72" y="456" fill="#17212f" font-size="20" font-weight="700">Readiness Categories</text>
+    <path d="M 176 522 L 176.00 470.00 A 52 52 0 0 1 183.18 573.50 Z" fill="#12645a"/><path d="M 176 522 L 183.18 573.50 A 52 52 0 0 1 124.50 514.82 Z" fill="#9a650f"/><path d="M 176 522 L 124.50 514.82 A 52 52 0 0 1 166.45 470.89 Z" fill="#256f91"/><path d="M 176 522 L 166.45 470.89 A 52 52 0 0 1 176.00 470.00 Z" fill="#9f2f24"/>
+    <circle cx="176" cy="522" r="30" fill="#ffffff"/>
+    <text x="176" y="518" text-anchor="middle" fill="#17212f" font-size="22" font-weight="800">48%</text>
+    <text x="176" y="536" text-anchor="middle" fill="#64748b" font-size="10" font-weight="700">ready</text>
+    <text x="270" y="500" fill="#12645a" font-size="13" font-weight="700">Ready 65</text>
+    <text x="270" y="524" fill="#9a650f" font-size="13" font-weight="700">Reboot 40</text>
+    <text x="270" y="548" fill="#256f91" font-size="13" font-weight="700">Owner 27</text>
+    <text x="270" y="572" fill="#9f2f24" font-size="13" font-weight="700">Lifecycle 4</text>
+    <rect x="424" y="420" width="728" height="190" rx="8" fill="#ffffff" stroke="#d9e0e8"/>
+    <text x="448" y="456" fill="#17212f" font-size="20" font-weight="700">Readiness Trend</text>
+    <text x="448" y="486" fill="#475569" font-size="14">Pre-window readiness pressure</text>
+    <text x="448" y="514" fill="#64748b" font-size="13">71 systems need coordination, owner review, or lifecycle handling before the patch window is fully ready.</text>
+    <rect x="448" y="536" width="190" height="40" rx="6" fill="#f8fafc" stroke="#d9e0e8"/>
+    <text x="468" y="561" fill="#12645a" font-size="20" font-weight="800">65</text>
+    <text x="522" y="561" fill="#64748b" font-size="12" font-weight="700">ready</text>
+    <rect x="660" y="536" width="190" height="40" rx="6" fill="#f8fafc" stroke="#d9e0e8"/>
+    <text x="680" y="561" fill="#9f2f24" font-size="20" font-weight="800">71</text>
+    <text x="736" y="561" fill="#64748b" font-size="12" font-weight="700">blockers</text>
+    <rect x="872" y="536" width="190" height="40" rx="6" fill="#f8fafc" stroke="#d9e0e8"/>
+    <text x="892" y="561" fill="#12645a" font-size="20" font-weight="800">48</text>
+    <text x="948" y="561" fill="#64748b" font-size="12" font-weight="700">score</text>
+    <rect x="48" y="626" width="1104" height="256" rx="8" fill="#ffffff" stroke="#d9e0e8"/>
+    <text x="72" y="660" fill="#17212f" font-size="21" font-weight="700">Top Patch Weekend Review Items</text>
+    
+      <text x="72" y="688" fill="#17212f" font-size="14" font-weight="700">BAYOU-FILE-115</text>
+      <text x="230" y="688" fill="#475569" font-size="13">Retail</text>
+      <text x="390" y="688" fill="#475569" font-size="13">Pending Reboot Review</text>
+      <text x="642" y="688" fill="#9f2f24" font-size="13" font-weight="700">Not ready - reboot coordination needed</text>
+      <text x="72" y="726" fill="#17212f" font-size="14" font-weight="700">BAYOU-NOC-003</text>
+      <text x="230" y="726" fill="#475569" font-size="13">Security</text>
+      <text x="390" y="726" fill="#475569" font-size="13">Pending Reboot Review</text>
+      <text x="642" y="726" fill="#9f2f24" font-size="13" font-weight="700">Not ready - reboot coordination needed</text>
+      <text x="72" y="764" fill="#17212f" font-size="14" font-weight="700">BAYOU-SQL-051</text>
+      <text x="230" y="764" fill="#475569" font-size="13">Operations</text>
+      <text x="390" y="764" fill="#475569" font-size="13">Pending Reboot Review</text>
+      <text x="642" y="764" fill="#9f2f24" font-size="13" font-weight="700">Not ready - reboot coordination needed</text>
+      <text x="72" y="802" fill="#17212f" font-size="14" font-weight="700">BAYOU-APP-043</text>
+      <text x="230" y="802" fill="#475569" font-size="13">Operations</text>
+      <text x="390" y="802" fill="#475569" font-size="13">Pending Reboot Review</text>
+      <text x="642" y="802" fill="#9f2f24" font-size="13" font-weight="700">Not ready - reboot coordination needed</text>
+    <text x="72" y="850" fill="#64748b" font-size="13">Operational Advisory Only - Human Approval Required. No patching, rebooting, remote execution, or endpoint modification.</text>
+    <text x="48" y="892" fill="#64748b" font-size="12">© 2026 BayouFinds.com — Dewayne Cox &amp; Cheri Cox. All Rights Reserved.</text>
+  </g>
+</svg>
