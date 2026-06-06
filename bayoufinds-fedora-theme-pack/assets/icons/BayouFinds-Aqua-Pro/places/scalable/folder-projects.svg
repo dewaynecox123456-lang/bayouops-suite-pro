@@ -3,11 +3,11 @@ Copyright (c) 2026 Wonder Piece Studio.
 All Rights Reserved.
 -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
-  <title id="title">folder-projects</title>
-  <desc id="desc">Projects Bayou Green folder for Aqua Pro Icon Pack v1.</desc>
+  <title id="title">folder-bayoufinds</title>
+  <desc id="desc">BayouFinds Bayou Green folder for Aqua Pro Icon Pack v1.</desc>
   <defs>
-    <linearGradient id="tab" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#b7f0c7"/><stop offset="0.55" stop-color="#67c985"/><stop offset="1" stop-color="#3d9b63"/></linearGradient>
-    <linearGradient id="body" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#8de5a7"/><stop offset="0.45" stop-color="#58bd78"/><stop offset="1" stop-color="#267a4d"/></linearGradient>
+    <linearGradient id="tab" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#c9ffd9"/><stop offset="0.55" stop-color="#72dc93"/><stop offset="1" stop-color="#43aa6d"/></linearGradient>
+    <linearGradient id="body" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#9bffb8"/><stop offset="0.45" stop-color="#61d184"/><stop offset="1" stop-color="#2a8755"/></linearGradient>
     <linearGradient id="shine" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity="0.58"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></linearGradient>
     <filter id="shadow" x="-18%" y="-18%" width="136%" height="148%"><feDropShadow dx="0" dy="24" stdDeviation="22" flood-color="#000000" flood-opacity="0.34"/></filter>
   </defs>
@@ -16,6 +16,7 @@ All Rights Reserved.
     <path d="M56 196c0-32 26-58 58-58h284c32 0 58 26 58 58v164c0 32-26 58-58 58H114c-32 0-58-26-58-58z" fill="url(#body)"/>
     <path d="M80 202c6-26 28-44 56-44h239c27 0 50 18 56 44z" fill="#ffffff" opacity="0.14"/>
     <path d="M92 220c0-22 18-40 40-40h248c22 0 40 18 40 40v18H92z" fill="url(#shine)" opacity="0.78"/>
-    <path d="M142 315h82m32 0h114m-228 42h165" stroke="#0c3822" stroke-width="16" stroke-linecap="round" opacity="0.22"/>
+    <path d="M112 246h288" stroke="#ffffff" stroke-width="10" stroke-linecap="round" opacity="0.35"/>
+    <path d="M166 326c42-28 88-39 139-32 27 4 52-2 74-16-20 42-50 69-90 81-41 12-82 5-123-21 16 1 33-4 50-15-17 3-34 4-50 3z" fill="#0c3822" opacity="0.22"/>
   </g>
 </svg>

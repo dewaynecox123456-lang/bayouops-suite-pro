@@ -17,6 +17,7 @@ All Rights Reserved.
 - `assets/icons/BayouFinds-Aqua-Pro/places/scalable/folder-projects.svg`
 - `assets/icons/BayouFinds-Aqua-Pro/places/scalable/folder-infrastructure.svg`
 - `assets/icons/BayouFinds-Aqua-Pro/places/scalable/folder-archives.svg`
+- `assets/icons/BayouFinds-Aqua-Pro/mimetypes/scalable/*.svg`
 - `assets/icons/BayouFinds/places/scalable/Folder-Green.svg`
 - `assets/icons/BayouFinds/places/scalable/Folder-Blue.svg`
 - `assets/icons/BayouFinds/places/scalable/Folder-Cypress.svg`
@@ -75,6 +76,14 @@ All Rights Reserved.
 - `assets/icons/BayouFinds-Aqua-Pro/places/256/*.png`
 - `assets/icons/BayouFinds-Aqua-Pro/places/512/*.png`
 - `assets/icons/BayouFinds-Aqua-Pro/places/1024/*.png`
+- `assets/icons/BayouFinds-Aqua-Pro/mimetypes/256/*.png`
+- `assets/icons/BayouFinds-Aqua-Pro/mimetypes/512/*.png`
+- `assets/icons/BayouFinds-Aqua-Pro/mimetypes/1024/*.png`
+- `assets/generated/v1.1/file-type-preview.png`
+- `assets/generated/v1.1/home-directory-standard.png`
+- `assets/generated/v1.1/preview.html`
+- `assets/generated/v1.2/home-directory-standard.png`
+- `assets/generated/v1.2/preview.html`
 
 ## BayouFinds Aqua Pro Icon Pack v1
 
@@ -115,6 +124,61 @@ Documentation:
 - `docs/DOCK_LAYOUT.md`
 - `docs/STAGING_ONLY.md`
 - `docs/standards/BayouFinds-Aqua-Pro-Standards-Guide.md`
+- `docs/FILE_TYPE_ICONS.md`
+
+## BayouFinds Aqua Pro v1.1 User Install
+
+Scripts:
+
+- `scripts/backup-user-aqua-pro-settings.sh`
+- `scripts/install-aqua-pro-user.sh`
+- `scripts/uninstall-aqua-pro-user.sh`
+- `scripts/validate-aqua-pro-v1.1.sh`
+- `scripts/validate-aqua-pro-v1.2.sh`
+
+Packages:
+
+- `dist/bayoufinds-aqua-pro-v1.1-fedora42-user-install.zip`
+- `dist/bayoufinds-aqua-pro-v1.1-fedora42-user-install.tar.gz`
+- `dist/bayoufinds-aqua-pro-v1.2-green-folders-user-install.zip`
+- `dist/bayoufinds-aqua-pro-v1.2-green-folders-user-install.tar.gz`
+
+## BayouFinds Aqua Pro v1.2 Green Default Folders
+
+Default and common GNOME folders use Bayou Green:
+
+- `folder`
+- `folder-default`
+- `folder-default-cypress`
+- `user-desktop`
+- `folder-documents`
+- `folder-download`
+- `folder-downloads`
+- `folder-music`
+- `folder-pictures`
+- `folder-videos`
+- `folder-templates`
+- `folder-publicshare`
+- `folder-home`
+- `user-home`
+
+Retained role colors:
+
+- Archives: Copper
+- Infrastructure, development, Git, and repo folders: River Blue
+
+## GDM Module Staging
+
+The GDM module is staged separately and is not run by the user-level installer.
+
+- `gdm-module/README.md`
+- `gdm-module/login/gdm-background.png`
+- `gdm-module/login/gdm-background.svg`
+- `gdm-module/docs/GDM_SAFETY.md`
+- `gdm-module/scripts/backup-gdm.sh`
+- `gdm-module/scripts/install-gdm.sh`
+- `gdm-module/scripts/uninstall-gdm.sh`
+- `gdm-module/scripts/validate-gdm.sh`
 
 ## Generated Base Image Prompt
 

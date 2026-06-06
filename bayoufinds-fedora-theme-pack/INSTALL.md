@@ -1,9 +1,9 @@
 Copyright (c) 2026 Wonder Piece Studio.
 All Rights Reserved.
 
-# Install Planning
+# User-Level Install
 
-BayouFinds Aqua Pro v1.0 is delivered as an installable desktop standard package, but this repository task does not install it.
+BayouFinds Aqua Pro v1.2 includes a user-level installer for the current Fedora 42 GNOME account.
 
 ## Target Platform
 
@@ -19,6 +19,8 @@ Open the local previews:
 ```bash
 xdg-open assets/generated/icon-pack-v1/preview.html
 xdg-open assets/generated/v1.0/preview.html
+xdg-open assets/generated/v1.1/preview.html
+xdg-open assets/generated/v1.2/preview.html
 ```
 
 Run validation:
@@ -26,24 +28,27 @@ Run validation:
 ```bash
 bash -n scripts/*.sh
 ./scripts/validate-aqua-pro-v1.0.sh
+./scripts/validate-aqua-pro-v1.1.sh
+./scripts/validate-aqua-pro-v1.2.sh
 ```
 
-## User-Local GNOME Icon Theme Install Plan
+## User Install Command
 
-The safest install path for evaluation is user-local and does not require sudo:
+Run only after review:
 
 ```bash
-mkdir -p ~/.local/share/icons
-cp -a assets/icons/BayouFinds-Aqua-Pro ~/.local/share/icons/
+./scripts/install-aqua-pro-user.sh
 ```
 
-Then select the icon theme through GNOME Tweaks, or plan a controlled `gsettings` change:
+The installer:
 
-```bash
-gsettings set org.gnome.desktop.interface icon-theme 'BayouFinds Aqua Pro'
-```
-
-Do not run that command until the operator has approved the change.
+- Runs `scripts/backup-user-aqua-pro-settings.sh`.
+- Copies the icon theme to `~/.local/share/icons/BayouFinds-Aqua-Pro`.
+- Copies wallpaper assets to `~/.local/share/backgrounds/bayoufinds/`.
+- Sets the current user's icon theme to `BayouFinds-Aqua-Pro`.
+- Sets current user wallpaper and lock screen settings with absolute file URIs.
+- Updates the user icon cache when `gtk-update-icon-cache` is available.
+- Restarts Nautilus only with `nautilus -q` when available.
 
 ## Wallpaper And Lock Screen Install Plan
 
@@ -52,7 +57,7 @@ Review these staged assets:
 - `wallpapers/bayoufinds-wallpaper-4k.png`
 - `lockscreen/bayoufinds-lockscreen.png`
 
-For user-local testing, use GNOME Settings to select the wallpaper and lock screen image manually.
+The v1.1 installer applies these only to the current user account.
 
 ## GDM And Plymouth
 
