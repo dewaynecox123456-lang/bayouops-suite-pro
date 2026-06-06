@@ -1,6 +1,6 @@
 {
   "reportName": "BayouOps Audit Evidence Manifest",
-  "generatedAt": "2026-06-05T13:50:26.629Z",
+  "generatedAt": "2026-06-06T15:03:42.015Z",
   "advisoryOnly": true,
   "positioning": "Read-only maintenance readiness and audit evidence generated from existing BayouOps worklist data. Human approval is required for all maintenance decisions.",
   "safetyBoundaries": [
@@ -25,11 +25,21 @@
     "exports/patch-worklist-summary.md",
     "exports/maintenance-readiness.csv",
     "exports/maintenance-readiness-summary.md",
-    "exports/audit-evidence-manifest.json"
+    "exports/maintenance-readiness-dashboard.html",
+    "exports/audit-evidence-manifest.json",
+    "screenshots/2026-06-05/maintenance-readiness-dashboard.svg",
+    "screenshots/2026-06-05/maintenance-readiness-dashboard.png",
+    "screenshots/2026-06-05/maintenance-readiness-dashboard-mobile.svg",
+    "screenshots/2026-06-05/maintenance-readiness-dashboard-mobile.png"
   ],
   "summary": {
     "systemsReviewed": 136,
     "overallRisk": "Elevated",
+    "maintenanceOverallStatus": "Not Fully Ready",
+    "readinessScore": 48,
+    "readinessPercent": 48,
+    "readyForMaintenance": 65,
+    "maintenanceBlockers": 71,
     "p1ReviewFirst": 48,
     "p2ScheduleSoon": 10,
     "staleSystems45Days": 60,

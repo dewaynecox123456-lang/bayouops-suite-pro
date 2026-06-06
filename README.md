@@ -253,6 +253,12 @@ files under [`exports/`](exports/):
   generated, which source files were used, which export files were produced,
   summary counts, evidence status counts, approval-state counts, and the
   read-only safety boundaries.
+- [`exports/maintenance-readiness-dashboard.html`](exports/maintenance-readiness-dashboard.html) —
+  a read-only executive dashboard view for patch weekend readiness. It shows
+  systems reviewed, readiness score, readiness percentage, systems ready for
+  maintenance, reboot coordination required, owner review required, lifecycle
+  review required, overall readiness status, readiness category chart, trend
+  summary, and export links for the supporting evidence files.
 
 Before patch weekend, an IT manager can use these exports to separate systems
 that are ready for scheduling from systems that still need owner review, reboot
@@ -260,6 +266,8 @@ coordination, lifecycle exception handling, or stale-evidence validation. The
 Markdown summary supports leadership, CAB, and compliance discussions. The CSV
 supports operator assignment and follow-up tracking. The JSON manifest supports
 audit traceability by documenting the evidence source and generation details.
+
+![Maintenance Readiness Dashboard](screenshots/2026-06-05/maintenance-readiness-dashboard.png)
 
 These exports are advisory only. They do not approve maintenance, deploy
 patches, reboot systems, remotely execute commands, modify endpoints, install
