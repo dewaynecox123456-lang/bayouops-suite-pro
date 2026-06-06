@@ -1,0 +1,11 @@
+# Copyright (c) 2026 Wonder Piece Studio.
+# All Rights Reserved.
+
+[Plymouth Theme]
+Name=BayouFinds BayouOps
+Description=BayouFinds branded Fedora 42 boot theme for BayouOps workstations.
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/bayoufinds
+ScriptFile=/usr/share/plymouth/themes/bayoufinds/bayoufinds.script

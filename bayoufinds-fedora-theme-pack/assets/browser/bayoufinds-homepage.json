@@ -1,0 +1,13 @@
+{
+  "copyright": "Copyright (c) 2026 Wonder Piece Studio. All Rights Reserved.",
+  "firefox_policy_target": "/usr/lib64/firefox/distribution/policies.json",
+  "homepage": "https://bayoufinds.com",
+  "policy": {
+    "policies": {
+      "Homepage": {
+        "URL": "https://bayoufinds.com",
+        "StartPage": "homepage"
+      }
+    }
+  }
+}

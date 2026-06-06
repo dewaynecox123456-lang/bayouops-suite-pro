@@ -1,0 +1,29 @@
+<!--
+Copyright (c) 2026 Wonder Piece Studio.
+All Rights Reserved.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 180" role="img" aria-labelledby="title desc">
+  <title id="title">BayouFinds BayouOps logo</title>
+  <desc id="desc">Enterprise wordmark for BayouFinds and BayouOps.</desc>
+  <defs>
+    <linearGradient id="markGradient" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#5fbf7a"/>
+      <stop offset="1" stop-color="#5f8fb8"/>
+    </linearGradient>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+  <rect width="720" height="180" fill="none"/>
+  <g filter="url(#softShadow)">
+    <path d="M90 18c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72z" fill="#111820" stroke="#243340" stroke-width="4"/>
+    <path d="M46 106c16-22 38-35 65-39 14-2 29-8 42-19-6 28-19 50-40 65-21 16-44 20-67 12 8-3 16-9 24-18-8 1-16 1-24-1z" fill="url(#markGradient)"/>
+    <path d="M51 123c26 10 52 9 78-3" fill="none" stroke="#5f8fb8" stroke-width="6" stroke-linecap="round" opacity="0.75"/>
+    <path d="M64 83h52m-39 18h58" fill="none" stroke="#d8efe1" stroke-width="5" stroke-linecap="round" opacity="0.55"/>
+  </g>
+  <g font-family="Inter, Segoe UI, Cantarell, Arial, sans-serif">
+    <text x="190" y="80" fill="#f4f7f6" font-size="47" font-weight="800" letter-spacing="0.5">BayouFinds</text>
+    <text x="193" y="126" fill="#72c689" font-size="34" font-weight="700" letter-spacing="1.8">BayouOps</text>
+    <text x="194" y="154" fill="#8fa8ba" font-size="17" font-weight="500" letter-spacing="2.2">ENTERPRISE OPERATIONS VISIBILITY</text>
+  </g>
+</svg>

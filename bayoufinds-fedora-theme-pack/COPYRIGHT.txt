@@ -1,0 +1,6 @@
+Copyright (c) 2026 Wonder Piece Studio.
+All Rights Reserved.
+
+BayouFinds Fedora 42 Enterprise Theme Pack.
+
+All project-created files in this theme pack include Wonder Piece Studio copyright notices where the file format supports text notices. Raster image exports are derived from source assets in this package and include copyright metadata where generated locally.

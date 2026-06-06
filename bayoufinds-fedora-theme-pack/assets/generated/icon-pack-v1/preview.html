@@ -1,0 +1,127 @@
+<!doctype html>
+<!--
+Copyright (c) 2026 Wonder Piece Studio.
+All Rights Reserved.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="copyright" content="Copyright (c) 2026 Wonder Piece Studio. All Rights Reserved.">
+    <title>BayouFinds Aqua Pro Icon Pack v1</title>
+    <style>
+      /*
+      Copyright (c) 2026 Wonder Piece Studio.
+      All Rights Reserved.
+      */
+      :root {
+        color-scheme: dark;
+        --bg: #090e13;
+        --panel: #121a22;
+        --line: #263541;
+        --text: #edf4f0;
+        --muted: #91a5b2;
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: Inter, Segoe UI, Cantarell, Arial, sans-serif;
+        background:
+          radial-gradient(circle at top left, rgba(103, 201, 133, 0.15), transparent 34rem),
+          radial-gradient(circle at top right, rgba(114, 182, 223, 0.13), transparent 32rem),
+          var(--bg);
+        color: var(--text);
+      }
+
+      main {
+        width: min(1220px, calc(100% - 48px));
+        margin: 0 auto;
+        padding: 56px 0;
+      }
+
+      h1 { margin: 0 0 10px; font-size: clamp(2rem, 4vw, 3.25rem); line-height: 1.05; }
+      p { margin: 0; color: var(--muted); }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+        gap: 20px;
+        margin-top: 34px;
+      }
+      .tile {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(18, 26, 34, 0.86);
+        padding: 22px;
+      }
+      .icon-surface {
+        display: grid;
+        place-items: center;
+        border-radius: 8px;
+        min-height: 230px;
+        margin-bottom: 18px;
+        background:
+          linear-gradient(45deg, rgba(255, 255, 255, 0.055) 25%, transparent 25%),
+          linear-gradient(-45deg, rgba(255, 255, 255, 0.055) 25%, transparent 25%),
+          linear-gradient(45deg, transparent 75%, rgba(255, 255, 255, 0.055) 75%),
+          linear-gradient(-45deg, transparent 75%, rgba(255, 255, 255, 0.055) 75%),
+          #0d141b;
+        background-position: 0 0, 0 12px, 12px -12px, -12px 0;
+        background-size: 24px 24px;
+      }
+      .tile img {
+        display: block;
+        width: 100%;
+        max-width: 220px;
+        margin: 0 auto;
+      }
+      .name { font-weight: 750; }
+      .use { margin-top: 7px; color: var(--muted); font-size: 0.92rem; line-height: 1.45; }
+      footer { margin-top: 34px; color: var(--muted); font-size: 0.85rem; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>BayouFinds Aqua Pro Icon Pack v1</h1>
+        <p>macOS-inspired glossy folder icons with restrained BayouFinds/BayouOps identity accents.</p>
+      </header>
+
+      <section class="grid" aria-label="BayouFinds Aqua Pro Icon Pack v1">
+        <article class="tile">
+          <div class="icon-surface"><img src="./png/512/folder-default-cypress.png" alt="folder-default-cypress icon"></div>
+          <div class="name">folder-default-cypress</div>
+          <div class="use">Default folder: Cypress Gray</div>
+        </article>
+        <article class="tile">
+          <div class="icon-surface"><img src="./png/512/folder-bayoufinds.png" alt="folder-bayoufinds icon"></div>
+          <div class="name">folder-bayoufinds</div>
+          <div class="use">BayouFinds folder: Bayou Green</div>
+        </article>
+        <article class="tile">
+          <div class="icon-surface"><img src="./png/512/folder-bayouops.png" alt="folder-bayouops icon"></div>
+          <div class="name">folder-bayouops</div>
+          <div class="use">BayouOps folder: Bayou Green with subtle emblem accent</div>
+        </article>
+        <article class="tile">
+          <div class="icon-surface"><img src="./png/512/folder-projects.png" alt="folder-projects icon"></div>
+          <div class="name">folder-projects</div>
+          <div class="use">Projects folder: Bayou Green</div>
+        </article>
+        <article class="tile">
+          <div class="icon-surface"><img src="./png/512/folder-infrastructure.png" alt="folder-infrastructure icon"></div>
+          <div class="name">folder-infrastructure</div>
+          <div class="use">Infrastructure folder: River Blue</div>
+        </article>
+        <article class="tile">
+          <div class="icon-surface"><img src="./png/512/folder-archives.png" alt="folder-archives icon"></div>
+          <div class="name">folder-archives</div>
+          <div class="use">Archives folder: Copper</div>
+        </article>
+      </section>
+
+      <footer>Copyright (c) 2026 Wonder Piece Studio. All Rights Reserved.</footer>
+    </main>
+  </body>
+</html>

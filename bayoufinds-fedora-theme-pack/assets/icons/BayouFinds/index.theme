@@ -1,0 +1,20 @@
+# Copyright (c) 2026 Wonder Piece Studio.
+# All Rights Reserved.
+
+[Icon Theme]
+Name=BayouFinds
+Comment=BayouFinds enterprise folder accents for Fedora 42.
+Inherits=Adwaita,hicolor
+Directories=places/scalable,places/256
+
+[places/scalable]
+Size=256
+Type=Scalable
+MinSize=16
+MaxSize=512
+Context=Places
+
+[places/256]
+Size=256
+Type=Fixed
+Context=Places

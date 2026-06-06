@@ -1,0 +1,30 @@
+# Copyright (c) 2026 Wonder Piece Studio.
+# All Rights Reserved.
+
+[Icon Theme]
+Name=BayouFinds Aqua Pro
+Comment=BayouFinds Aqua Pro v1.0 Fedora 42 GNOME desktop folder standard.
+Inherits=Adwaita,hicolor
+Directories=places/scalable,places/256,places/512,places/1024
+
+[places/scalable]
+Size=512
+Type=Scalable
+MinSize=16
+MaxSize=1024
+Context=Places
+
+[places/256]
+Size=256
+Type=Fixed
+Context=Places
+
+[places/512]
+Size=512
+Type=Fixed
+Context=Places
+
+[places/1024]
+Size=1024
+Type=Fixed
+Context=Places

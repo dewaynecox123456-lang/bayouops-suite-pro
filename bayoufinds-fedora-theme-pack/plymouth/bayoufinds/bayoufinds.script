@@ -1,0 +1,39 @@
+// Copyright (c) 2026 Wonder Piece Studio.
+// All Rights Reserved.
+
+Window.SetBackgroundTopColor(0.03, 0.05, 0.07);
+Window.SetBackgroundBottomColor(0.02, 0.03, 0.04);
+
+screen_width = Window.GetWidth();
+screen_height = Window.GetHeight();
+
+logo_image = Image("bayoufinds-emblem.png");
+logo_sprite = Sprite(logo_image);
+logo_sprite.SetX(screen_width / 2 - logo_image.GetWidth() / 2);
+logo_sprite.SetY(screen_height / 2 - logo_image.GetHeight() / 2 - 80);
+
+brand_message = Image.Text("BayouFinds  |  BayouOps", 0.86, 0.93, 0.90);
+brand_sprite = Sprite(brand_message);
+brand_sprite.SetX(screen_width / 2 - brand_message.GetWidth() / 2);
+brand_sprite.SetY(screen_height / 2 + 80);
+
+status_message = Image.Text("Starting enterprise workstation", 0.50, 0.62, 0.68);
+status_sprite = Sprite(status_message);
+status_sprite.SetX(screen_width / 2 - status_message.GetWidth() / 2);
+status_sprite.SetY(screen_height / 2 + 130);
+
+copyright_message = Image.Text("Copyright (c) 2026 Wonder Piece Studio. All Rights Reserved.", 0.38, 0.48, 0.54);
+copyright_sprite = Sprite(copyright_message);
+copyright_sprite.SetX(screen_width / 2 - copyright_message.GetWidth() / 2);
+copyright_sprite.SetY(screen_height - 70);
+
+progress = 0;
+
+fun refresh_callback()
+{
+  progress = (progress + 4) % 360;
+  alpha = 0.45 + 0.35 * Math.Sin(progress * 3.14159 / 180);
+  status_sprite.SetOpacity(alpha);
+}
+
+Plymouth.SetRefreshFunction(refresh_callback);

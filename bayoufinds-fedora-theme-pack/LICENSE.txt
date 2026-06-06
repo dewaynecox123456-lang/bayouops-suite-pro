@@ -1,0 +1,8 @@
+Copyright (c) 2026 Wonder Piece Studio.
+All Rights Reserved.
+
+Proprietary License
+
+This BayouFinds Fedora 42 Enterprise Theme Pack is proprietary material owned by Wonder Piece Studio.
+
+No permission is granted to copy, redistribute, sublicense, sell, or modify this package outside authorized BayouFinds/BayouOps business use without written permission from Wonder Piece Studio.

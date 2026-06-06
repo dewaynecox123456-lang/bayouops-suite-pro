@@ -1,0 +1,23 @@
+Copyright (c) 2026 Wonder Piece Studio.
+All Rights Reserved.
+
+Personal Use License
+
+BayouFinds Aqua Pro Icon Pack v1 is provided for personal, non-commercial use only.
+
+You may:
+
+- Use the included icons on personally owned workstations.
+- Use the included preview images for personal evaluation.
+- Modify the included SVG files for your own personal workstation customization.
+
+You may not:
+
+- Sell, resell, sublicense, redistribute, or repackage this icon pack.
+- Use this icon pack in client work, commercial products, paid themes, templates, courses, or marketplaces.
+- Claim ownership of the BayouFinds, BayouOps, Wonder Piece Studio, or related visual identity.
+- Remove copyright notices from source, documentation, or generated assets.
+
+Commercial licensing requires written permission from Wonder Piece Studio.
+
+No warranty is provided. Use at your own discretion.

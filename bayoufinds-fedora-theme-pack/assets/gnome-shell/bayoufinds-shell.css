@@ -1,0 +1,43 @@
+/*
+Copyright (c) 2026 Wonder Piece Studio.
+All Rights Reserved.
+*/
+
+:root {
+  --bayou-graphite: #0b1117;
+  --bayou-panel: #121a22;
+  --bayou-green: #5fbf7a;
+  --bayou-steel: #5f8fb8;
+  --bayou-text: #e8f0ec;
+}
+
+#panel {
+  background-color: rgba(11, 17, 23, 0.96);
+  border-bottom: 1px solid rgba(95, 191, 122, 0.28);
+  color: var(--bayou-text);
+}
+
+.popup-menu,
+.calendar,
+.message-list,
+.dash-background,
+.overview-tile {
+  background-color: rgba(18, 26, 34, 0.98);
+  border-color: rgba(95, 143, 184, 0.26);
+  color: var(--bayou-text);
+}
+
+.popup-menu-item:selected,
+.calendar-day-base:hover,
+.dash-item-container:hover .overview-icon {
+  background-color: rgba(95, 191, 122, 0.18);
+}
+
+.toggle-switch:checked,
+.slider {
+  color: var(--bayou-green);
+}
+
+.workspace-thumbnail-indicator {
+  border-color: var(--bayou-green);
+}
