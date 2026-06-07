@@ -213,6 +213,24 @@ execution tool.
 Collector documentation is available at
 [`docs/WINDOWS_PATCH_INVENTORY_COLLECTOR.md`](docs/WINDOWS_PATCH_INVENTORY_COLLECTOR.md).
 
+## Network Inventory Collector
+
+BayouOps includes a Windows Network Inventory Collector for practical,
+CSV-driven operational visibility across approved Windows systems. Operators
+provide a target CSV, then run the collector from a Windows admin workstation
+with permission to query those systems.
+
+Collector:
+[`collectors/windows/Invoke-BayouOpsNetworkInventory.ps1`](collectors/windows/Invoke-BayouOpsNetworkInventory.ps1)
+
+Sample target CSV:
+[`samples/windows-network-targets.sample.csv`](samples/windows-network-targets.sample.csv)
+
+Collector documentation:
+[`docs/WINDOWS_NETWORK_INVENTORY_COLLECTOR.md`](docs/WINDOWS_NETWORK_INVENTORY_COLLECTOR.md)
+
+This collector is read-only and intended only for systems you own or are authorized to manage.
+
 ## Windows Operational Readiness Export
 
 Generate a local Windows operational readiness export:

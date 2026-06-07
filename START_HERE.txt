@@ -17,6 +17,21 @@ BAYOUOPS QUICK START
 Exports are saved under:
 ./exports/
 
+Network Inventory Collector:
+BayouOps includes a Windows network inventory collector for approved target
+lists. It uses a CSV file instead of blind network scanning.
+
+Collector:
+./collectors/windows/Invoke-BayouOpsNetworkInventory.ps1
+
+Sample target CSV:
+./samples/windows-network-targets.sample.csv
+
+Documentation:
+./docs/WINDOWS_NETWORK_INVENTORY_COLLECTOR.md
+
+This collector is read-only and intended only for systems you own or are authorized to manage.
+
 Executive demo packs, when generated from the source repo, are saved under:
 ./exports/demo/
 

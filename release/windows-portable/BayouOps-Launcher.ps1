@@ -1,10 +1,10 @@
 <#
 .SYNOPSIS
-Starts the BayouOps Suite Pro portable Windows launcher.
+Starts the BayouOps Suite Pro Windows release launcher.
 
 .DESCRIPTION
 Provides a local, non-admin menu for running bundled export and aggregation
-workflows from the portable release folder.
+workflows from the release folder.
 #>
 
 [CmdletBinding()]
@@ -72,7 +72,7 @@ function Get-LicenseStatus {
 
 function Write-MenuHeader {
     Clear-Host
-    Write-Host "$ProductName - Windows Portable Launcher"
+    Write-Host "$ProductName - Windows Release Launcher"
     Write-Host '======================================================'
     Write-Host ''
     Write-Host "Version : $ProductVersion"

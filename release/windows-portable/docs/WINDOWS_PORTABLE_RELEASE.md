@@ -1,11 +1,11 @@
-# Windows Portable Release
+# Windows Release Package
 
-BayouOps Suite Pro can be staged as a local Windows portable package under
-`release/windows-portable/`. The package is intended for ZIP distribution or
+BayouOps Suite Pro can be staged as a local Windows release package under
+`release/BayouOps-Suite-Pro/`. The package is intended for ZIP distribution or
 later MSI wrapping, without requiring installation or administrative privileges
 by default.
 
-The portable package is operator-triggered and local-only. It does not install
+The release package is operator-triggered and local-only. It does not install
 agents, start services, schedule tasks, collect telemetry, or phone home.
 
 ## Included Contents
@@ -26,7 +26,7 @@ agents, start services, schedule tasks, collect telemetry, or phone home.
 
 ## How to Run
 
-1. Open `release/windows-portable/` on a Windows host.
+1. Extract `BayouOps-Suite-Pro-v0.3-Release.zip` on a Windows host.
 2. Double-click `BayouOps-Launcher.bat`, or run `BayouOps-Launcher.ps1` from PowerShell.
 3. Choose one of the launcher options:
    - Generate Demo Environment
@@ -75,7 +75,7 @@ ready.
 
 ## Expected Outputs
 
-Generated files are written to `exports/` inside the portable package:
+Generated files are written to `exports/` inside the release package:
 
 - `patch-readiness-report.csv`: Windows host readiness export.
 - `executive-operational-summary.csv`: aggregated host summary.
@@ -83,13 +83,13 @@ Generated files are written to `exports/` inside the portable package:
 
 The aggregation engine reads any available input files in `exports/`, including `patch-readiness-report.csv` and `linux-health-summary.csv` if present.
 
-Executive demo packs generated from the portable folder are written under
+Executive demo packs generated from the release folder are written under
 `exports/demo/`. Generated export bundles are local artifacts and should not be
 committed back to the source repository.
 
 ## Safety Scope
 
-The portable release is local-first and file-based. The included launcher and bundled scripts:
+The release package is local-first and file-based. The included launcher and bundled scripts:
 
 - do not require administrator rights by default;
 - do not delete or modify system files;
@@ -102,7 +102,7 @@ The portable release is local-first and file-based. The included launcher and bu
 
 ## Future MSI Packaging
 
-This package is a clean portable foundation only. A later MSI pass can wrap the same staged contents, add shortcuts, define install and uninstall behavior, and set signing or publisher metadata. MSI packaging is intentionally out of scope for this pass.
+This package is a clean release foundation. A later MSI pass can wrap the same staged contents, add shortcuts, define install and uninstall behavior, and set signing or publisher metadata. MSI packaging is intentionally out of scope for this pass.
 
 ---
 

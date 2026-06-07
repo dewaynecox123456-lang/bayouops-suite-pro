@@ -3,6 +3,7 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 PACKAGE_DIR="${ROOT_DIR}/release/BayouOps-Suite-Pro"
+RELEASE_ZIP="${ROOT_DIR}/release/BayouOps-Suite-Pro-v0.3-Release.zip"
 
 print_section() {
     local title="$1"
@@ -43,6 +44,11 @@ case "${PACKAGE_DIR}" in
         ;;
 esac
 
+if ! command -v zip >/dev/null 2>&1; then
+    echo "Missing required command: zip" >&2
+    exit 1
+fi
+
 require_path "README.md"
 require_path "START_HERE.txt"
 require_path "config/lines-of-business.json"
@@ -59,8 +65,12 @@ require_path "release/windows-portable/BayouOps-Launcher.ps1"
 require_path "release/windows-portable/BayouOps-Launcher.bat"
 require_path "release/windows-portable/README.md"
 require_path "release/windows-portable/docs"
+require_path "collectors/windows/Invoke-BayouOpsNetworkInventory.ps1"
+require_path "samples/windows-network-targets.sample.csv"
+require_path "docs/WINDOWS_NETWORK_INVENTORY_COLLECTOR.md"
 
 rm -rf "${PACKAGE_DIR}"
+rm -f "${RELEASE_ZIP}"
 mkdir -p "${PACKAGE_DIR}"
 
 cp "${ROOT_DIR}/release/windows-portable/BayouOps-Launcher.ps1" "${PACKAGE_DIR}/BayouOps-Launcher.ps1"
@@ -71,6 +81,11 @@ cp "${ROOT_DIR}/release/windows-portable/README.md" "${PACKAGE_DIR}/README.md"
 copy_if_present "LICENSE" "${PACKAGE_DIR}/LICENSE"
 copy_if_present "LICENSE.txt" "${PACKAGE_DIR}/LICENSE.txt"
 cp -R "${ROOT_DIR}/release/windows-portable/docs" "${PACKAGE_DIR}/docs"
+copy_required_file "docs/WINDOWS_NETWORK_INVENTORY_COLLECTOR.md" "${PACKAGE_DIR}/docs/WINDOWS_NETWORK_INVENTORY_COLLECTOR.md"
+mkdir -p "${PACKAGE_DIR}/collectors/windows"
+copy_required_file "collectors/windows/Invoke-BayouOpsNetworkInventory.ps1" "${PACKAGE_DIR}/collectors/windows/Invoke-BayouOpsNetworkInventory.ps1"
+mkdir -p "${PACKAGE_DIR}/samples"
+copy_required_file "samples/windows-network-targets.sample.csv" "${PACKAGE_DIR}/samples/windows-network-targets.sample.csv"
 cp -R "${ROOT_DIR}/windows" "${PACKAGE_DIR}/windows"
 cp -R "${ROOT_DIR}/tools" "${PACKAGE_DIR}/tools"
 cp -R "${ROOT_DIR}/config" "${PACKAGE_DIR}/config"
@@ -90,7 +105,7 @@ mkdir -p "${PACKAGE_DIR}/exports"
 find "${PACKAGE_DIR}" -type d -name '__pycache__' -prune -exec rm -rf {} +
 find "${PACKAGE_DIR}/exports" -mindepth 1 -exec rm -rf {} +
 
-print_section "Portable Package Contents"
+print_section "Release Package Contents"
 find "${PACKAGE_DIR}" -maxdepth 3 -type f | sed "s#${ROOT_DIR}/##" | sort
 
 print_section "Package Audit"
@@ -105,6 +120,9 @@ required_package_paths=(
     "docs/TERMS_AND_CONDITIONS.md"
     "docs/EULA.md"
     "docs/SUPPORT_EMAIL_SETUP.md"
+    "docs/WINDOWS_NETWORK_INVENTORY_COLLECTOR.md"
+    "collectors/windows/Invoke-BayouOpsNetworkInventory.ps1"
+    "samples/windows-network-targets.sample.csv"
     "config/lines-of-business.json"
     "config/license.example.json"
     "icons/launcher-icon-concept.ico"
@@ -176,5 +194,20 @@ else
     exit 1
 fi
 
+if grep -R "This collector is read-only and intended only for systems you own or are authorized to manage." "${PACKAGE_DIR}/README.md" "${PACKAGE_DIR}/START_HERE.txt" "${PACKAGE_DIR}/docs/WINDOWS_NETWORK_INVENTORY_COLLECTOR.md" >/dev/null; then
+    echo "OK network collector authorization disclaimer present"
+else
+    echo "Missing network collector authorization disclaimer" >&2
+    exit 1
+fi
+
+print_section "Create Release ZIP"
+(
+    cd "${ROOT_DIR}/release"
+    zip -qr "$(basename "${RELEASE_ZIP}")" "BayouOps-Suite-Pro"
+)
+echo "Release ZIP created at: ${RELEASE_ZIP}"
+
 print_section "Package Ready"
-echo "Portable release staged at: ${PACKAGE_DIR}"
+echo "Release package staged at: ${PACKAGE_DIR}"
+echo "Release ZIP ready: ${RELEASE_ZIP}"

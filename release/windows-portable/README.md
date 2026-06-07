@@ -48,7 +48,7 @@ Generate a local Windows operational readiness export:
 pwsh -NoProfile -File .\windows\Export-PatchReadiness.ps1
 ```
 
-Or use the portable launcher:
+Or use the release launcher:
 
 ```powershell
 .\BayouOps-Launcher.ps1
@@ -56,11 +56,31 @@ Or use the portable launcher:
 
 The launcher shows product metadata, support contact information, license
 status, local preflight checks, and operator-triggered actions. Generated
-reports are written to `exports/` inside the portable folder.
+reports are written to `exports/` inside the release folder.
 
 Use of BayouOps Suite Pro requires acceptance of the license terms and
 conditions before protected workflows run. Review `docs/TERMS_AND_CONDITIONS.md`
 and `docs/EULA.md`.
+
+---
+
+## Network Inventory Collector
+
+BayouOps includes a Windows Network Inventory Collector for practical,
+CSV-driven operational visibility across approved Windows systems. Operators
+provide a target CSV, then run the collector from a Windows admin workstation
+with permission to query those systems.
+
+Collector:
+`collectors/windows/Invoke-BayouOpsNetworkInventory.ps1`
+
+Sample target CSV:
+`samples/windows-network-targets.sample.csv`
+
+Collector documentation:
+`docs/WINDOWS_NETWORK_INVENTORY_COLLECTOR.md`
+
+This collector is read-only and intended only for systems you own or are authorized to manage.
 
 ---
 
@@ -75,7 +95,7 @@ node .\scripts\demo\export-executive-demo-pack.mjs
 ```
 
 The generated pack is written under `exports/demo/`. Optional screenshot gallery
-PNGs are intentionally excluded from the portable customer package to keep it
+PNGs are intentionally excluded from the customer release package to keep it
 lightweight.
 
 Launcher workflow:
