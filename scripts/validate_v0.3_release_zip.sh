@@ -31,6 +31,7 @@ required_zip_paths=(
     "${PACKAGE_ROOT}/exports/network-readiness.csv"
     "${PACKAGE_ROOT}/screenshots/demo/network-readiness-dashboard.png"
     "${PACKAGE_ROOT}/screenshots/demo/network-readiness-dashboard.svg"
+    "${PACKAGE_ROOT}/icons/bayouops-launcher-icon.ico"
 )
 
 print_section "Validate v0.3 Release ZIP"

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">BayouOps Launcher Icon</title>
+  <desc id="desc">Enterprise IT shield and dashboard mark with subtle bayou linework and a green readiness indicator.</desc>
+  <defs>
+    <linearGradient id="bg" x1="34" y1="18" x2="220" y2="236" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#17212f"/>
+      <stop offset="1" stop-color="#263446"/>
+    </linearGradient>
+    <linearGradient id="shield" x1="80" y1="42" x2="178" y2="204" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f7fbff"/>
+      <stop offset="1" stop-color="#cbd8e6"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="86" y1="76" x2="174" y2="154" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#203044"/>
+      <stop offset="1" stop-color="#111c2a"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="145%" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#07111d" flood-opacity="0.42"/>
+    </filter>
+  </defs>
+  <rect width="256" height="256" rx="48" fill="url(#bg)"/>
+  <path d="M27 183c23-30 46-34 72-22 29 13 53 8 78-20 20-23 35-32 52-31" fill="none" stroke="#5f7f95" stroke-width="7" stroke-linecap="round" opacity="0.28"/>
+  <path d="M25 203c27-27 51-29 77-15 31 17 62 8 88-24 14-17 26-24 42-25" fill="none" stroke="#8fb7c8" stroke-width="5" stroke-linecap="round" opacity="0.18"/>
+  <path d="M128 33l76 29v55c0 48-29 88-76 108-47-20-76-60-76-108V62l76-29z" fill="url(#shield)" filter="url(#shadow)"/>
+  <path d="M128 51l58 22v43c0 37-21 68-58 85-37-17-58-48-58-85V73l58-22z" fill="#182436"/>
+  <rect x="86" y="78" width="84" height="70" rx="10" fill="url(#panel)" stroke="#7f92a8" stroke-width="4"/>
+  <path d="M96 128l19-18 17 13 28-31" fill="none" stroke="#28c08f" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="96" y="160" width="21" height="14" rx="3" fill="#7f92a8"/>
+  <rect x="124" y="160" width="36" height="14" rx="3" fill="#28c08f"/>
+  <circle cx="184" cy="184" r="31" fill="#0e1724" stroke="#d8e3ee" stroke-width="6"/>
+  <circle cx="184" cy="184" r="18" fill="#23c17f"/>
+  <path d="M176 184l6 6 12-15" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
