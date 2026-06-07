@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BayouOps Network Readiness Dashboard</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #17212f;
+      --muted: #64748b;
+      --line: #d9e0e8;
+      --panel: #ffffff;
+      --soft: #f5f7fa;
+      --teal: #12645a;
+      --cyan: #256f91;
+      --amber: #9a650f;
+      --red: #9f2f24;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--soft);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.45;
+    }
+    main {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 34px 24px 44px;
+    }
+    header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 24px;
+      align-items: start;
+      border-bottom: 3px solid var(--teal);
+      padding-bottom: 20px;
+    }
+    .brand-line {
+      margin-bottom: 8px;
+      color: var(--teal);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    h1, h2, p { margin-top: 0; }
+    h1 {
+      margin-bottom: 8px;
+      font-size: 34px;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin-bottom: 10px;
+      font-size: 20px;
+      letter-spacing: 0;
+    }
+    .subtle { color: var(--muted); }
+    .status-badge {
+      min-width: 210px;
+      border-radius: 6px;
+      padding: 14px 16px;
+      background: var(--red);
+      color: #ffffff;
+      font-weight: 800;
+      text-align: center;
+    }
+    .status-badge span {
+      display: block;
+      margin-top: 4px;
+      font-size: 12px;
+      font-weight: 700;
+      opacity: 0.9;
+      text-transform: uppercase;
+    }
+    .notice {
+      margin: 18px 0 0;
+      border-left: 4px solid var(--teal);
+      padding: 12px 14px;
+      background: #edf6f4;
+      font-weight: 700;
+    }
+    .export-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .export-actions a {
+      display: inline-flex;
+      min-height: 38px;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 0 12px;
+      background: #ffffff;
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 24px;
+    }
+    .card {
+      min-width: 0;
+      min-height: 116px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 15px;
+      background: var(--panel);
+    }
+    .card strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--ink);
+      font-size: 30px;
+      line-height: 1;
+      overflow-wrap: anywhere;
+    }
+    .card span {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .card.ready strong { color: var(--teal); }
+    .card.warn strong { color: var(--amber); }
+    .card.risk strong { color: var(--red); }
+    .card.status-card strong {
+      font-size: 22px;
+      line-height: 1.08;
+    }
+    .panel {
+      margin-top: 22px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 18px;
+      background: var(--panel);
+    }
+    .two-column {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+      gap: 16px;
+      margin-top: 22px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 10px 9px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: #f0f4f8;
+      color: #405064;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+    .summary-band {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 22px;
+    }
+    .summary-band .panel {
+      margin-top: 0;
+    }
+    ul { margin: 0; padding-left: 20px; }
+    li { margin: 8px 0; }
+    footer {
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    @media (max-width: 980px) {
+      header, .two-column, .summary-band { grid-template-columns: 1fr; }
+      .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 620px) {
+      main { padding: 22px 14px 34px; }
+      h1 { font-size: 28px; }
+      .status-badge { width: 100%; min-width: 0; }
+      .export-actions a { flex: 1 1 150px; }
+      .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+      .card { min-height: 104px; padding: 13px; }
+      .card strong { font-size: 27px; }
+      .card span { font-size: 12px; }
+      .card.status-card strong { font-size: 19px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div>
+        <div class="brand-line">BayouOps Suite Pro</div>
+        <h1>Network Readiness Dashboard</h1>
+        <p class="subtle">Generated 2026-06-07T02:13:08.919Z. CSV-driven Windows network inventory evidence for operator review and executive reporting.</p>
+        <p class="notice">Operational Advisory Only - Human Approval Required. This dashboard is read-only and does not scan networks, collect credentials, exploit systems, remediate systems, reboot systems, or modify endpoints.</p>
+        <nav class="export-actions" aria-label="Read-only network report exports">
+          <a href="network-readiness.csv" download>Export CSV</a>
+          <a href="network-readiness-summary.md" download>Export Summary</a>
+        </nav>
+      </div>
+      <div class="status-badge">Red: Action Required<span>Executive Summary</span></div>
+    </header>
+
+    <section class="cards" aria-label="Network readiness counts">
+      <div class="card"><strong>5</strong><span>Total Systems</span></div>
+      <div class="card ready"><strong>4</strong><span>Online Systems</span></div>
+      <div class="card risk"><strong>1</strong><span>Offline Systems</span></div>
+      <div class="card warn"><strong>1</strong><span>Reboot Required</span></div>
+      <div class="card risk"><strong>1</strong><span>Collection Failures</span></div>
+      <div class="card ready"><strong>40%</strong><span>Healthy Readiness</span></div>
+      <div class="card warn"><strong>1</strong><span>Attention Required</span></div>
+      <div class="card status-card risk"><strong>Red: Action Required</strong><span>Overall Status</span></div>
+    </section>
+
+    <section class="summary-band" aria-label="Executive color summary">
+      <div class="panel"><h2>Green: Healthy</h2><p class="subtle">2 systems online with collected evidence and no reboot signal.</p></div>
+      <div class="panel"><h2>Yellow: Attention Required</h2><p class="subtle">1 system needs review for reboot state or incomplete OS evidence.</p></div>
+      <div class="panel"><h2>Red: Action Required</h2><p class="subtle">2 systems offline or had collection failures requiring operator follow-up.</p></div>
+    </section>
+
+    <section class="two-column">
+      <div class="panel">
+        <h2>Attention Items</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Status</th>
+              <th>Computer</th>
+              <th>Collection Status</th>
+              <th>OS</th>
+              <th>Review Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr>
+                <td>Yellow: Attention Required</td>
+                <td>BAYOU-SQL01</td>
+                <td>Collected</td>
+                <td>Microsoft Windows Server 2019 Standard</td>
+                <td>Pending reboot signal should be coordinated before maintenance readiness is considered clean.</td>
+              </tr>
+              <tr>
+                <td>Red: Action Required</td>
+                <td>BAYOU-FILE01</td>
+                <td>Ping failed</td>
+                <td>Unknown</td>
+                <td>System did not respond during collection. Validate availability and ownership before relying on readiness evidence.</td>
+              </tr>
+              <tr>
+                <td>Red: Action Required</td>
+                <td>BAYOU-WKS07</td>
+                <td>Collection failed: WinRM access denied</td>
+                <td>Unknown</td>
+                <td>System was reachable, but collection failed. Review WinRM, permissions, or local policy.</td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+      <aside class="panel">
+        <h2>OS Breakdown</h2>
+        <table>
+          <thead><tr><th>OS</th><th>Systems</th></tr></thead>
+          <tbody><tr><td>Unknown</td><td>2</td></tr><tr><td>Microsoft Windows Server 2019 Standard</td><td>1</td></tr><tr><td>Microsoft Windows Server 2022 Datacenter</td><td>1</td></tr><tr><td>Microsoft Windows Server 2022 Standard</td><td>1</td></tr></tbody>
+        </table>
+      </aside>
+    </section>
+
+    <section class="panel">
+      <h2>Workflow</h2>
+      <p class="subtle">Collector -> Import -> Dashboard -> Executive Summary</p>
+      <ul>
+        <li>Run the CSV-driven Windows collector against approved systems.</li>
+        <li>Place the collector output at <code>exports/bayouops-network-inventory.csv</code>.</li>
+        <li>Run the reporting pipeline to generate dashboard, summary, and CSV outputs.</li>
+        <li>Use the executive color summary for manager, CAB, or readiness review.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Evidence Sources</h2>
+      <ul>
+            <li>Built-in network readiness demo data</li>
+      </ul>
+    </section>
+
+    <footer>© 2026 BayouFinds.com — Dewayne Cox &amp; Cheri Cox. All Rights Reserved.</footer>
+  </main>
+</body>
+</html>

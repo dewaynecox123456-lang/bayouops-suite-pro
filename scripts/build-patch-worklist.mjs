@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import { execFileSync } from "child_process";
 import { COPYRIGHT_FULL } from "./demo/signature-constants.mjs";
+import { buildNetworkReadinessPipeline } from "./build-network-readiness.mjs";
 
 const EXPORT_DIR = "./exports";
 const GENERATED_DIR = "./demo-data/generated";
@@ -1840,6 +1841,7 @@ fs.writeFileSync(MAINTENANCE_READINESS_MOBILE_SCREENSHOT_SVG, renderMaintenanceR
 fs.writeFileSync(AUDIT_EVIDENCE_MANIFEST, JSON.stringify(buildAuditEvidenceManifest(dedupedWorklist, generatedAt, sourceFiles), null, 2) + "\n");
 const screenshotPngCreated = convertSvgToPng(MAINTENANCE_READINESS_SCREENSHOT_SVG, MAINTENANCE_READINESS_SCREENSHOT_PNG);
 const mobileScreenshotPngCreated = convertSvgToPng(MAINTENANCE_READINESS_MOBILE_SCREENSHOT_SVG, MAINTENANCE_READINESS_MOBILE_SCREENSHOT_PNG);
+const networkReadinessResult = buildNetworkReadinessPipeline(generatedAt);
 
 console.log("");
 console.log("========================================");
@@ -1860,6 +1862,11 @@ console.log(` Screenshot SVG   : ${MAINTENANCE_READINESS_SCREENSHOT_SVG}`);
 console.log(` Screenshot PNG   : ${screenshotPngCreated ? MAINTENANCE_READINESS_SCREENSHOT_PNG : "PNG conversion unavailable"}`);
 console.log(` Mobile SVG       : ${MAINTENANCE_READINESS_MOBILE_SCREENSHOT_SVG}`);
 console.log(` Mobile PNG       : ${mobileScreenshotPngCreated ? MAINTENANCE_READINESS_MOBILE_SCREENSHOT_PNG : "PNG conversion unavailable"}`);
+console.log(` Network Input    : ${networkReadinessResult.input}`);
+console.log(` Network CSV      : ${networkReadinessResult.csv}`);
+console.log(` Network Summary  : ${networkReadinessResult.summary}`);
+console.log(` Network HTML     : ${networkReadinessResult.dashboard}`);
+console.log(` Network Screenshot: ${networkReadinessResult.screenshotPng ?? networkReadinessResult.screenshotSvg}`);
 console.log(" Advisory Only    : Human approval required; no endpoint actions performed.");
 console.log("========================================");
 console.log("");

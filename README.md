@@ -231,6 +231,29 @@ Collector documentation:
 
 This collector is read-only and intended only for systems you own or are authorized to manage.
 
+Network readiness reporting workflow:
+
+```text
+Collector -> Import -> Dashboard -> Executive Summary
+```
+
+1. Run the collector from an authorized Windows admin workstation.
+2. Place the collector output at `exports/bayouops-network-inventory.csv`.
+3. Run the reporting pipeline:
+
+```bash
+node scripts/build-patch-worklist.mjs
+```
+
+The pipeline imports the network inventory CSV and generates:
+
+- [`exports/network-readiness-dashboard.html`](exports/network-readiness-dashboard.html)
+- [`exports/network-readiness-summary.md`](exports/network-readiness-summary.md)
+- [`exports/network-readiness.csv`](exports/network-readiness.csv)
+
+If collector output is missing, BayouOps uses sample demo data so the dashboard
+and executive summary workflow can still be reviewed safely.
+
 ## Windows Operational Readiness Export
 
 Generate a local Windows operational readiness export:
