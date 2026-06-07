@@ -68,6 +68,13 @@ require_path "release/windows-portable/docs"
 require_path "collectors/windows/Invoke-BayouOpsNetworkInventory.ps1"
 require_path "samples/windows-network-targets.sample.csv"
 require_path "docs/WINDOWS_NETWORK_INVENTORY_COLLECTOR.md"
+require_path "scripts/build-network-readiness.mjs"
+require_path "scripts/demo/signature-constants.mjs"
+require_path "exports/network-readiness-dashboard.html"
+require_path "exports/network-readiness-summary.md"
+require_path "exports/network-readiness.csv"
+require_path "screenshots/demo/network-readiness-dashboard.png"
+require_path "screenshots/demo/network-readiness-dashboard.svg"
 
 rm -rf "${PACKAGE_DIR}"
 rm -f "${RELEASE_ZIP}"
@@ -93,17 +100,23 @@ rm -f "${PACKAGE_DIR}/config/license.json"
 mkdir -p "${PACKAGE_DIR}/icons"
 copy_required_file "brand/icons/launcher-icon-concept.ico" "${PACKAGE_DIR}/icons/launcher-icon-concept.ico"
 mkdir -p "${PACKAGE_DIR}/scripts/demo"
+copy_required_file "scripts/build-network-readiness.mjs" "${PACKAGE_DIR}/scripts/build-network-readiness.mjs"
 copy_required_file "scripts/demo/export-executive-demo-pack.mjs" "${PACKAGE_DIR}/scripts/demo/export-executive-demo-pack.mjs"
 copy_required_file "scripts/demo/generate-demo-scenario.mjs" "${PACKAGE_DIR}/scripts/demo/generate-demo-scenario.mjs"
 copy_required_file "scripts/demo/lob-config.mjs" "${PACKAGE_DIR}/scripts/demo/lob-config.mjs"
 copy_required_file "scripts/demo/render-demo-dashboard.mjs" "${PACKAGE_DIR}/scripts/demo/render-demo-dashboard.mjs"
+copy_required_file "scripts/demo/signature-constants.mjs" "${PACKAGE_DIR}/scripts/demo/signature-constants.mjs"
 cp -R "${ROOT_DIR}/demo-data" "${PACKAGE_DIR}/demo-data"
 mkdir -p "${PACKAGE_DIR}/screenshots/demo"
 copy_required_file "screenshots/demo/executive-dashboard.html" "${PACKAGE_DIR}/screenshots/demo/executive-dashboard.html"
+copy_required_file "screenshots/demo/network-readiness-dashboard.png" "${PACKAGE_DIR}/screenshots/demo/network-readiness-dashboard.png"
+copy_required_file "screenshots/demo/network-readiness-dashboard.svg" "${PACKAGE_DIR}/screenshots/demo/network-readiness-dashboard.svg"
 mkdir -p "${PACKAGE_DIR}/exports"
+copy_required_file "exports/network-readiness-dashboard.html" "${PACKAGE_DIR}/exports/network-readiness-dashboard.html"
+copy_required_file "exports/network-readiness-summary.md" "${PACKAGE_DIR}/exports/network-readiness-summary.md"
+copy_required_file "exports/network-readiness.csv" "${PACKAGE_DIR}/exports/network-readiness.csv"
 
 find "${PACKAGE_DIR}" -type d -name '__pycache__' -prune -exec rm -rf {} +
-find "${PACKAGE_DIR}/exports" -mindepth 1 -exec rm -rf {} +
 
 print_section "Release Package Contents"
 find "${PACKAGE_DIR}" -maxdepth 3 -type f | sed "s#${ROOT_DIR}/##" | sort
@@ -126,12 +139,19 @@ required_package_paths=(
     "config/lines-of-business.json"
     "config/license.example.json"
     "icons/launcher-icon-concept.ico"
+    "scripts/build-network-readiness.mjs"
     "scripts/demo/export-executive-demo-pack.mjs"
     "scripts/demo/generate-demo-scenario.mjs"
     "scripts/demo/lob-config.mjs"
     "scripts/demo/render-demo-dashboard.mjs"
+    "scripts/demo/signature-constants.mjs"
     "demo-data/generated"
     "screenshots/demo/executive-dashboard.html"
+    "screenshots/demo/network-readiness-dashboard.png"
+    "screenshots/demo/network-readiness-dashboard.svg"
+    "exports/network-readiness-dashboard.html"
+    "exports/network-readiness-summary.md"
+    "exports/network-readiness.csv"
     "windows/Export-PatchReadiness.ps1"
     "tools/aggregate_operational_reports.py"
     "exports"
@@ -156,7 +176,7 @@ forbidden_matches="$(
         -name '*.tmp' -o \
         -name '*.bak' -o \
         -name '*.backup-*' -o \
-        -name '*.png' \
+        \( -name '*.png' ! -path "${PACKAGE_DIR}/screenshots/demo/network-readiness-dashboard.png" \) \
     \) -print
 )"
 

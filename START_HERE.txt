@@ -33,13 +33,13 @@ Documentation:
 This collector is read-only and intended only for systems you own or are authorized to manage.
 
 Network readiness reporting workflow:
-Collector -> Import -> Dashboard -> Executive Summary
+Run collector → generate network readiness dashboard → review executive summary.
 
 1. Run the collector from an authorized Windows admin workstation.
 2. Place the collector output at:
    ./exports/bayouops-network-inventory.csv
 3. Run the reporting pipeline:
-   node scripts/build-patch-worklist.mjs
+   node scripts/build-network-readiness.mjs
 4. Review:
    ./exports/network-readiness-dashboard.html
    ./exports/network-readiness-summary.md
